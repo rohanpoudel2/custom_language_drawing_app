@@ -16,6 +16,15 @@ namespace Assignment
         {
             InitializeComponent();
         }
-     
+
+        private void singleCommand_KeyDown(object sender, KeyEventArgs e)
+        {
+ 
+            if (e.KeyCode == Keys.Enter)
+            {
+                Console.WriteLine("Enter Pressed");
+            }
+
+        }
     }
 }

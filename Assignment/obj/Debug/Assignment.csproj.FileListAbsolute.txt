@@ -8,3 +8,4 @@ C:\Users\rohan\source\Assignment\Assignment\obj\Debug\Assignment.csproj.Generate
 C:\Users\rohan\source\Assignment\Assignment\obj\Debug\Assignment.csproj.CoreCompileInputs.cache
 C:\Users\rohan\source\Assignment\Assignment\obj\Debug\Assignment.exe
 C:\Users\rohan\source\Assignment\Assignment\obj\Debug\Assignment.pdb
+C:\Users\rohan\source\Assignment\Assignment\obj\Debug\Assignment.drawingProgram.resources

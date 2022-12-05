@@ -48,6 +48,7 @@
             this.singleCommand.Name = "singleCommand";
             this.singleCommand.Size = new System.Drawing.Size(798, 31);
             this.singleCommand.TabIndex = 1;
+            this.singleCommand.KeyDown += new System.Windows.Forms.KeyEventHandler(this.singleCommand_KeyDown);
             // 
             // richTextBox1
             // 
