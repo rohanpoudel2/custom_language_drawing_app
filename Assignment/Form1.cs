@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace Assignment
 {
-    public partial class Form1 : Form
+    public partial class drawingProgram : Form
     {
-        public Form1()
+        public drawingProgram()
         {
             InitializeComponent();
         }
+     
     }
 }
