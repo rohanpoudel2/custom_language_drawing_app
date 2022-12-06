@@ -31,11 +31,14 @@
             this.outputWindow = new System.Windows.Forms.PictureBox();
             this.singleCommandLine = new System.Windows.Forms.TextBox();
             this.programInputWindow = new System.Windows.Forms.RichTextBox();
+            this.errorWindow = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorWindow)).BeginInit();
             this.SuspendLayout();
             // 
             // outputWindow
             // 
+            this.outputWindow.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.outputWindow.Location = new System.Drawing.Point(12, 67);
             this.outputWindow.Name = "outputWindow";
             this.outputWindow.Size = new System.Drawing.Size(1048, 928);
@@ -45,7 +48,7 @@
             // 
             // singleCommandLine
             // 
-            this.singleCommandLine.Location = new System.Drawing.Point(1077, 1026);
+            this.singleCommandLine.Location = new System.Drawing.Point(1077, 1006);
             this.singleCommandLine.Name = "singleCommandLine";
             this.singleCommandLine.Size = new System.Drawing.Size(798, 31);
             this.singleCommandLine.TabIndex = 1;
@@ -59,17 +62,28 @@
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
             // 
+            // errorWindow
+            // 
+            this.errorWindow.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.errorWindow.Location = new System.Drawing.Point(12, 1006);
+            this.errorWindow.Name = "errorWindow";
+            this.errorWindow.Size = new System.Drawing.Size(1048, 184);
+            this.errorWindow.TabIndex = 3;
+            this.errorWindow.TabStop = false;
+            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1887, 1281);
+            this.Controls.Add(this.errorWindow);
             this.Controls.Add(this.programInputWindow);
             this.Controls.Add(this.singleCommandLine);
             this.Controls.Add(this.outputWindow);
             this.Name = "drawingProgram";
             this.Text = "Command Drawing Program";
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,6 +94,7 @@
         private System.Windows.Forms.PictureBox outputWindow;
         private System.Windows.Forms.TextBox singleCommandLine;
         private System.Windows.Forms.RichTextBox programInputWindow;
+        private System.Windows.Forms.PictureBox errorWindow;
     }
 }
 
