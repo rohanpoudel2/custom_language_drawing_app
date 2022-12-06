@@ -16,24 +16,71 @@ namespace Assignment
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
         artWork myArtWork;
+
         public drawingProgram()
         {
             InitializeComponent();
             myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
         }
 
-     private void processCommand(String instruction)
+     private void processCommandLine(String instruction)
         {
-            if (instruction.Equals("line") == true)
+            string[] commandSplit = instruction.Split(' ');
+
+            string command = "";
+            string[] parameter = Array.Empty<string>();
+
+            List<string> errors = new List<string>();
+
+            try
             {
-                myArtWork.DrawLine(160, 150);
+                if (commandSplit.Length == 2)
+                {
+                    command = commandSplit[0];
+                    parameter = commandSplit[1].Split(',');
+                    List<int> checkedParameters = new List<int>();
+                    int[] checkedParametersArrays = Array.Empty<int>();
+
+                    for (int i = 0; i < parameter.Length; i++)
+                    {
+                        checkedParameters.Add(Int32.Parse(parameter[i]));
+                    }
+                    
+                    checkedParametersArrays = checkedParameters.ToArray();
+
+                    if (command.Equals("drawto") == true)
+                    {
+                        if (checkedParametersArrays.Length != 2)
+                        {
+                            errors.Add("Invalid Number of parameters provided");
+                            throw new ArgumentException();
+                        }
+                        myArtWork.DrawLine(checkedParametersArrays[0], checkedParametersArrays[1]);
+
+                    }
+                }
+
+                if (instruction.Equals("line") == true)
+                {
+                    myArtWork.DrawLine(160, 150);
+                }
+                else if (instruction.Equals("square") == true)
+                {
+                    myArtWork.DrawSquare(30);
+                }
             }
-            else if (instruction.Equals("square") == true)
+            catch (Exception e)
             {
-                myArtWork.DrawSquare(30);
+                errors.Add(e.Message);
             }
-            singleCommandLine.Text = "";
-            Refresh();
+            finally
+            {
+                foreach(string error in errors)
+                {
+                    Console.WriteLine(error);
+                }
+            }
+            
         }
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)
@@ -47,9 +94,9 @@ namespace Assignment
  
             if (e.KeyCode == Keys.Enter)
             {
-            
-                processCommand(singleCommandLine.Text.Trim().ToLower());
-              
+                processCommandLine(singleCommandLine.Text.Trim().ToLower());
+                singleCommandLine.Text = "";
+                Refresh();
             }
 
         }
