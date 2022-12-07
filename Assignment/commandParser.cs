@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +59,36 @@ namespace Assignment
                             throw new ArgumentException();
                         }
                         myArtWork.drawCircle(checkedParametersArrays[0]);
+                    }
+
+                    if(command.Equals("rectangle") == true)
+                    {
+                        if(checkedParametersArrays.Length != 2)
+                        {
+                            throw new ArgumentException();
+                        }
+                        myArtWork.drawRectangle(checkedParametersArrays[0], checkedParametersArrays[1]);
+                    }
+
+                    if(command.Equals("triangle") == true)
+                    {
+                        if(checkedParametersArrays.Length != 5)
+                        {
+                            throw new ArgumentException();
+                        }
+                        Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
+                        Point point2 = new Point(checkedParametersArrays[0], checkedParametersArrays[1]);
+                        Point point3 = new Point(checkedParametersArrays[1], checkedParametersArrays[2]);
+                        Point point4 = new Point(checkedParametersArrays[2], checkedParametersArrays[3]);
+                        Point point5 = new Point(checkedParametersArrays[3], checkedParametersArrays[4]);
+                        Point point6 = new Point(checkedParametersArrays[4], myArtWork.Xposition);
+
+                        Point[] points =
+                        {
+                            point1, point2, point3, point4, point5, point6
+                        };
+
+                        myArtWork.drawTriangle(points);
                     }
 
                     if (command.Equals("moveto") == true)

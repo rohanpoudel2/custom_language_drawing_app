@@ -48,6 +48,16 @@ namespace Assignment
             illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
         }
 
+        public void drawRectangle(int width, int height)
+        {
+            illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
+        }
+
+        public void drawTriangle(Point[] Points)
+        {
+            illustrate.DrawPolygon(pen, Points);
+        }
+
         public void showError(string error, int positionX, int positionY)
         {
             illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
@@ -66,6 +76,8 @@ namespace Assignment
             pen = new Pen(Color.Red, 2);
             illustrate.DrawEllipse(pen, x, y, radius, radius);
         }
+
+
 
     }
 }
