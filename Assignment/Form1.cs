@@ -60,7 +60,7 @@ namespace Assignment
                         multiCommands.Add(programInputWindow.Lines[i]);
                     }
 
-                    foreach (string command in multiCommands)
+                    foreach (string command in multiCommands.ToList())
                     {
                         if (string.IsNullOrWhiteSpace(command))
                         {

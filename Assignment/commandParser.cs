@@ -11,6 +11,7 @@ namespace Assignment
 
         artWork myArtWork, errorArtWork;
 
+        int errorPosition = 0;
         public commandParser(artWork myArtWork,artWork errorArtWork)
         {
            this.myArtWork = myArtWork;
@@ -71,12 +72,11 @@ namespace Assignment
             finally
             {
                 int x = 0;
-                int y = 0;
                 foreach (string error in errors)
                 {
                     Console.WriteLine(error);
-                    errorArtWork.showError(error, x, y);
-                    y = y + 50;
+                    errorArtWork.showError(error, x, errorPosition);
+                    errorPosition = errorPosition + 50;
                 }
             }
         }
