@@ -48,14 +48,14 @@ namespace Assignment
 
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
- 
+
             if (e.KeyCode == Keys.Enter)
             {
                 string code = singleCommandLine.Text.Trim().ToLower();
 
-                if(code == "run")
+                if (code == "run")
                 {
-                    for (int i=0; i<programInputWindow.Lines.Length; i++) 
+                    for (int i = 0; i < programInputWindow.Lines.Length; i++)
                     {
                         multiCommands.Add(programInputWindow.Lines[i]);
                     }
@@ -66,20 +66,24 @@ namespace Assignment
                         {
                             multiCommands.RemoveAt(multiCommands.IndexOf(command));
                         }
-                        
+
                         parser.runCommand(command);
                     }
-                } 
+                }
                 else if (code == "clear")
                 {
                     Graphics g = Graphics.FromImage(bitmapOutput);
                     g.Clear(Color.White);
-                    myArtWork.drawPosition();
+                    myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
                 }
-                else
+                else if (code == "reset")
                 {
-                    parser.runCommand(code);
+                    myArtWork.moveTo(0, 0);
                 }
+            else
+            {
+                parser.runCommand(code);
+            }
                
                 singleCommandLine.Text = "";
                 Refresh();

@@ -13,14 +13,22 @@ namespace Assignment
         Graphics illustrate;
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-        int xPosition, yPosition;
+        private int xPosition, yPosition;
+        public int Xposition
+        {
+            get; set;
+        }
+        public int Yposition
+        {
+            get; set;
+        }
 
         public artWork(Graphics g)
         {
             this.illustrate = g;
             xPosition = yPosition = 0;
             pen = new Pen(Color.Black, 1);
-            drawPosition();
+            drawPosition(xPosition, yPosition);
         }
 
         public void drawLine(int xPos, int yPos)
@@ -49,14 +57,14 @@ namespace Assignment
         {
             this.xPosition = positionX;
             this.yPosition = positionY;
-            drawPosition();
+            drawPosition(positionX, positionY);
         }
 
-        public void drawPosition()
+        public void drawPosition(int x, int y)
         {
             const int radius = 4;
             pen = new Pen(Color.Red, 2);
-            illustrate.DrawEllipse(pen, xPosition, yPosition, radius, radius);
+            illustrate.DrawEllipse(pen, x, y, radius, radius);
         }
 
     }
