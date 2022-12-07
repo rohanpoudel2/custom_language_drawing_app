@@ -79,7 +79,8 @@ namespace Assignment
 
         public void changeColor(string colour)
         {
-            
+            Color newColor = Color.FromName(colour);
+            pen = new Pen(newColor, 2);
         }
 
 
