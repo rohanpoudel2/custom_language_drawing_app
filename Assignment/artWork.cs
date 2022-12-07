@@ -13,6 +13,9 @@ namespace Assignment
         Graphics illustrate;
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
+
+        ShapeFactory shape;
+
         private int xPosition, yPosition;
         public int Xposition
         {
@@ -28,7 +31,6 @@ namespace Assignment
             this.illustrate = g;
             xPosition = yPosition = 0;
             pen = new Pen(Color.Black, 1);
-            drawPosition(xPosition, yPosition);
         }
 
         public void drawLine(int xPos, int yPos)
@@ -45,12 +47,16 @@ namespace Assignment
 
         public void drawCircle(int radius)
         {
-            illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
+            //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
+            shape = new ShapeFactory(illustrate);
+            (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
         }
 
         public void drawRectangle(int width, int height)
         {
-            illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
+            //illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
+            shape = new ShapeFactory(illustrate);
+    
         }
 
         public void drawTriangle(Point[] Points)
@@ -81,6 +87,11 @@ namespace Assignment
         {
             Color newColor = Color.FromName(colour);
             pen = new Pen(newColor, 2);
+        }
+
+        public void changeFill(string fill)
+        {
+            
         }
 
 

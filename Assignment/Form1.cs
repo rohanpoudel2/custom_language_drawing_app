@@ -29,6 +29,7 @@ namespace Assignment
             myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
             errorArtWork = new artWork(Graphics.FromImage(errorBitMapOutput));
             parser = new commandParser(myArtWork, errorArtWork);
+            myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
         }
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)

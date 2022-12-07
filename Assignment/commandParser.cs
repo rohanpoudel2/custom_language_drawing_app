@@ -138,6 +138,16 @@ namespace Assignment
                         }
                         myArtWork.changeColor(parameter[0]);
                     }
+
+                    if(command.Equals("fill") == true)
+                    {
+                        parameter = checkParameter(commandSplit[1], "string");
+                        if (parameter.Length != 1)
+                        {
+                            throw new ArgumentException();
+                        }
+                        myArtWork.changeFill(parameter[0]);
+                    }
                 }
             }
             catch (Exception e)
@@ -151,8 +161,10 @@ namespace Assignment
                 {
                     Console.WriteLine(error);
                     errorArtWork.showError(error, x, errorPosition);
-                    errorPosition = errorPosition + 50;
+                    errorPosition = errorPosition + 30;
                 }
+                errorPosition = 0;
+                errors.Clear();
             }
         }
     }
