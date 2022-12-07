@@ -46,14 +46,25 @@ namespace Assignment
             g.Clear(Color.White);
         }
 
-        private void programInputWindow_KeyDown(object sender, KeyEventArgs e)
+        private void programInputWindow_TextChanged(object sender, EventArgs e)
         {
-            string code = programInputWindow.Text;
-            if(e.KeyCode == Keys.Enter)
+            /*
+           string code = programInputWindow.Text.Trim().ToLower();
+           multiCommands.Add(code);
+           code = "";
+           */
+         
+            List<string> codeLinesList = new List<string>(programInputWindow.Text.Split('\n'));
+
+            foreach (string code in codeLinesList.ToList())
             {
-                multiCommands.Add(code.Trim().ToLower());
-                code = "";
+                if (string.IsNullOrWhiteSpace(code))
+                {
+                    codeLinesList.RemoveAt(codeLinesList.IndexOf(code));
+                }
+                Console.WriteLine(code);
             }
+
         }
 
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
