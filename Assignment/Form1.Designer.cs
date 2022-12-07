@@ -64,12 +64,13 @@
             // 
             // errorWindow
             // 
-            this.errorWindow.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.errorWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.errorWindow.Location = new System.Drawing.Point(12, 1006);
             this.errorWindow.Name = "errorWindow";
             this.errorWindow.Size = new System.Drawing.Size(1048, 184);
             this.errorWindow.TabIndex = 3;
             this.errorWindow.TabStop = false;
+            this.errorWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.errorWindow_Paint);
             // 
             // drawingProgram
             // 

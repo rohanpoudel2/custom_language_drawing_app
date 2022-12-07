@@ -11,6 +11,8 @@ namespace Assignment
     {
         Pen pen;
         Graphics illustrate;
+        Font drawFont = new Font("Arial", 16);
+        SolidBrush drawBrush = new SolidBrush(Color.Black);
         int xPosition, yPosition;
 
         public artWork(Graphics g)
@@ -20,16 +22,26 @@ namespace Assignment
             pen = new Pen(Color.Black, 1);
         }
 
-        public void DrawLine(int xPos, int yPos)
+        public void drawLine(int xPos, int yPos)
         {
             illustrate.DrawLine(pen, xPosition, yPosition, xPos, yPos);
             xPosition = xPos;
             yPosition = yPos;
         }
 
-        public void DrawSquare(int size)
+        public void drawSquare(int size)
         {
             illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
+        }
+
+        public void drawCircle(int radius)
+        {
+            illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
+        }
+
+        public void showError(string error, int positionX, int positionY)
+        {         
+            illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
         }
 
     }

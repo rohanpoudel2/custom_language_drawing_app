@@ -15,12 +15,15 @@ namespace Assignment
         const int bitmapWidth = 650, bitmapHeight = 500; 
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
+        Bitmap errorBitMapOutput = new Bitmap(bitmapWidth, bitmapHeight);
         artWork myArtWork;
+        artWork errorArtWork;
 
         public drawingProgram()
         {
             InitializeComponent();
             myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
+            errorArtWork = new artWork(Graphics.FromImage(errorBitMapOutput));
         }
 
      private void processCommandLine(String instruction)
@@ -29,7 +32,6 @@ namespace Assignment
 
             string command = "";
             string[] parameter = Array.Empty<string>();
-
             List<string> errors = new List<string>();
 
             try
@@ -52,21 +54,20 @@ namespace Assignment
                     {
                         if (checkedParametersArrays.Length != 2)
                         {
-                            errors.Add("Invalid Number of parameters provided");
                             throw new ArgumentException();
                         }
-                        myArtWork.DrawLine(checkedParametersArrays[0], checkedParametersArrays[1]);
+                        myArtWork.drawLine(checkedParametersArrays[0], checkedParametersArrays[1]);
 
                     }
-                }
 
-                if (instruction.Equals("line") == true)
-                {
-                    myArtWork.DrawLine(160, 150);
-                }
-                else if (instruction.Equals("square") == true)
-                {
-                    myArtWork.DrawSquare(30);
+                    if(command.Equals("circle") == true)
+                    {
+                        if(checkedParametersArrays.Length != 1)
+                        {
+                            throw new ArgumentException();
+                        }
+                        myArtWork.drawCircle(checkedParametersArrays[0]);
+                    }
                 }
             }
             catch (Exception e)
@@ -75,9 +76,13 @@ namespace Assignment
             }
             finally
             {
+                int x = 0;
+                int y = 0;
                 foreach(string error in errors)
                 {
                     Console.WriteLine(error);
+                    errorArtWork.showError(error, x, y);
+                    y = y + 50;
                 }
             }
             
@@ -87,6 +92,15 @@ namespace Assignment
         {
             Graphics currentIllustration = e.Graphics;
             currentIllustration.DrawImageUnscaled(bitmapOutput, 0, 0);
+        }
+
+        private void errorWindow_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics currentIllustration = e.Graphics;
+            currentIllustration.DrawImageUnscaled(errorBitMapOutput, 0, 0);
+
+            Graphics g = Graphics.FromImage(errorBitMapOutput);
+            g.Clear(Color.White);
         }
 
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
