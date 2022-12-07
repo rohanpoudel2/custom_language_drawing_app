@@ -31,6 +31,7 @@ namespace Assignment
             this.illustrate = g;
             xPosition = yPosition = 0;
             pen = new Pen(Color.Black, 1);
+            shape = new ShapeFactory(illustrate);
         }
 
         public void drawLine(int xPos, int yPos)
@@ -48,20 +49,19 @@ namespace Assignment
         public void drawCircle(int radius)
         {
             //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
-            shape = new ShapeFactory(illustrate);
             (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
         }
 
         public void drawRectangle(int width, int height)
         {
             //illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
-            shape = new ShapeFactory(illustrate);
-    
+            (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw();
         }
 
         public void drawTriangle(Point[] Points)
         {
-            illustrate.DrawPolygon(pen, Points);
+            //illustrate.DrawPolygon(pen, Points);
+            (shape.drawTriangle(pen, Points)).Draw();
         }
 
         public void showError(string error, int positionX, int positionY)

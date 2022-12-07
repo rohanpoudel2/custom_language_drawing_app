@@ -26,5 +26,10 @@ namespace Assignment
         {
             return new Rectanglee(illustrate, pen, x, y, width, height);
         }
+
+        public Triangle drawTriangle(Pen pen, Point[] points)
+        {
+            return new Triangle(illustrate, pen, points);
+        }
     }
 }
