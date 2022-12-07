@@ -20,7 +20,7 @@ namespace Assignment
             this.illustrate = g;
             xPosition = yPosition = 0;
             pen = new Pen(Color.Black, 1);
-            drawPosition(xPosition, yPosition);
+            drawPosition();
         }
 
         public void drawLine(int xPos, int yPos)
@@ -49,10 +49,10 @@ namespace Assignment
         {
             this.xPosition = positionX;
             this.yPosition = positionY;
-            drawPosition(xPosition, yPosition);
+            drawPosition();
         }
 
-        public void drawPosition(int positionX, int positionY)
+        public void drawPosition()
         {
             const int radius = 4;
             pen = new Pen(Color.Red, 2);

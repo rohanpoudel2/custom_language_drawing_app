@@ -21,7 +21,6 @@ namespace Assignment
        public void runCommand(string instruction)
         {
             string[] commandSplit = instruction.Split(' ');
-
             string command = "";
             string[] parameter = Array.Empty<string>();
             List<string> errors = new List<string>();
@@ -39,8 +38,6 @@ namespace Assignment
                     {
                         checkedParameters.Add(Int32.Parse(parameter[i]));
                     }
-
-                    Console.WriteLine(command);
 
                     checkedParametersArrays = checkedParameters.ToArray();
 
@@ -63,16 +60,15 @@ namespace Assignment
                         myArtWork.drawCircle(checkedParametersArrays[0]);
                     }
 
-                    if(command.Equals("moveto") == true)
+                    if (command.Equals("moveto") == true)
                     {
-                        if(checkedParametersArrays.Length != 2)
+                        if (checkedParametersArrays.Length != 2)
                         {
                             throw new ArgumentException();
                         }
                         myArtWork.moveTo(checkedParametersArrays[0], checkedParametersArrays[1]);
                     }
                 }
-
             }
             catch (Exception e)
             {
