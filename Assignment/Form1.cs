@@ -19,73 +19,16 @@ namespace Assignment
         artWork myArtWork;
         artWork errorArtWork;
 
+        commandParser parser;
+
+        List<string> multiCommands = new List<string>();
+
         public drawingProgram()
         {
             InitializeComponent();
             myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
             errorArtWork = new artWork(Graphics.FromImage(errorBitMapOutput));
-        }
-
-     private void processCommandLine(String instruction)
-        {
-            string[] commandSplit = instruction.Split(' ');
-
-            string command = "";
-            string[] parameter = Array.Empty<string>();
-            List<string> errors = new List<string>();
-
-            try
-            {
-                if (commandSplit.Length == 2)
-                {
-                    command = commandSplit[0];
-                    parameter = commandSplit[1].Split(',');
-                    List<int> checkedParameters = new List<int>();
-                    int[] checkedParametersArrays = Array.Empty<int>();
-
-                    for (int i = 0; i < parameter.Length; i++)
-                    {
-                        checkedParameters.Add(Int32.Parse(parameter[i]));
-                    }
-                    
-                    checkedParametersArrays = checkedParameters.ToArray();
-
-                    if (command.Equals("drawto") == true)
-                    {
-                        if (checkedParametersArrays.Length != 2)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawLine(checkedParametersArrays[0], checkedParametersArrays[1]);
-
-                    }
-
-                    if(command.Equals("circle") == true)
-                    {
-                        if(checkedParametersArrays.Length != 1)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawCircle(checkedParametersArrays[0]);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                errors.Add(e.Message);
-            }
-            finally
-            {
-                int x = 0;
-                int y = 0;
-                foreach(string error in errors)
-                {
-                    Console.WriteLine(error);
-                    errorArtWork.showError(error, x, y);
-                    y = y + 50;
-                }
-            }
-            
+            parser = new commandParser(myArtWork, errorArtWork);
         }
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)
@@ -103,12 +46,35 @@ namespace Assignment
             g.Clear(Color.White);
         }
 
+        private void programInputWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            string code = programInputWindow.Text;
+            if(e.KeyCode == Keys.Enter)
+            {
+                multiCommands.Add(code.Trim().ToLower());
+                code = "";
+            }
+        }
+
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
  
             if (e.KeyCode == Keys.Enter)
             {
-                processCommandLine(singleCommandLine.Text.Trim().ToLower());
+                string code = singleCommandLine.Text.Trim().ToLower();
+
+                if(code == "run")
+                {
+                    foreach(string command in multiCommands)
+                    {
+                        parser.runCommand(command);
+                    }
+                }
+                else
+                {
+                    parser.runCommand(code);
+                }
+               
                 singleCommandLine.Text = "";
                 Refresh();
             }

@@ -61,6 +61,7 @@
             this.programInputWindow.Size = new System.Drawing.Size(798, 928);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
+            this.programInputWindow.KeyDown += new System.Windows.Forms.KeyEventHandler(this.programInputWindow_KeyDown);
             // 
             // errorWindow
             // 
