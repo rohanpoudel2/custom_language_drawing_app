@@ -39,6 +39,8 @@ namespace Assignment
                         checkedParameters.Add(Int32.Parse(parameter[i]));
                     }
 
+                    Console.WriteLine(command);
+
                     checkedParametersArrays = checkedParameters.ToArray();
 
                     if (command.Equals("drawto") == true)

@@ -61,7 +61,6 @@
             this.programInputWindow.Size = new System.Drawing.Size(798, 928);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
-            this.programInputWindow.TextChanged += new System.EventHandler(this.programInputWindow_TextChanged);
             // 
             // errorWindow
             // 

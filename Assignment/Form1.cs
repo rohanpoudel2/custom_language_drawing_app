@@ -46,27 +46,6 @@ namespace Assignment
             g.Clear(Color.White);
         }
 
-        private void programInputWindow_TextChanged(object sender, EventArgs e)
-        {
-            /*
-           string code = programInputWindow.Text.Trim().ToLower();
-           multiCommands.Add(code);
-           code = "";
-           */
-         
-            List<string> codeLinesList = new List<string>(programInputWindow.Text.Split('\n'));
-
-            foreach (string code in codeLinesList.ToList())
-            {
-                if (string.IsNullOrWhiteSpace(code))
-                {
-                    codeLinesList.RemoveAt(codeLinesList.IndexOf(code));
-                }
-                Console.WriteLine(code);
-            }
-
-        }
-
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
  
@@ -76,8 +55,18 @@ namespace Assignment
 
                 if(code == "run")
                 {
-                    foreach(string command in multiCommands)
+                    for (int i=0; i<programInputWindow.Lines.Length; i++) 
                     {
+                        multiCommands.Add(programInputWindow.Lines[i]);
+                    }
+
+                    foreach (string command in multiCommands)
+                    {
+                        if (string.IsNullOrWhiteSpace(command))
+                        {
+                            multiCommands.RemoveAt(multiCommands.IndexOf(command));
+                        }
+                        
                         parser.runCommand(command);
                     }
                 }
