@@ -73,8 +73,13 @@ namespace Assignment
         public void drawPosition(int x, int y)
         {
             const int radius = 4;
-            pen = new Pen(Color.Red, 2);
-            illustrate.DrawEllipse(pen, x, y, radius, radius);
+            Pen Positionpen = new Pen(Color.Red, 2);
+            illustrate.DrawEllipse(Positionpen, x, y, radius, radius);
+        }
+
+        public void changeColor(string colour)
+        {
+            
         }
 
 
