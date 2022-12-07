@@ -62,6 +62,15 @@ namespace Assignment
                         }
                         myArtWork.drawCircle(checkedParametersArrays[0]);
                     }
+
+                    if(command.Equals("moveto") == true)
+                    {
+                        if(checkedParametersArrays.Length != 2)
+                        {
+                            throw new ArgumentException();
+                        }
+                        myArtWork.moveTo(checkedParametersArrays[0], checkedParametersArrays[1]);
+                    }
                 }
 
             }

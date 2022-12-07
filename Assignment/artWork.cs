@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-     class artWork
+    class artWork
     {
         Pen pen;
         Graphics illustrate;
@@ -20,6 +20,7 @@ namespace Assignment
             this.illustrate = g;
             xPosition = yPosition = 0;
             pen = new Pen(Color.Black, 1);
+            drawPosition(xPosition, yPosition);
         }
 
         public void drawLine(int xPos, int yPos)
@@ -40,8 +41,22 @@ namespace Assignment
         }
 
         public void showError(string error, int positionX, int positionY)
-        {         
+        {
             illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
+        }
+
+        public void moveTo(int positionX, int positionY)
+        {
+            this.xPosition = positionX;
+            this.yPosition = positionY;
+            drawPosition(xPosition, yPosition);
+        }
+
+        public void drawPosition(int positionX, int positionY)
+        {
+            const int radius = 4;
+            pen = new Pen(Color.Red, 2);
+            illustrate.DrawEllipse(pen, xPosition, yPosition, radius, radius);
         }
 
     }
