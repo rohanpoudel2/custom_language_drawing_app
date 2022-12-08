@@ -12,5 +12,6 @@ namespace Assignment
         Circle drawCircle(Pen pen, int xPosition, int yPosition, int radius);
         Rectanglee drawRectangle(Pen pen, int xPosition, int yPosition, int width, int height);
         Triangle drawTriangle(Pen pen, Point[] points);
+        Square drawSquare(Pen pen, int xPosition, int yPosition, int size);
     }
 }

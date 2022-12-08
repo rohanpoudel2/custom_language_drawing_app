@@ -77,6 +77,16 @@ namespace Assignment
 
                     }
 
+                    if(command.Equals("square") == true)
+                    {
+                        parameter = checkParameter(commandSplit[1], "int");
+                        if(parameter.Length != 1)
+                        {
+                            throw new ArgumentException();
+                        }
+                        myArtWork.drawSquare(parameter[0]);
+                    }
+
                     if (command.Equals("circle") == true)
                     {
                         parameter = checkParameter(commandSplit[1], "int");
@@ -146,7 +156,16 @@ namespace Assignment
                         {
                             throw new ArgumentException();
                         }
-                        myArtWork.changeFill(parameter[0]);
+                        if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
+                        {
+                            myArtWork.changeFill(parameter[0]);
+
+                        }
+                        else
+                        {
+                            throw new ArgumentException();
+                        }
+               
                     }
                 }
             }

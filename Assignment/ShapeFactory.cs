@@ -31,5 +31,10 @@ namespace Assignment
         {
             return new Triangle(illustrate, pen, points);
         }
+
+        public Square drawSquare(Pen pen, int xPosition, int yPosition, int size)
+        {
+            return new Square(illustrate, pen, xPosition, yPosition, size);
+        }
     }
 }

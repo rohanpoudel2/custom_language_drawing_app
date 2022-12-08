@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Assignment
 {
@@ -19,7 +20,13 @@ namespace Assignment
 
         public void Draw()
         {
-            illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
+           illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
         }
+
+        public void Draw(SolidBrush brush)
+        {
+            illustrate.FillEllipse(brush, xPosition, yPosition, xPosition+(radius * 2), yPosition + (radius *2));
+        }
+
     }
 }

@@ -13,7 +13,7 @@ namespace Assignment
         Graphics illustrate;
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-
+        Boolean fill = false;
         ShapeFactory shape;
 
         private int xPosition, yPosition;
@@ -43,13 +43,22 @@ namespace Assignment
 
         public void drawSquare(int size)
         {
-            illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
+            //illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
+            (shape.drawSquare(pen, Xposition, Yposition, size)).Draw();
         }
 
         public void drawCircle(int radius)
         {
             //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
-            (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
+            if (fill)
+            {
+               (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw(drawBrush);
+            }
+            else
+            {
+               (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
+            }
+           
         }
 
         public void drawRectangle(int width, int height)
@@ -91,7 +100,13 @@ namespace Assignment
 
         public void changeFill(string fill)
         {
-            
+            if (fill.Equals("on"))
+            {
+                this.fill = true;
+            }else if(fill.Equals("off"))
+            {
+                this.fill = false;
+            }
         }
 
 
