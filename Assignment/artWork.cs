@@ -36,7 +36,8 @@ namespace Assignment
 
         public void drawLine(int xPos, int yPos)
         {
-            illustrate.DrawLine(pen, xPosition, yPosition, xPos, yPos);
+            //illustrate.DrawLine(pen, xPosition, yPosition, xPos, yPos);
+            (shape.drawLine(pen, xPosition, yPosition, xPos, yPos)).Draw();
             xPosition = xPos;
             yPosition = yPos;
         }
@@ -44,7 +45,15 @@ namespace Assignment
         public void drawSquare(int size)
         {
             //illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
-            (shape.drawSquare(pen, Xposition, Yposition, size)).Draw();
+            
+            if (fill)
+            {
+                (shape.drawSquare(pen, Xposition, Yposition, size)).Draw(drawBrush);
+            }
+            else
+            {
+                (shape.drawSquare(pen, Xposition, Yposition, size)).Draw();
+            }
         }
 
         public void drawCircle(int radius)
@@ -64,13 +73,29 @@ namespace Assignment
         public void drawRectangle(int width, int height)
         {
             //illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
-            (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw();
+            if (fill)
+            {
+                (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw(drawBrush);
+            }
+            else
+            {
+                (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw();
+            }
+                
         }
 
         public void drawTriangle(Point[] Points)
         {
             //illustrate.DrawPolygon(pen, Points);
-            (shape.drawTriangle(pen, Points)).Draw();
+            if (fill)
+            {
+                (shape.drawTriangle(pen, Points)).Draw(drawBrush);
+            }
+            else
+            {
+                (shape.drawTriangle(pen, Points)).Draw();
+            }
+
         }
 
         public void showError(string error, int positionX, int positionY)

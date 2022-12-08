@@ -20,5 +20,10 @@ namespace Assignment
         {
             illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
         }
+
+        public void Draw(SolidBrush brush)
+        {
+            illustrate.FillRectangle(brush,xPosition, yPosition, xPosition + size, yPosition + size);
+        }
     }
 }

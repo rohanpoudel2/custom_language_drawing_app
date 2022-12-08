@@ -18,5 +18,10 @@ namespace Assignment
         {
             illustrate.DrawPolygon(pen, points);
         }
+
+        public void Draw(SolidBrush brush)
+        {
+            illustrate.FillPolygon(brush, points);
+        }
     }
 }

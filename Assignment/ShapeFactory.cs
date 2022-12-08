@@ -36,5 +36,10 @@ namespace Assignment
         {
             return new Square(illustrate, pen, xPosition, yPosition, size);
         }
+
+        public Line drawLine(Pen pen, int xPosition, int yPosition, int xPos, int yPos)
+        {
+            return new Line(illustrate, pen, xPosition, yPosition, xPos, yPos);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace Assignment
 {
@@ -21,6 +22,11 @@ namespace Assignment
         public void Draw()
         {
             illustrate.DrawRectangle(pen, xPosition, yPosition, width, height);
+        }
+
+        public void Draw(SolidBrush brush)
+        {
+            illustrate.FillRectangle(brush, xPosition, yPosition, width, height);
         }
     }
 }
