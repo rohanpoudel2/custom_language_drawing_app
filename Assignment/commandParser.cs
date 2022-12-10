@@ -10,6 +10,24 @@ namespace Assignment
     class commandParser
     {
 
+        enum shapeCommands
+        {
+            circle,
+            drawto,
+            square,
+            rectangle,
+            triangle
+        }
+
+        enum otherCommands 
+        {
+            reset,
+            clear,
+            moveto,
+            pen,
+            fill
+        }
+
         artWork myArtWork, errorArtWork;
         List<string> errors = new List<string>();
         int errorPosition = 0;
@@ -58,116 +76,137 @@ namespace Assignment
        public void runCommand(string instruction)
         {
             string[] commandSplit = instruction.Split(' ');
-            string command = "";
-            dynamic parameter;
+
+            string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
+            string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
+
             try
             {
-                if (commandSplit.Length == 2)
+                if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
-                    command = commandSplit[0];
-
-                    if (command.Equals("drawto") == true)
+                    if (commandSplit.Length == 2)
                     {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if (parameter.Length != 2)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawLine(parameter[0], parameter[1]);
+                        dynamic parameter;
+                        string command = commandSplit[0];
 
-                    }
-
-                    if(command.Equals("square") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if(parameter.Length != 1)
+                        if (command.Equals("drawto") == true)
                         {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawSquare(parameter[0]);
-                    }
-
-                    if (command.Equals("circle") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if (parameter.Length != 1)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawCircle(parameter[0]);
-                    }
-
-                    if(command.Equals("rectangle") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if (parameter.Length != 2)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.drawRectangle(parameter[0], parameter[1]);
-                    }
-
-                    if(command.Equals("triangle") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if (parameter.Length != 5)
-                        {
-                            throw new ArgumentException();
-                        }
-                        Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
-                        Point point2 = new Point(parameter[0], parameter[1]);
-                        Point point3 = new Point(parameter[1], parameter[2]);
-                        Point point4 = new Point(parameter[2], parameter[3]);
-                        Point point5 = new Point(parameter[3], parameter[4]);
-                        Point point6 = new Point(parameter[4], myArtWork.Xposition);
-
-                        Point[] points =
-                        {
-                            point1, point2, point3, point4, point5, point6
-                        };
-
-                        myArtWork.drawTriangle(points);
-                    }
-
-                    if (command.Equals("moveto") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "int");
-                        if (parameter.Length != 2)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.moveTo(parameter[0], parameter[1]);
-                    }
-
-                    if(command.Equals("pen") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "string");
-                        if(parameter.Length != 1)
-                        {
-                            throw new ArgumentException();
-                        }
-                        myArtWork.changeColor(parameter[0]);
-                    }
-
-                    if(command.Equals("fill") == true)
-                    {
-                        parameter = checkParameter(commandSplit[1], "string");
-                        if (parameter.Length != 1)
-                        {
-                            throw new ArgumentException();
-                        }
-                        if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
-                        {
-                            myArtWork.changeFill(parameter[0]);
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if (parameter.Length != 2)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.drawLine(parameter[0], parameter[1]);
 
                         }
-                        else
+
+                        if(command.Equals("square") == true)
                         {
-                            throw new ArgumentException();
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if(parameter.Length != 1)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.drawSquare(parameter[0]);
                         }
-               
+
+                        if (command.Equals("circle") == true)
+                        {
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if (parameter.Length != 1)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.drawCircle(parameter[0]);
+                        }
+
+                        if(command.Equals("rectangle") == true)
+                        {
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if (parameter.Length != 2)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.drawRectangle(parameter[0], parameter[1]);
+                        }
+
+                        if(command.Equals("triangle") == true)
+                        {
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if (parameter.Length != 5)
+                            {
+                                throw new ArgumentException();
+                            }
+                            Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
+                            Point point2 = new Point(parameter[0], parameter[1]);
+                            Point point3 = new Point(parameter[1], parameter[2]);
+                            Point point4 = new Point(parameter[2], parameter[3]);
+                            Point point5 = new Point(parameter[3], parameter[4]);
+                            Point point6 = new Point(parameter[4], myArtWork.Xposition);
+
+                            Point[] points =
+                            {
+                                point1, point2, point3, point4, point5, point6
+                            };
+
+                            myArtWork.drawTriangle(points);
+                        }
+
                     }
                 }
+                if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
+                {
+                    dynamic parameter;
+                    string command = commandSplit[0];
+
+                    if (commandSplit.Length == 2)
+                    {
+                        if (command.Equals("moveto") == true)
+                        {
+                            Console.WriteLine("helo worl");
+                            parameter = checkParameter(commandSplit[1], "int");
+                            if (parameter.Length != 2)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.moveTo(parameter[0], parameter[1]);
+                        }
+
+                        if (command.Equals("pen") == true)
+                        {
+                            parameter = checkParameter(commandSplit[1], "string");
+                            if (parameter.Length != 1)
+                            {
+                                throw new ArgumentException();
+                            }
+                            myArtWork.changeColor(parameter[0]);
+                        }
+
+                        if (command.Equals("fill") == true)
+                        {
+                            parameter = checkParameter(commandSplit[1], "string");
+                            if (parameter.Length != 1)
+                            {
+                                throw new ArgumentException();
+                            }
+                            if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
+                            {
+                                myArtWork.changeFill(parameter[0]);
+
+                            }
+                            else
+                            {
+                                throw new ArgumentException();
+                            }
+
+                        }
+                    }   
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }  
+                
             }
             catch (Exception e)
             {

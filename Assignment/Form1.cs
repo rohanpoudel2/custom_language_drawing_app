@@ -26,6 +26,7 @@ namespace Assignment
         public drawingProgram()
         {
             InitializeComponent();
+            Size = new Size(970, 700);
             myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
             errorArtWork = new artWork(Graphics.FromImage(errorBitMapOutput));
             parser = new commandParser(myArtWork, errorArtWork);
