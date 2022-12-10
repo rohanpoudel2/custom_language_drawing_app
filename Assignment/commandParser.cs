@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    class commandParser
+    class CommandParser
     {
 
         enum shapeCommands
@@ -28,10 +28,10 @@ namespace Assignment
             fill
         }
 
-        artWork myArtWork, errorArtWork;
+        ArtWork myArtWork, errorArtWork;
         List<string> errors = new List<string>();
         int errorPosition = 0;
-        public commandParser(artWork myArtWork,artWork errorArtWork)
+        public CommandParser(ArtWork myArtWork,ArtWork errorArtWork)
         {
            this.myArtWork = myArtWork;
            this.errorArtWork = errorArtWork;
@@ -163,7 +163,6 @@ namespace Assignment
                     {
                         if (command.Equals("moveto") == true)
                         {
-                            Console.WriteLine("helo worl");
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 2)
                             {

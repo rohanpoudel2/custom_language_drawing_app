@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    class artWork
+    class ArtWork
     {
         Pen pen;
         Graphics illustrate;
@@ -26,7 +26,7 @@ namespace Assignment
             get; set;
         }
 
-        public artWork(Graphics g)
+        public ArtWork(Graphics g)
         {
             this.illustrate = g;
             xPosition = yPosition = 0;
@@ -45,7 +45,7 @@ namespace Assignment
         public void drawSquare(int size)
         {
             //illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
-            
+
             if (fill)
             {
                 (shape.drawSquare(pen, Xposition, Yposition, size)).Draw(drawBrush);
@@ -61,13 +61,13 @@ namespace Assignment
             //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
             if (fill)
             {
-               (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw(drawBrush);
+                (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw(drawBrush);
             }
             else
             {
-               (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
+                (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
             }
-           
+
         }
 
         public void drawRectangle(int width, int height)
@@ -81,7 +81,7 @@ namespace Assignment
             {
                 (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw();
             }
-                
+
         }
 
         public void drawTriangle(Point[] Points)
@@ -107,13 +107,14 @@ namespace Assignment
         {
             this.xPosition = positionX;
             this.yPosition = positionY;
-            drawPosition(positionX, positionY);
+            drawPosition(positionX, positionY );
         }
 
         public void drawPosition(int x, int y)
         {
             const int radius = 4;
             Pen Positionpen = new Pen(Color.Red, 2);
+
             illustrate.DrawEllipse(Positionpen, x, y, radius, radius);
         }
 
@@ -128,7 +129,8 @@ namespace Assignment
             if (fill.Equals("on"))
             {
                 this.fill = true;
-            }else if(fill.Equals("off"))
+            }
+            else if (fill.Equals("off"))
             {
                 this.fill = false;
             }

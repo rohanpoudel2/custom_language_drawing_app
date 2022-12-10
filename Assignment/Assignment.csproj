@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="artWork.cs" />
+    <Compile Include="ArtWork.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="commandParser.cs" />
     <Compile Include="Form1.cs">

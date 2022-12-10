@@ -16,10 +16,11 @@ namespace Assignment
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
         Bitmap errorBitMapOutput = new Bitmap(bitmapWidth, bitmapHeight);
-        artWork myArtWork;
-        artWork errorArtWork;
 
-        commandParser parser;
+        ArtWork myArtWork;
+        ArtWork errorArtWork;
+
+        CommandParser parser;
 
         List<string> multiCommands = new List<string>();
 
@@ -27,10 +28,12 @@ namespace Assignment
         {
             InitializeComponent();
             Size = new Size(970, 700);
-            myArtWork = new artWork(Graphics.FromImage(bitmapOutput));
-            errorArtWork = new artWork(Graphics.FromImage(errorBitMapOutput));
-            parser = new commandParser(myArtWork, errorArtWork);
+
+            myArtWork = new ArtWork(Graphics.FromImage(bitmapOutput));
+            errorArtWork = new ArtWork(Graphics.FromImage(errorBitMapOutput));
+            parser = new CommandParser(myArtWork, errorArtWork);
             myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
+
         }
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)
@@ -80,15 +83,16 @@ namespace Assignment
                 }
                 else if (code == "reset")
                 {
+                    Graphics g = Graphics.FromImage(bitmapOutput);
+                    g.Clear(Color.White);
                     myArtWork.moveTo(0, 0);
                 }
-            else
-            {
-                parser.runCommand(code);
-            }
-               
-                singleCommandLine.Text = "";
-                Refresh();
+                else
+                {
+                    parser.runCommand(code);
+                }
+                    singleCommandLine.Text = "";
+                    Refresh();
             }
 
         }
