@@ -170,6 +170,17 @@ namespace Assignment
                         myArtWork.clear();
                     }
 
+                    if(command.Equals("reset") == true)
+                    {
+                        if(commandSplit.Length != 1)
+                        {
+                            throw new ArgumentException("reset does not require parameters");
+                        }
+                        myArtWork.reset();
+                    }
+
+
+
                     if (commandSplit.Length != 2)
                     {
                         throw new ArgumentException("Invalid Number of parameters");

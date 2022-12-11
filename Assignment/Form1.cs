@@ -62,12 +62,6 @@ namespace Assignment
                         parser.runCommand(command);
                     }
                 }
-                else if (code == "reset")
-                {
-                    Graphics g = Graphics.FromImage(bitmapOutput);
-                    g.Clear(Color.White);
-                    myArtWork.moveTo(0, 0);
-                }
                 else
                 {
                     parser.runCommand(code);

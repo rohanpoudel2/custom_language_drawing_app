@@ -114,6 +114,12 @@ namespace Assignment
             illustrate.Clear(Color.White);
         }
 
+        public void reset()
+        {
+            this.xPosition = 0;
+            this.yPosition = 0;
+        }
+
         public void changeColor(string colour)
         {
             Color newColor = Color.FromName(colour);
