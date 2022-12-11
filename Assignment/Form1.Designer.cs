@@ -71,44 +71,48 @@
             // outputBoxLabel
             // 
             this.outputBoxLabel.AutoSize = true;
-            this.outputBoxLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.outputBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputBoxLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
+            this.outputBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputBoxLabel.Location = new System.Drawing.Point(12, 39);
             this.outputBoxLabel.Name = "outputBoxLabel";
-            this.outputBoxLabel.Size = new System.Drawing.Size(352, 55);
+            this.outputBoxLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.outputBoxLabel.Size = new System.Drawing.Size(375, 65);
             this.outputBoxLabel.TabIndex = 4;
             this.outputBoxLabel.Text = "Output Window";
             // 
             // logsLabel
             // 
             this.logsLabel.AutoSize = true;
-            this.logsLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.logsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
+            this.logsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logsLabel.Location = new System.Drawing.Point(1229, 39);
             this.logsLabel.Name = "logsLabel";
-            this.logsLabel.Size = new System.Drawing.Size(313, 55);
+            this.logsLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.logsLabel.Size = new System.Drawing.Size(334, 65);
             this.logsLabel.TabIndex = 5;
             this.logsLabel.Text = "Logs Window";
             // 
             // programInputWindowLabel
             // 
             this.programInputWindowLabel.AutoSize = true;
-            this.programInputWindowLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.programInputWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.programInputWindowLabel.Location = new System.Drawing.Point(1234, 508);
+            this.programInputWindowLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
+            this.programInputWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.programInputWindowLabel.Location = new System.Drawing.Point(1230, 508);
             this.programInputWindowLabel.Name = "programInputWindowLabel";
-            this.programInputWindowLabel.Size = new System.Drawing.Size(513, 55);
+            this.programInputWindowLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.programInputWindowLabel.Size = new System.Drawing.Size(543, 65);
             this.programInputWindowLabel.TabIndex = 6;
             this.programInputWindowLabel.Text = "Program Input Window";
             // 
             // singleCommandWindowLabel
             // 
             this.singleCommandWindowLabel.AutoSize = true;
-            this.singleCommandWindowLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.singleCommandWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singleCommandWindowLabel.Location = new System.Drawing.Point(1230, 1178);
+            this.singleCommandWindowLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
+            this.singleCommandWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.singleCommandWindowLabel.Location = new System.Drawing.Point(1230, 1171);
             this.singleCommandWindowLabel.Name = "singleCommandWindowLabel";
-            this.singleCommandWindowLabel.Size = new System.Drawing.Size(323, 31);
+            this.singleCommandWindowLabel.Padding = new System.Windows.Forms.Padding(5);
+            this.singleCommandWindowLabel.Size = new System.Drawing.Size(354, 41);
             this.singleCommandWindowLabel.TabIndex = 7;
             this.singleCommandWindowLabel.Text = "Single Command Window";
             // 
@@ -124,7 +128,7 @@
             // 
             // runButton
             // 
-            this.runButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.runButton.Location = new System.Drawing.Point(1230, 1271);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(391, 61);
@@ -135,7 +139,7 @@
             // 
             // clearCodeButton
             // 
-            this.clearCodeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearCodeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearCodeButton.Location = new System.Drawing.Point(1637, 1271);
             this.clearCodeButton.Name = "clearCodeButton";
             this.clearCodeButton.Size = new System.Drawing.Size(391, 61);
@@ -146,7 +150,7 @@
             // 
             // clearScreenButton
             // 
-            this.clearScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearScreenButton.Location = new System.Drawing.Point(12, 1271);
             this.clearScreenButton.Name = "clearScreenButton";
             this.clearScreenButton.Size = new System.Drawing.Size(391, 61);
@@ -159,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(236)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(2052, 1344);
             this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
