@@ -51,7 +51,6 @@ namespace Assignment
 
                     for (int i = 0; i < programInputWindow.Lines.Length; i++)
                     {
-                        Console.WriteLine(programInputWindow.Lines[i]);
                         multiCommands.Add(programInputWindow.Lines[i]);
                     }
 
@@ -73,6 +72,7 @@ namespace Assignment
                 }
 
                 singleCommandLine.Text = "";
+                
                 programLogWindow.Lines = parser.showError().ToArray();
 
                 multiCommands.Clear();

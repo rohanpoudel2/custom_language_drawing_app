@@ -29,8 +29,9 @@ namespace Assignment
         }
 
         ArtWork myArtWork;
+
         List<string> errors = new List<string>();
-        int codeIndex = 1;
+        int errorIndex = 0;
         public CommandParser(ArtWork myArtWork)
         {
            this.myArtWork = myArtWork;
@@ -75,8 +76,10 @@ namespace Assignment
 
        public void runCommand(string instruction)
        {
-            string[] commandSplit = instruction.Split(' ');
 
+            errorIndex++;
+            
+            string[] commandSplit = instruction.Split(' ');
             string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
 
@@ -230,12 +233,13 @@ namespace Assignment
             }
             catch (Exception e)
             {
-                errors.Add(e.Message);
+                errors.Add("Index "+(errorIndex - 1)+": "+e.Message);
             }
         }
 
         public List<string> showError()
         {
+            errorIndex = 0;
             return errors;
         }
     }
