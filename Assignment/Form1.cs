@@ -15,14 +15,10 @@ namespace Assignment
         const int bitmapWidth = 700, bitmapHeight = 700; 
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
-        Bitmap errorBitMapOutput = new Bitmap(bitmapWidth, bitmapHeight);
 
         ArtWork myArtWork;
-        ArtWork errorArtWork;
 
         CommandParser parser;
-
-        List<string> multiCommands = new List<string>();
 
         public drawingProgram()
         {
@@ -30,10 +26,8 @@ namespace Assignment
             Size = new Size(1100, 700);
 
             myArtWork = new ArtWork(Graphics.FromImage(bitmapOutput));
-            errorArtWork = new ArtWork(Graphics.FromImage(errorBitMapOutput));
-            parser = new CommandParser(myArtWork, errorArtWork);
-            myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
 
+            parser = new CommandParser(myArtWork);
         }
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)
@@ -42,20 +36,13 @@ namespace Assignment
             currentIllustration.DrawImageUnscaled(bitmapOutput, 0, 0);
         }
 
-        private void errorWindow_Paint(object sender, PaintEventArgs e)
-        {
-            Graphics currentIllustration = e.Graphics;
-            currentIllustration.DrawImageUnscaled(errorBitMapOutput, 0, 0);
-
-            Graphics g = Graphics.FromImage(errorBitMapOutput);
-            g.Clear(Color.White);
-        }
-
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
 
             if (e.KeyCode == Keys.Enter)
             {
+                List<string> multiCommands = new List<string>();
+
                 string code = singleCommandLine.Text.Trim().ToLower();
 
                 if (code == "run")
@@ -75,17 +62,6 @@ namespace Assignment
                         parser.runCommand(command);
                     }
                 }
-                else if (code == "clear")
-                {
-                    Graphics g = Graphics.FromImage(bitmapOutput);
-                    g.Clear(Color.White);
-                    myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
-                    code = "";
-                    foreach (string multiCommand in multiCommands.ToList())
-                    {
-                        multiCommands.RemoveAt(multiCommands.IndexOf(multiCommand));
-                    }
-                }
                 else if (code == "reset")
                 {
                     Graphics g = Graphics.FromImage(bitmapOutput);
@@ -97,7 +73,11 @@ namespace Assignment
                     parser.runCommand(code);
                 }
                     singleCommandLine.Text = "";
-                    Refresh();
+                    foreach (string multiCommand in multiCommands.ToList())
+                    {
+                        multiCommands.RemoveAt(multiCommands.IndexOf(multiCommand));
+                    }
+                Refresh();
             }
 
         }

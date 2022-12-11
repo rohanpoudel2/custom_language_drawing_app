@@ -28,13 +28,12 @@ namespace Assignment
             fill
         }
 
-        ArtWork myArtWork, errorArtWork;
+        ArtWork myArtWork;
         List<string> errors = new List<string>();
         int errorPosition = 0;
-        public CommandParser(ArtWork myArtWork,ArtWork errorArtWork)
+        public CommandParser(ArtWork myArtWork)
         {
            this.myArtWork = myArtWork;
-           this.errorArtWork = errorArtWork;
         }
 
         public dynamic checkParameter(string parameter, string type)
@@ -80,7 +79,7 @@ namespace Assignment
 
             string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
-            Console.WriteLine(commandSplit[0]);
+
             try
             {
                 if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
@@ -161,6 +160,16 @@ namespace Assignment
                 {
                     dynamic parameter;
                     string command = commandSplit[0];
+
+                    if (command.Equals("clear") == true)
+                    {
+                        if (commandSplit.Length != 1)
+                        {
+                            throw new ArgumentException("clear does not require parameters");
+                        }
+                        myArtWork.clear();
+                    }
+
                     if (commandSplit.Length != 2)
                     {
                         throw new ArgumentException("Invalid Number of parameters");
@@ -222,7 +231,7 @@ namespace Assignment
                 foreach (string error in errors)
                 {
                     Console.WriteLine(error);
-                    errorArtWork.showError(error, x, errorPosition);
+                    myArtWork.showError(error, x, errorPosition);
                     errorPosition = errorPosition + 30;
                 }
                 errorPosition = 0;

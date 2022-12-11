@@ -36,7 +36,7 @@ namespace Assignment
 
         public void drawLine(int xPos, int yPos)
         {
-            //illustrate.DrawLine(pen, xPosition, yPosition, xPos, yPos);
+ 
             (shape.drawLine(pen, xPosition, yPosition, xPos, yPos)).Draw();
             xPosition = xPos;
             yPosition = yPos;
@@ -44,7 +44,6 @@ namespace Assignment
 
         public void drawSquare(int size)
         {
-            //illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
 
             if (fill)
             {
@@ -58,7 +57,7 @@ namespace Assignment
 
         public void drawCircle(int radius)
         {
-            //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
+ 
             if (fill)
             {
                 (shape.drawCircle(pen, xPosition, yPosition, radius)).Draw(drawBrush);
@@ -72,7 +71,7 @@ namespace Assignment
 
         public void drawRectangle(int width, int height)
         {
-            //illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
+            
             if (fill)
             {
                 (shape.drawRectangle(pen, xPosition, yPosition, width, height)).Draw(drawBrush);
@@ -86,7 +85,7 @@ namespace Assignment
 
         public void drawTriangle(Point[] Points)
         {
-            //illustrate.DrawPolygon(pen, Points);
+           
             if (fill)
             {
                 (shape.drawTriangle(pen, Points)).Draw(drawBrush);
@@ -100,22 +99,19 @@ namespace Assignment
 
         public void showError(string error, int positionX, int positionY)
         {
-            illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
+           // illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
+           
         }
 
         public void moveTo(int positionX, int positionY)
         {
             this.xPosition = positionX;
             this.yPosition = positionY;
-            drawPosition(positionX, positionY );
         }
 
-        public void drawPosition(int x, int y)
+        public void clear()
         {
-            const int radius = 4;
-            Pen Positionpen = new Pen(Color.Red, 2);
-
-            illustrate.DrawEllipse(Positionpen, x, y, radius, radius);
+            illustrate.Clear(Color.White);
         }
 
         public void changeColor(string colour)

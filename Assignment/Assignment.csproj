@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="ArtWork.cs" />
     <Compile Include="Circle.cs" />
-    <Compile Include="commandParser.cs" />
+    <Compile Include="CommandParser.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -31,13 +31,12 @@
             this.outputWindow = new System.Windows.Forms.PictureBox();
             this.singleCommandLine = new System.Windows.Forms.TextBox();
             this.programInputWindow = new System.Windows.Forms.RichTextBox();
-            this.errorWindow = new System.Windows.Forms.PictureBox();
             this.outputBoxLabel = new System.Windows.Forms.Label();
             this.logsLabel = new System.Windows.Forms.Label();
             this.programInputWindowLabel = new System.Windows.Forms.Label();
             this.singleCommandWindowLabel = new System.Windows.Forms.Label();
+            this.programLogWindow = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorWindow)).BeginInit();
             this.SuspendLayout();
             // 
             // outputWindow
@@ -65,16 +64,6 @@
             this.programInputWindow.Size = new System.Drawing.Size(798, 572);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
-            // 
-            // errorWindow
-            // 
-            this.errorWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.errorWindow.Location = new System.Drawing.Point(1230, 115);
-            this.errorWindow.Name = "errorWindow";
-            this.errorWindow.Size = new System.Drawing.Size(798, 362);
-            this.errorWindow.TabIndex = 3;
-            this.errorWindow.TabStop = false;
-            this.errorWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.errorWindow_Paint);
             // 
             // outputBoxLabel
             // 
@@ -120,24 +109,33 @@
             this.singleCommandWindowLabel.TabIndex = 7;
             this.singleCommandWindowLabel.Text = "Single Command Window";
             // 
+            // programLogWindow
+            // 
+            this.programLogWindow.BackColor = System.Drawing.Color.White;
+            this.programLogWindow.Location = new System.Drawing.Point(1230, 115);
+            this.programLogWindow.Name = "programLogWindow";
+            this.programLogWindow.ReadOnly = true;
+            this.programLogWindow.Size = new System.Drawing.Size(798, 369);
+            this.programLogWindow.TabIndex = 8;
+            this.programLogWindow.Text = "";
+            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(2052, 1309);
+            this.Controls.Add(this.programLogWindow);
             this.Controls.Add(this.singleCommandWindowLabel);
             this.Controls.Add(this.programInputWindowLabel);
             this.Controls.Add(this.logsLabel);
             this.Controls.Add(this.outputBoxLabel);
-            this.Controls.Add(this.errorWindow);
             this.Controls.Add(this.programInputWindow);
             this.Controls.Add(this.singleCommandLine);
             this.Controls.Add(this.outputWindow);
             this.Name = "drawingProgram";
             this.Text = "Command Drawing Program";
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorWindow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,11 +146,11 @@
         private System.Windows.Forms.PictureBox outputWindow;
         private System.Windows.Forms.TextBox singleCommandLine;
         private System.Windows.Forms.RichTextBox programInputWindow;
-        private System.Windows.Forms.PictureBox errorWindow;
         private System.Windows.Forms.Label outputBoxLabel;
         private System.Windows.Forms.Label logsLabel;
         private System.Windows.Forms.Label programInputWindowLabel;
         private System.Windows.Forms.Label singleCommandWindowLabel;
+        private System.Windows.Forms.RichTextBox programLogWindow;
     }
 }
 
