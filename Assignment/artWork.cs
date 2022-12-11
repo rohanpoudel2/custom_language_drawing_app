@@ -48,11 +48,11 @@ namespace Assignment
 
             if (fill)
             {
-                (shape.drawSquare(pen, Xposition, Yposition, size)).Draw(drawBrush);
+                (shape.drawSquare(pen, xPosition, yPosition, size)).Draw(drawBrush);
             }
             else
             {
-                (shape.drawSquare(pen, Xposition, Yposition, size)).Draw();
+                (shape.drawSquare(pen, xPosition, yPosition, size)).Draw();
             }
         }
 
@@ -61,11 +61,11 @@ namespace Assignment
             //illustrate.DrawEllipse(pen, xPosition, yPosition, xPosition + (radius * 2), yPosition + (radius * 2));
             if (fill)
             {
-                (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw(drawBrush);
+                (shape.drawCircle(pen, xPosition, yPosition, radius)).Draw(drawBrush);
             }
             else
             {
-                (shape.drawCircle(pen, Xposition, Yposition, radius)).Draw();
+                (shape.drawCircle(pen, xPosition, yPosition, radius)).Draw();
             }
 
         }
@@ -75,11 +75,11 @@ namespace Assignment
             //illustrate.DrawRectangle(pen, xPosition, yPosition, width, height );
             if (fill)
             {
-                (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw(drawBrush);
+                (shape.drawRectangle(pen, xPosition, yPosition, width, height)).Draw(drawBrush);
             }
             else
             {
-                (shape.drawRectangle(pen, Xposition, Yposition, width, height)).Draw();
+                (shape.drawRectangle(pen, xPosition, yPosition, width, height)).Draw();
             }
 
         }
@@ -121,6 +121,7 @@ namespace Assignment
         public void changeColor(string colour)
         {
             Color newColor = Color.FromName(colour);
+            drawBrush = new SolidBrush(newColor);
             pen = new Pen(newColor, 2);
         }
 

@@ -58,7 +58,7 @@ namespace Assignment
                     {
                         if (parms.Any(char.IsDigit))
                         {
-                            throw new ArgumentException();
+                            throw new ArgumentException("Parameter must be of String Type");
                         }
                         stringParams.Add(parms);
                     }
@@ -69,8 +69,9 @@ namespace Assignment
             catch(Exception e) 
             {
                 errors.Add(e.Message);
+                throw new ArgumentException("Parameter must be a Number");
             }
-            return "";
+            return new ArgumentException("Please try again !");
         }
 
        public void runCommand(string instruction)
@@ -84,6 +85,10 @@ namespace Assignment
             {
                 if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
+                    if (commandSplit.Length != 2)
+                    {
+                        throw new ArgumentException("Invalid Number of parameters");
+                    }
                     if (commandSplit.Length == 2)
                     {
                         dynamic parameter;
@@ -94,7 +99,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 2)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.drawLine(parameter[0], parameter[1]);
 
@@ -105,7 +110,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if(parameter.Length != 1)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.drawSquare(parameter[0]);
                         }
@@ -115,7 +120,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 1)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.drawCircle(parameter[0]);
                         }
@@ -125,7 +130,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 2)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.drawRectangle(parameter[0], parameter[1]);
                         }
@@ -133,20 +138,18 @@ namespace Assignment
                         if(command.Equals("triangle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if (parameter.Length != 5)
+                            if (parameter.Length != 4)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
+
                             Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
                             Point point2 = new Point(parameter[0], parameter[1]);
-                            Point point3 = new Point(parameter[1], parameter[2]);
-                            Point point4 = new Point(parameter[2], parameter[3]);
-                            Point point5 = new Point(parameter[3], parameter[4]);
-                            Point point6 = new Point(parameter[4], myArtWork.Xposition);
+                            Point point3 = new Point(parameter[2], parameter[3]);
 
                             Point[] points =
                             {
-                                point1, point2, point3, point4, point5, point6
+                                point1, point2, point3
                             };
 
                             myArtWork.drawTriangle(points);
@@ -158,7 +161,10 @@ namespace Assignment
                 {
                     dynamic parameter;
                     string command = commandSplit[0];
-
+                    if (commandSplit.Length != 2)
+                    {
+                        throw new ArgumentException("Invalid Number of parameters");
+                    }
                     if (commandSplit.Length == 2)
                     {
                         if (command.Equals("moveto") == true)
@@ -166,7 +172,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 2)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.moveTo(parameter[0], parameter[1]);
                         }
@@ -176,7 +182,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Invalid Number of Parameter is Given");
                             }
                             myArtWork.changeColor(parameter[0]);
                         }
@@ -186,16 +192,15 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Not Enough Parameter is Given");
                             }
                             if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
                             {
                                 myArtWork.changeFill(parameter[0]);
-
                             }
                             else
                             {
-                                throw new ArgumentException();
+                                throw new ArgumentException("Fill parameter must be 'on' or 'off'");
                             }
 
                         }
@@ -203,7 +208,7 @@ namespace Assignment
                 }
                 else
                 {
-                    throw new ArgumentException();
+                    throw new ArgumentException("Command Not Available");
                 }  
                 
             }

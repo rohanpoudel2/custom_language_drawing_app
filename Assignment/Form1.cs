@@ -12,7 +12,7 @@ namespace Assignment
 {
     public partial class drawingProgram : Form
     {
-        const int bitmapWidth = 650, bitmapHeight = 500; 
+        const int bitmapWidth = 700, bitmapHeight = 700; 
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
         Bitmap errorBitMapOutput = new Bitmap(bitmapWidth, bitmapHeight);
@@ -27,7 +27,7 @@ namespace Assignment
         public drawingProgram()
         {
             InitializeComponent();
-            Size = new Size(970, 700);
+            Size = new Size(1100, 700);
 
             myArtWork = new ArtWork(Graphics.FromImage(bitmapOutput));
             errorArtWork = new ArtWork(Graphics.FromImage(errorBitMapOutput));
@@ -80,6 +80,11 @@ namespace Assignment
                     Graphics g = Graphics.FromImage(bitmapOutput);
                     g.Clear(Color.White);
                     myArtWork.drawPosition(myArtWork.Xposition, myArtWork.Yposition);
+                    code = "";
+                    foreach (string multiCommand in multiCommands.ToList())
+                    {
+                        multiCommands.RemoveAt(multiCommands.IndexOf(multiCommand));
+                    }
                 }
                 else if (code == "reset")
                 {

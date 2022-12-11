@@ -18,12 +18,12 @@ namespace Assignment
 
         public void Draw()
         {
-            illustrate.DrawRectangle(pen, xPosition, yPosition, xPosition + size, yPosition + size);
+            illustrate.DrawRectangle(pen, xPosition, yPosition, size,  size);
         }
 
         public void Draw(SolidBrush brush)
         {
-            illustrate.FillRectangle(brush,xPosition, yPosition, xPosition + size, yPosition + size);
+            illustrate.FillRectangle(brush, xPosition, yPosition, size, size);
         }
     }
 }

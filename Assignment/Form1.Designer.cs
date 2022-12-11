@@ -41,14 +41,14 @@
             this.outputWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.outputWindow.Location = new System.Drawing.Point(12, 67);
             this.outputWindow.Name = "outputWindow";
-            this.outputWindow.Size = new System.Drawing.Size(1048, 928);
+            this.outputWindow.Size = new System.Drawing.Size(1201, 1175);
             this.outputWindow.TabIndex = 0;
             this.outputWindow.TabStop = false;
             this.outputWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.outputWindow_Paint);
             // 
             // singleCommandLine
             // 
-            this.singleCommandLine.Location = new System.Drawing.Point(1077, 1006);
+            this.singleCommandLine.Location = new System.Drawing.Point(1230, 919);
             this.singleCommandLine.Name = "singleCommandLine";
             this.singleCommandLine.Size = new System.Drawing.Size(798, 31);
             this.singleCommandLine.TabIndex = 1;
@@ -56,18 +56,18 @@
             // 
             // programInputWindow
             // 
-            this.programInputWindow.Location = new System.Drawing.Point(1077, 67);
+            this.programInputWindow.Location = new System.Drawing.Point(1230, 67);
             this.programInputWindow.Name = "programInputWindow";
-            this.programInputWindow.Size = new System.Drawing.Size(798, 928);
+            this.programInputWindow.Size = new System.Drawing.Size(798, 822);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
             // 
             // errorWindow
             // 
             this.errorWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.errorWindow.Location = new System.Drawing.Point(12, 1006);
+            this.errorWindow.Location = new System.Drawing.Point(1230, 1058);
             this.errorWindow.Name = "errorWindow";
-            this.errorWindow.Size = new System.Drawing.Size(1048, 184);
+            this.errorWindow.Size = new System.Drawing.Size(798, 184);
             this.errorWindow.TabIndex = 3;
             this.errorWindow.TabStop = false;
             this.errorWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.errorWindow_Paint);
