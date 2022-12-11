@@ -36,6 +36,9 @@
             this.programInputWindowLabel = new System.Windows.Forms.Label();
             this.singleCommandWindowLabel = new System.Windows.Forms.Label();
             this.programLogWindow = new System.Windows.Forms.RichTextBox();
+            this.runButton = new System.Windows.Forms.Button();
+            this.clearCodeButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,14 +47,14 @@
             this.outputWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.outputWindow.Location = new System.Drawing.Point(12, 115);
             this.outputWindow.Name = "outputWindow";
-            this.outputWindow.Size = new System.Drawing.Size(1201, 1043);
+            this.outputWindow.Size = new System.Drawing.Size(1201, 1110);
             this.outputWindow.TabIndex = 0;
             this.outputWindow.TabStop = false;
             this.outputWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.outputWindow_Paint);
             // 
             // singleCommandLine
             // 
-            this.singleCommandLine.Location = new System.Drawing.Point(1230, 1184);
+            this.singleCommandLine.Location = new System.Drawing.Point(1230, 1224);
             this.singleCommandLine.Name = "singleCommandLine";
             this.singleCommandLine.Size = new System.Drawing.Size(798, 31);
             this.singleCommandLine.TabIndex = 1;
@@ -103,7 +106,7 @@
             this.singleCommandWindowLabel.AutoSize = true;
             this.singleCommandWindowLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.singleCommandWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singleCommandWindowLabel.Location = new System.Drawing.Point(890, 1184);
+            this.singleCommandWindowLabel.Location = new System.Drawing.Point(1230, 1178);
             this.singleCommandWindowLabel.Name = "singleCommandWindowLabel";
             this.singleCommandWindowLabel.Size = new System.Drawing.Size(323, 31);
             this.singleCommandWindowLabel.TabIndex = 7;
@@ -119,12 +122,45 @@
             this.programLogWindow.TabIndex = 8;
             this.programLogWindow.Text = "";
             // 
+            // runButton
+            // 
+            this.runButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.runButton.Location = new System.Drawing.Point(1230, 1271);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(391, 61);
+            this.runButton.TabIndex = 9;
+            this.runButton.Text = "RUN";
+            this.runButton.UseVisualStyleBackColor = true;
+            // 
+            // clearCodeButton
+            // 
+            this.clearCodeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearCodeButton.Location = new System.Drawing.Point(1637, 1271);
+            this.clearCodeButton.Name = "clearCodeButton";
+            this.clearCodeButton.Size = new System.Drawing.Size(391, 61);
+            this.clearCodeButton.TabIndex = 10;
+            this.clearCodeButton.Text = "CLEAR INPUT";
+            this.clearCodeButton.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(12, 1271);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(391, 61);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "CLEAR";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.ClientSize = new System.Drawing.Size(2052, 1309);
+            this.ClientSize = new System.Drawing.Size(2052, 1344);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.clearCodeButton);
+            this.Controls.Add(this.runButton);
             this.Controls.Add(this.programLogWindow);
             this.Controls.Add(this.singleCommandWindowLabel);
             this.Controls.Add(this.programInputWindowLabel);
@@ -151,6 +187,9 @@
         private System.Windows.Forms.Label programInputWindowLabel;
         private System.Windows.Forms.Label singleCommandWindowLabel;
         private System.Windows.Forms.RichTextBox programLogWindow;
+        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Button clearCodeButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 
