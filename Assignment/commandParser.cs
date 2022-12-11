@@ -80,7 +80,7 @@ namespace Assignment
 
             string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
-
+            Console.WriteLine(commandSplit[0]);
             try
             {
                 if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
@@ -157,7 +157,7 @@ namespace Assignment
 
                     }
                 }
-                if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
+                else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
                     dynamic parameter;
                     string command = commandSplit[0];
