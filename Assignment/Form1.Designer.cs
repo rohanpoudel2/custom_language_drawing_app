@@ -38,7 +38,7 @@
             this.programLogWindow = new System.Windows.Forms.RichTextBox();
             this.runButton = new System.Windows.Forms.Button();
             this.clearCodeButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.clearScreenButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -131,6 +131,7 @@
             this.runButton.TabIndex = 9;
             this.runButton.Text = "RUN";
             this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
             // clearCodeButton
             // 
@@ -141,16 +142,18 @@
             this.clearCodeButton.TabIndex = 10;
             this.clearCodeButton.Text = "CLEAR INPUT";
             this.clearCodeButton.UseVisualStyleBackColor = true;
+            this.clearCodeButton.Click += new System.EventHandler(this.clearCodeButton_Click);
             // 
-            // button1
+            // clearScreenButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(12, 1271);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(391, 61);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "CLEAR";
-            this.button1.UseVisualStyleBackColor = true;
+            this.clearScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clearScreenButton.Location = new System.Drawing.Point(12, 1271);
+            this.clearScreenButton.Name = "clearScreenButton";
+            this.clearScreenButton.Size = new System.Drawing.Size(391, 61);
+            this.clearScreenButton.TabIndex = 11;
+            this.clearScreenButton.Text = "CLEAR";
+            this.clearScreenButton.UseVisualStyleBackColor = true;
+            this.clearScreenButton.Click += new System.EventHandler(this.clearScreenButton_Click);
             // 
             // drawingProgram
             // 
@@ -158,7 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(2052, 1344);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.programLogWindow);
@@ -189,7 +192,7 @@
         private System.Windows.Forms.RichTextBox programLogWindow;
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Button clearCodeButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clearScreenButton;
     }
 }
 

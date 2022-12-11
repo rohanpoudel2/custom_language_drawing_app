@@ -20,10 +20,12 @@ namespace Assignment
 
         CommandParser parser;
 
+        List<string> multiCommands = new List<string>();
+
         public drawingProgram()
         {
             InitializeComponent();
-            Size = new Size(1100, 700);
+            Size = new Size(1040, 750);
 
             myArtWork = new ArtWork(Graphics.FromImage(bitmapOutput));
 
@@ -36,35 +38,25 @@ namespace Assignment
             currentIllustration.DrawImageUnscaled(bitmapOutput, 0, 0);
         }
 
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            runCode();
+            programLogWindow.Lines = parser.showError().ToArray();
+            multiCommands.Clear();
+            Refresh();
+        }
+
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
 
             if (e.KeyCode == Keys.Enter)
             {
-                List<string> multiCommands = new List<string>();
-
+                
                 string code = singleCommandLine.Text.Trim().ToLower();
 
                 if (code == "run")
                 {
-                    parser.runCommand("clear");
-
-                    for (int i = 0; i < programInputWindow.Lines.Length; i++)
-                    {
-                        multiCommands.Add(programInputWindow.Lines[i]);
-                    }
-
-                    foreach (string command in multiCommands.ToList())
-                    {
-                        if (string.IsNullOrWhiteSpace(command))
-                        {
-                            multiCommands.RemoveAt(multiCommands.IndexOf(command));
-                        }
-                        else
-                        {
-                            parser.runCommand(command);
-                        }    
-                    }
+                    runCode();
                 }
                 else
                 {
@@ -77,10 +69,43 @@ namespace Assignment
 
                 multiCommands.Clear();
 
-
                 Refresh();
             }
 
+        }
+
+        private void clearCodeButton_Click(object sender, EventArgs e)
+        {
+            multiCommands.Clear();
+            programInputWindow.Clear();
+        }
+
+        private void clearScreenButton_Click(object sender, EventArgs e)
+        {
+            parser.runCommand("clear");
+            
+        }
+
+        private void runCode()
+        {
+            parser.runCommand("clear");
+
+            for (int i = 0; i < programInputWindow.Lines.Length; i++)
+            {
+                multiCommands.Add(programInputWindow.Lines[i]);
+            }
+
+            foreach (string command in multiCommands.ToList())
+            {
+                if (string.IsNullOrWhiteSpace(command))
+                {
+                    multiCommands.RemoveAt(multiCommands.IndexOf(command));
+                }
+                else
+                {
+                    parser.runCommand(command);
+                }
+            }
         }
     }
 }
