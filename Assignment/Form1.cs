@@ -73,6 +73,7 @@ namespace Assignment
                 }
 
                 singleCommandLine.Text = "";
+                programLogWindow.Lines = parser.showError().ToArray();
 
                 multiCommands.Clear();
 

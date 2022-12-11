@@ -30,6 +30,7 @@ namespace Assignment
 
         ArtWork myArtWork;
         List<string> errors = new List<string>();
+        int codeIndex = 1;
         public CommandParser(ArtWork myArtWork)
         {
            this.myArtWork = myArtWork;
@@ -180,11 +181,6 @@ namespace Assignment
                         errors.Clear();
                     }
 
-
-                    if (commandSplit.Length != 2)
-                    {
-                        throw new ArgumentException("Invalid Number of parameters");
-                    }
                     if (commandSplit.Length == 2)
                     {
                         if (command.Equals("moveto") == true)
@@ -192,7 +188,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "int");
                             if (parameter.Length != 2)
                             {
-                                throw new ArgumentException("Invalid Number of Parameter is Given");
+                                throw new ArgumentException("Invalid Number of Parameter is Given for moveto");
                             }
                             myArtWork.moveTo(parameter[0], parameter[1]);
                         }
@@ -202,7 +198,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
-                                throw new ArgumentException("Invalid Number of Parameter is Given");
+                                throw new ArgumentException("Invalid Number of Parameter is Given for pen");
                             }
                             myArtWork.changeColor(parameter[0]);
                         }
@@ -212,7 +208,7 @@ namespace Assignment
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
-                                throw new ArgumentException("Not Enough Parameter is Given");
+                                throw new ArgumentException("Not Enough Parameter is Given for fill");
                             }
                             if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
                             {
