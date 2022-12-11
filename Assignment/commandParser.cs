@@ -30,7 +30,6 @@ namespace Assignment
 
         ArtWork myArtWork;
         List<string> errors = new List<string>();
-        int errorPosition = 0;
         public CommandParser(ArtWork myArtWork)
         {
            this.myArtWork = myArtWork;
@@ -74,7 +73,7 @@ namespace Assignment
         }
 
        public void runCommand(string instruction)
-        {
+       {
             string[] commandSplit = instruction.Split(' ');
 
             string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
@@ -168,6 +167,7 @@ namespace Assignment
                             throw new ArgumentException("clear does not require parameters");
                         }
                         myArtWork.clear();
+                        errors.Clear();
                     }
 
                     if(command.Equals("reset") == true)
@@ -177,8 +177,8 @@ namespace Assignment
                             throw new ArgumentException("reset does not require parameters");
                         }
                         myArtWork.reset();
+                        errors.Clear();
                     }
-
 
 
                     if (commandSplit.Length != 2)
@@ -236,18 +236,11 @@ namespace Assignment
             {
                 errors.Add(e.Message);
             }
-            finally
-            {
-                int x = 0;
-                foreach (string error in errors)
-                {
-                    Console.WriteLine(error);
-                    myArtWork.showError(error, x, errorPosition);
-                    errorPosition = errorPosition + 30;
-                }
-                errorPosition = 0;
-                errors.Clear();
-            }
+        }
+
+        public List<string> showError()
+        {
+            return errors;
         }
     }
 }

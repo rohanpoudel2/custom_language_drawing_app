@@ -97,12 +97,6 @@ namespace Assignment
 
         }
 
-        public void showError(string error, int positionX, int positionY)
-        {
-           // illustrate.DrawString(error, drawFont, drawBrush, positionX, positionY);
-           
-        }
-
         public void moveTo(int positionX, int positionY)
         {
             this.xPosition = positionX;

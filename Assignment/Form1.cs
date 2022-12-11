@@ -47,8 +47,11 @@ namespace Assignment
 
                 if (code == "run")
                 {
+                    parser.runCommand("clear");
+
                     for (int i = 0; i < programInputWindow.Lines.Length; i++)
                     {
+                        Console.WriteLine(programInputWindow.Lines[i]);
                         multiCommands.Add(programInputWindow.Lines[i]);
                     }
 
@@ -58,19 +61,22 @@ namespace Assignment
                         {
                             multiCommands.RemoveAt(multiCommands.IndexOf(command));
                         }
-
-                        parser.runCommand(command);
+                        else
+                        {
+                            parser.runCommand(command);
+                        }    
                     }
                 }
                 else
                 {
                     parser.runCommand(code);
                 }
-                    singleCommandLine.Text = "";
-                    foreach (string multiCommand in multiCommands.ToList())
-                    {
-                        multiCommands.RemoveAt(multiCommands.IndexOf(multiCommand));
-                    }
+
+                singleCommandLine.Text = "";
+
+                multiCommands.Clear();
+
+
                 Refresh();
             }
 
