@@ -25,7 +25,7 @@ namespace Assignment
         public drawingProgram()
         {
             InitializeComponent();
-            Size = new Size(1040, 750);
+            Size = new Size(1040, 770);
 
             myArtWork = new ArtWork(Graphics.FromImage(bitmapOutput));
 
@@ -83,7 +83,7 @@ namespace Assignment
         private void clearScreenButton_Click(object sender, EventArgs e)
         {
             parser.runCommand("clear");
-            
+            Refresh();
         }
 
         private void runCode()
