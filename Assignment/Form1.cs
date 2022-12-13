@@ -86,6 +86,30 @@ namespace Assignment
             Refresh();
         }
 
+        private void saveCodeButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+
+            saveFile.DefaultExt = "*.rtf";
+            saveFile.Filter = "RTF Files|*.rtf";
+
+            if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFile.FileName.Length > 0)
+            {
+                programInputWindow.SaveFile(saveFile.FileName);
+            }
+        }
+
+        private void loadCodeButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+
+            if(openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFile.CheckFileExists == true)
+            {
+                programInputWindow.LoadFile(openFile.FileName);
+            }
+
+        }
+
         private void runCode()
         {
             parser.runCommand("clear");
