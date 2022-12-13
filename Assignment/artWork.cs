@@ -114,11 +114,20 @@ namespace Assignment
             this.yPosition = 0;
         }
 
-        public void changeColor(string colour)
+        public Boolean changeColor(string colour)
         {
             Color newColor = Color.FromName(colour);
-            drawBrush = new SolidBrush(newColor);
-            pen = new Pen(newColor, 2);
+
+            if(newColor.IsKnownColor == false) {
+                return false;
+            }
+            else
+            {
+                drawBrush = new SolidBrush(newColor);
+                pen = new Pen(newColor, 2);
+                return true;
+            }
+            
         }
 
         public void changeFill(string fill)

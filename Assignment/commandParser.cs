@@ -208,6 +208,10 @@ namespace Assignment
                                 throw new ArgumentException("Invalid Parameter is Given for pen");
                             }
                             myArtWork.changeColor(parameter[0]);
+                            if (myArtWork.changeColor(parameter[0]) == false)
+                            {
+                                throw new ArgumentException("Invalid Color, Please try with new Color");
+                            }
                         }
 
                         if (command.Equals("fill") == true)
