@@ -110,6 +110,18 @@ namespace Assignment
 
         }
 
+        private void aboutButton_Click(object sender, EventArgs e)
+        {
+            string aboutMessage = "Hello World 👋 This Program is made by Rohan Poudel";
+            MessageBox.Show(aboutMessage, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void commandsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string availableCommands = "moveto int, int\r\ndrawto int, int\r\ncircle int\r\nsquare int\r\nrectangle int int\r\ntriangle point1, point2\r\nfill string \r\npen string\r\nreset\r\nclear\r\nrun\r\n\r\n";
+            MessageBox.Show(availableCommands, "Available Commands", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void runCode()
         {
             parser.runCommand("clear");
