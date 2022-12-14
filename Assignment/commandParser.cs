@@ -50,7 +50,7 @@ namespace Assignment
 
                      if(Int32.Parse(parms) < 0)
                      {
-                            throw new ArgumentOutOfRangeException();
+                            throw new ArgumentOutOfRangeException("helo");
                      }
 
                     }
@@ -103,11 +103,21 @@ namespace Assignment
                         if (command.Equals("drawto") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
+                            /*
                             if (parameter.Length != 2)
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for drawto");
                             }
-                            myArtWork.drawLine(parameter[0], parameter[1]);
+                            */
+                            if(checkCommandLength(parameter.Length, 2, "drawto"))
+                            {
+                                myArtWork.drawLine(parameter[0], parameter[1]);
+                            }
+                            else
+                            {
+                                throw new ArgumentException("Invalid Parameter is Given for drawto");
+                            }
+                            
 
                         }
 
@@ -244,6 +254,24 @@ namespace Assignment
                 errors.Add("Index "+(errorIndex - 1)+": "+e.Message);
                 errors.Add("--------------------------------------");
             }
+        }
+
+        public Boolean checkCommandLength(int length, int tobeLength, string commandName)
+        {
+
+            if(length != tobeLength)
+            {
+                return false;
+            }
+            else { 
+                return true; 
+            }
+  
+        }
+
+        public void resetFill()
+        {
+            myArtWork.changeFill("off");
         }
 
         public List<string> showError()

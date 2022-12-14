@@ -46,6 +46,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetPositionButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
@@ -188,8 +189,8 @@
             this.saveCodeButton,
             this.loadCodeButton});
             this.fileMenuItem.Name = "fileMenuItem";
-            this.fileMenuItem.Size = new System.Drawing.Size(89, 49);
-            this.fileMenuItem.Text = "File";
+            this.fileMenuItem.Size = new System.Drawing.Size(142, 49);
+            this.fileMenuItem.Text = "🗃️ File";
             // 
             // saveCodeButton
             // 
@@ -211,8 +212,8 @@
             this.aboutButton,
             this.commandsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(107, 49);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(160, 49);
+            this.helpToolStripMenuItem.Text = "ℹ️ Help";
             // 
             // aboutButton
             // 
@@ -228,12 +229,24 @@
             this.commandsToolStripMenuItem.Text = "Commands";
             this.commandsToolStripMenuItem.Click += new System.EventHandler(this.commandsToolStripMenuItem_Click);
             // 
+            // resetPositionButton
+            // 
+            this.resetPositionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetPositionButton.Location = new System.Drawing.Point(429, 1343);
+            this.resetPositionButton.Name = "resetPositionButton";
+            this.resetPositionButton.Size = new System.Drawing.Size(391, 61);
+            this.resetPositionButton.TabIndex = 13;
+            this.resetPositionButton.Text = "RESET POSITION";
+            this.resetPositionButton.UseVisualStyleBackColor = true;
+            this.resetPositionButton.Click += new System.EventHandler(this.resetPositionButton_Click);
+            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(236)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(2048, 1432);
+            this.Controls.Add(this.resetPositionButton);
             this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
             this.Controls.Add(this.runButton);
@@ -276,6 +289,7 @@
         private System.Windows.Forms.ToolStripMenuItem loadCodeButton;
         private System.Windows.Forms.ToolStripMenuItem aboutButton;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
+        private System.Windows.Forms.Button resetPositionButton;
     }
 }
 

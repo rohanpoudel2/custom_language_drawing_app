@@ -122,6 +122,11 @@ namespace Assignment
             MessageBox.Show(availableCommands, "Available Commands", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void resetPositionButton_Click(object sender, EventArgs e)
+        {
+            parser.runCommand("reset");
+        }
+
         private void runCode()
         {
             parser.runCommand("clear");
@@ -142,6 +147,7 @@ namespace Assignment
                     parser.runCommand(command);
                 }
             }
+            parser.resetFill();
         }
     }
 }
