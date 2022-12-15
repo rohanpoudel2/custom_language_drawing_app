@@ -77,8 +77,9 @@ namespace UnitTest
         public void TestPositionMove()
         {
             myArt = new ArtWork();
+            parser= new CommandParser(myArt);
 
-            myArt.moveTo(200,200);
+            parser.runCommand("moveto 200,200");
 
             expectedValue = new ArrayList();
             actualValue = new ArrayList();
