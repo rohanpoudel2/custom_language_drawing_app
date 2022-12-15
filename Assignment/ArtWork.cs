@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    class ArtWork
+    public class ArtWork
     {
         //Declaring variables
         Pen pen;
         Graphics illustrate;
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
-        Boolean fill = false;
+        public Boolean fill = false;
         ShapeFactory shape;
 
         private int xPosition, yPosition;
@@ -26,6 +26,8 @@ namespace Assignment
         {
             get; set;
         }
+
+        public ArtWork() { }
 
         // Constructor of ArtWork class which takes a Graphics object as the parameter
         public ArtWork(Graphics g)
