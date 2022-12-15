@@ -69,6 +69,28 @@ namespace UnitTest
             CollectionAssert.AreNotEqual(expectedValue, actualValue);
 
         }
+
+        [TestMethod]
+        public void TestPositionMove()
+        {
+            myArt = new ArtWork();
+
+            myArt.moveTo(200,200);
+
+            expectedValue = new ArrayList();
+            actualValue = new ArrayList();
+
+            expectedValue.Add(200);
+            expectedValue.Add(200);
+
+            actualValue.Add(myArt.xPosition);
+            actualValue.Add(myArt.yPosition);
+
+            CollectionAssert.AreEqual(expectedValue, actualValue);
+        }
+
+
+
       
     }
 }
