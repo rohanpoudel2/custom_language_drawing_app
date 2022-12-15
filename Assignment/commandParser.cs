@@ -9,7 +9,8 @@ namespace Assignment
 {
     class CommandParser
     {
-        enum shapeCommands
+        // Declaring enumeration for available shape commands
+        enum ShapeCommands
         {
             circle,
             drawto,
@@ -18,7 +19,8 @@ namespace Assignment
             triangle
         }
 
-        enum otherCommands
+        //Declaring enumeration for available commands apart for shape commands
+        enum OtherCommands
         {
             reset,
             clear,
@@ -29,13 +31,21 @@ namespace Assignment
 
         ArtWork myArtWork;
 
+        //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
+
+        //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
+
+        //Constructor for CommandParser class when takes an object of ArtWork for argument
         public CommandParser(ArtWork myArtWork)
         {
             this.myArtWork = myArtWork;
         }
 
+        /*Function with dynamic return type because the return type can be either an array of int or a string
+          *This function is responsible to check if the parameters are valid or not 
+        */
         public dynamic checkParameter(string parameter, string type)
         {
 
@@ -48,6 +58,7 @@ namespace Assignment
 
                     List<int> intParams = new List<int>();
 
+                    // Checking if the given parameter is a valid integer parameter
                     foreach (string parms in parameters)
                     {
                         intParams.Add(Int32.Parse(parms));
@@ -66,6 +77,7 @@ namespace Assignment
 
                     List<string> stringParams = new List<string>();
 
+                    //Checking if the given parameter is a valid string parameter
                     foreach (string parms in parameters)
                     {
                         if (parms.Any(char.IsDigit))
@@ -81,23 +93,29 @@ namespace Assignment
             }
             catch (Exception e)
             {
+                // If checking the parameters had thrown an error then the error is added to the global List of errors
                 errors.Add(e.Message);
             }
 
             return "";
         }
 
+        // Function responsible to check the command and call the appopriate function related to that command in the ArtWork class
         public void runCommand(string instruction)
         {
-
+            // Incrementing the errorIndex as this command is called only when the user enters a code
             errorIndex++;
 
+            // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
             string[] commandSplit = instruction.Split(' ');
-            string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
-            string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
+
+            // Creating two different arrays from the enums to check if the given command is valid and available to be processed
+            string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
+            string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
 
             try
             {
+                // Runs if any shape related commands have been given
                 if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
                     if (commandSplit.Length != 2)
@@ -108,12 +126,16 @@ namespace Assignment
                     if (commandSplit.Length == 2)
                     {
                         dynamic parameter;
+
+                        // Getting the first index of the array commandSplit which is the command
                         string command = commandSplit[0];
 
                         if (command.Equals("drawto") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid integer
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.drawLine(parameter[0], parameter[1]);
@@ -127,8 +149,10 @@ namespace Assignment
 
                         if (command.Equals("square") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid integer
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
                                 myArtWork.drawSquare(parameter[0]);
@@ -142,8 +166,10 @@ namespace Assignment
 
                         if (command.Equals("circle") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid integer
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
                                 myArtWork.drawCircle(parameter[0]);
@@ -157,8 +183,10 @@ namespace Assignment
 
                         if (command.Equals("rectangle") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid integer
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.drawRectangle(parameter[0], parameter[1]);
@@ -172,8 +200,10 @@ namespace Assignment
 
                         if (command.Equals("triangle") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid integer
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 4))
                             {
                                 Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
@@ -196,7 +226,7 @@ namespace Assignment
 
                     }
                 }
-
+                // Runs if any non shape related commands has been given
                 else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
                     dynamic parameter;
@@ -204,7 +234,7 @@ namespace Assignment
 
                     if (command.Equals("clear") == true)
                     {
-
+                        // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                         if (checkCommandLength(commandSplit.Length, 1))
                         {
                             myArtWork.clear();
@@ -219,7 +249,7 @@ namespace Assignment
 
                     if (command.Equals("reset") == true)
                     {
-
+                        // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                         if (checkCommandLength(commandSplit.Length, 1))
                         {
                             myArtWork.reset();
@@ -237,6 +267,7 @@ namespace Assignment
                         {
                             parameter = checkParameter(commandSplit[1], "int");
 
+                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.moveTo(parameter[0], parameter[1]);
@@ -250,6 +281,7 @@ namespace Assignment
 
                         if (command.Equals("pen") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid string
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
@@ -264,6 +296,7 @@ namespace Assignment
 
                         if (command.Equals("fill") == true)
                         {
+                            // Calling the checkParameter to check if the parametes is a valid string
                             parameter = checkParameter(commandSplit[1], "string");
                             if (parameter.Length != 1)
                             {
@@ -294,6 +327,7 @@ namespace Assignment
             }
         }
 
+        //Function responsible to check the Length of the parameter
         public Boolean checkCommandLength(int length, int tobeLength)
         {
 
@@ -308,16 +342,19 @@ namespace Assignment
 
         }
 
+        //Function responsible to reset the Fill to off
         public void resetFill()
         {
             myArtWork.changeFill("off");
         }
 
+        //Function responsible to reset the color to black
         public void resetColor()
         {
             myArtWork.changeColor("black");
         }
 
+        //Function responsible to return errors List
         public List<string> showError()
         {
             errorIndex = 0;
