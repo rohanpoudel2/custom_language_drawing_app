@@ -17,16 +17,8 @@ namespace Assignment
         public Boolean fill = false;
         ShapeFactory shape;
 
-        private int xPosition, yPosition;
-        public int Xposition
-        {
-            get; set;
-        }
-        public int Yposition
-        {
-            get; set;
-        }
-
+        public int xPosition, yPosition;
+    
         public ArtWork() { }
 
         // Constructor of ArtWork class which takes a Graphics object as the parameter

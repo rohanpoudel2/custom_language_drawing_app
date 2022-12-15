@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Assignment;
-using System.Collections.Generic;
+using System.Collections;
 
 namespace UnitTest
 {
@@ -46,11 +46,27 @@ namespace UnitTest
         {
             myArt = new ArtWork();
 
-            myArt.moveto(200, 200);
+            myArt.moveTo(200,200);
+            myArt.reset();
 
-            expectedValue = new int[0, 0];
-            actualValue = new int[myArt.Xposition, myArt.Yposition];
+            expectedValue = new ArrayList();
+            expectedValue.Add(0);
+            expectedValue.Add(0);
+
+            actualValue = new ArrayList();
+            actualValue.Add(myArt.xPosition);
+            actualValue.Add(myArt.yPosition);
+
             CollectionAssert.AreEqual(expectedValue, actualValue);
+
+            actualValue.Clear();
+            
+            myArt.moveTo(200,200);
+            
+            actualValue.Add(myArt.xPosition);
+            actualValue.Add(myArt.yPosition);
+
+            CollectionAssert.AreNotEqual(expectedValue, actualValue);
 
         }
       

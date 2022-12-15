@@ -206,7 +206,7 @@ namespace Assignment
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 4))
                             {
-                                Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
+                                Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
                                 Point point2 = new Point(parameter[0], parameter[1]);
                                 Point point3 = new Point(parameter[2], parameter[3]);
 
