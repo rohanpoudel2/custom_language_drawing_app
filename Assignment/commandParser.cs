@@ -18,7 +18,7 @@ namespace Assignment
             triangle
         }
 
-        enum otherCommands 
+        enum otherCommands
         {
             reset,
             clear,
@@ -33,32 +33,39 @@ namespace Assignment
         int errorIndex = 0;
         public CommandParser(ArtWork myArtWork)
         {
-           this.myArtWork = myArtWork;
+            this.myArtWork = myArtWork;
         }
 
         public dynamic checkParameter(string parameter, string type)
         {
+
             List<string> parameters = new List<string>(parameter.Split(','));
-            try 
+
+            try
             {
                 if (type == "int")
                 {
+
                     List<int> intParams = new List<int>();
+
                     foreach (string parms in parameters)
                     {
-                     intParams.Add(Int32.Parse(parms));
+                        intParams.Add(Int32.Parse(parms));
 
-                     if(Int32.Parse(parms) < 0)
-                     {
+                        if (Int32.Parse(parms) < 0)
+                        {
                             throw new ArgumentOutOfRangeException();
-                     }
+                        }
 
                     }
-                    return intParams.ToArray(); 
+
+                    return intParams.ToArray();
                 }
                 else
                 {
+
                     List<string> stringParams = new List<string>();
+
                     foreach (string parms in parameters)
                     {
                         if (parms.Any(char.IsDigit))
@@ -67,22 +74,24 @@ namespace Assignment
                         }
                         stringParams.Add(parms);
                     }
+
                     return stringParams.ToArray();
                 }
-                
+
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
                 errors.Add(e.Message);
             }
+
             return "";
         }
 
-       public void runCommand(string instruction)
-       {
+        public void runCommand(string instruction)
+        {
 
             errorIndex++;
-            
+
             string[] commandSplit = instruction.Split(' ');
             string[] availableShapeCommands = Enum.GetNames(typeof(shapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(otherCommands));
@@ -95,6 +104,7 @@ namespace Assignment
                     {
                         throw new ArgumentException("Invalid Number of parameters");
                     }
+
                     if (commandSplit.Length == 2)
                     {
                         dynamic parameter;
@@ -103,8 +113,8 @@ namespace Assignment
                         if (command.Equals("drawto") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            
-                            if(checkCommandLength(parameter.Length, 2))
+
+                            if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.drawLine(parameter[0], parameter[1]);
                             }
@@ -112,14 +122,14 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for drawto");
                             }
-                            
+
                         }
 
-                        if(command.Equals("square") == true)
+                        if (command.Equals("square") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                           
-                            if(checkCommandLength(parameter.Length, 1))
+
+                            if (checkCommandLength(parameter.Length, 1))
                             {
                                 myArtWork.drawSquare(parameter[0]);
                             }
@@ -127,14 +137,14 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for square");
                             }
-                            
+
                         }
 
                         if (command.Equals("circle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            
-                            if(checkCommandLength(parameter.Length, 1))
+
+                            if (checkCommandLength(parameter.Length, 1))
                             {
                                 myArtWork.drawCircle(parameter[0]);
                             }
@@ -142,14 +152,14 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for circle");
                             }
-                            
+
                         }
 
-                        if(command.Equals("rectangle") == true)
+                        if (command.Equals("rectangle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                           
-                            if(checkCommandLength(parameter.Length, 2))
+
+                            if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.drawRectangle(parameter[0], parameter[1]);
                             }
@@ -157,14 +167,14 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for rectangle");
                             }
-                            
+
                         }
 
-                        if(command.Equals("triangle") == true)
+                        if (command.Equals("triangle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            
-                            if(checkCommandLength(parameter.Length, 4))
+
+                            if (checkCommandLength(parameter.Length, 4))
                             {
                                 Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
                                 Point point2 = new Point(parameter[0], parameter[1]);
@@ -186,6 +196,7 @@ namespace Assignment
 
                     }
                 }
+
                 else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                 {
                     dynamic parameter;
@@ -193,8 +204,8 @@ namespace Assignment
 
                     if (command.Equals("clear") == true)
                     {
-           
-                        if(checkCommandLength(commandSplit.Length, 1))
+
+                        if (checkCommandLength(commandSplit.Length, 1))
                         {
                             myArtWork.clear();
                             errors.Clear();
@@ -203,13 +214,13 @@ namespace Assignment
                         {
                             throw new ArgumentException("clear does not require parameters");
                         }
-   
+
                     }
 
-                    if(command.Equals("reset") == true)
+                    if (command.Equals("reset") == true)
                     {
-                        
-                        if(checkCommandLength(commandSplit.Length, 1))
+
+                        if (checkCommandLength(commandSplit.Length, 1))
                         {
                             myArtWork.reset();
                         }
@@ -217,7 +228,7 @@ namespace Assignment
                         {
                             throw new ArgumentException("reset does not require parameters");
                         }
-                       
+
                     }
 
                     if (commandSplit.Length == 2)
@@ -225,8 +236,8 @@ namespace Assignment
                         if (command.Equals("moveto") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            
-                            if(checkCommandLength(parameter.Length, 2))
+
+                            if (checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.moveTo(parameter[0], parameter[1]);
                             }
@@ -234,7 +245,7 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid  Parameter is Given for moveto");
                             }
-                            
+
                         }
 
                         if (command.Equals("pen") == true)
@@ -268,17 +279,17 @@ namespace Assignment
                             }
 
                         }
-                    }   
+                    }
                 }
                 else
                 {
                     throw new ArgumentException("Command Not Available");
-                }  
-                
+                }
+
             }
             catch (Exception e)
             {
-                errors.Add("Index "+(errorIndex - 1)+": "+e.Message);
+                errors.Add("Index " + (errorIndex - 1) + ": " + e.Message);
                 errors.Add("--------------------------------------");
             }
         }
@@ -286,14 +297,15 @@ namespace Assignment
         public Boolean checkCommandLength(int length, int tobeLength)
         {
 
-            if(length != tobeLength)
+            if (length != tobeLength)
             {
                 return false;
             }
-            else { 
-                return true; 
+            else
+            {
+                return true;
             }
-  
+
         }
 
         public void resetFill()
