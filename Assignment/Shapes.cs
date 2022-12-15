@@ -9,6 +9,7 @@ namespace Assignment
 {
     interface Shapes
     {
+        // Declaring the interface methods which does not have a body or scope
         Circle drawCircle(Pen pen, int xPosition, int yPosition, int radius);
         Rectanglee drawRectangle(Pen pen, int xPosition, int yPosition, int width, int height);
         Triangle drawTriangle(Pen pen, Point[] points);
