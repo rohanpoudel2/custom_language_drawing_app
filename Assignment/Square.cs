@@ -2,21 +2,15 @@
 
 namespace Assignment
 {
-    public class Square
+    class Square : BasicShape
     {
         //Declaring variables
-        private Graphics illustrate;
-        private Pen pen;
-        private int xPosition, yPosition, size;
+        private int size;
 
         //Constructor of this class
-        public Square(Graphics illustrate,Pen pen, int xPosition, int yPosition, int size)
+        public Square(Graphics illustrate,Pen pen, int xPosition, int yPosition, int size) : base(pen, illustrate, xPosition, yPosition)
         {
             //Assigning the received parameters to the global variables
-            this.illustrate = illustrate;
-            this.pen = pen;
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
             this.size = size;
         }
 

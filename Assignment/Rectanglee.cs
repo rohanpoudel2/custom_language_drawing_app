@@ -3,21 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace Assignment
 {
-    public class Rectanglee
+    class Rectanglee : BasicShape
     {
         //Declaring variables
-        private Graphics illustrate;
-        private Pen pen;
-        private int xPosition, yPosition, width, height;
+        private int width, height;
 
         //Constructor of this class
-        public Rectanglee(Graphics illustrate, Pen pen, int xPosition, int yPosition, int width, int height)
+        public Rectanglee(Graphics illustrate, Pen pen, int xPosition, int yPosition, int width, int height) : base(pen, illustrate, xPosition, yPosition)
         {
             //Assigning the received parameters to the global variables
-            this.illustrate = illustrate;
-            this.pen = pen;
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
             this.width = width;
             this.height = height;
         }

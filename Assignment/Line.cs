@@ -2,22 +2,15 @@
 
 namespace Assignment
 {
-    public class Line
+    class Line : BasicShape
     {
         //Declaring variables
-        private Graphics illustrate;
-        private Pen pen;
-        private int xPosition, yPosition;
         private int toXPos, toYPos;
 
         //Constructor of this class
-        public Line(Graphics illustrate, Pen pen, int xPosition, int yPosition, int toXPos, int toYPos)
+        public Line(Graphics illustrate, Pen pen, int xPosition, int yPosition, int toXPos, int toYPos) : base(pen, illustrate, xPosition, yPosition)
         {
             //Assigning the received parameters to the global variables
-            this.illustrate = illustrate;
-            this.pen = pen;
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
             this.toXPos = toXPos;
             this.toYPos = toYPos;
         }

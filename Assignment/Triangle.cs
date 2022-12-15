@@ -2,19 +2,15 @@
 
 namespace Assignment
 {
-    public class Triangle
+    class Triangle : BasicShape
     {
         //Declaring variables
-        private Graphics illustrate;
-        private Pen pen;
         private Point[] points;
 
         //Constructor of this class
-        public Triangle(Graphics illustrate, Pen pen, Point[] points)
+        public Triangle(Graphics illustrate, Pen pen, Point[] points) : base(pen, illustrate, 0, 0)
         {
             //Assigning the received parameters to the global variables
-            this.illustrate = illustrate;
-            this.pen = pen;
             this.points = points;
         }
 

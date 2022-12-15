@@ -1,27 +1,21 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 
 namespace Assignment
 {
-    public class Circle
+    class Circle : BasicShape
     {
         //Declaring variables
-        private Graphics illustrate;
-        private Pen pen;
-        private int xPosition, yPosition;
         private int radius;
 
         //Constructor of this class
-        public Circle(Graphics illustrate, Pen pen, int xPosition, int yPosition, int radius)
+        public Circle(Graphics illustrate, Pen pen, int xPosition, int yPosition, int radius) : base(pen, illustrate, xPosition, yPosition)
         {
             //Assigning the received parameters to the global variables
-            this.illustrate = illustrate;
-            this.pen = pen;
-            this.xPosition = xPosition;
-            this.yPosition = yPosition;
             this.radius = radius;
         }
-
+ 
         // Function responsible to draw the Desired shape
         public void Draw()
         {
