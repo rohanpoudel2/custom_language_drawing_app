@@ -47,9 +47,10 @@ namespace UnitTest
         public void TestPositionReset()
         {
             myArt = new ArtWork();
+            parser= new CommandParser(myArt);
 
             myArt.moveTo(200,200);
-            myArt.reset();
+            parser.runCommand("reset");
 
             expectedValue = new ArrayList();
             expectedValue.Add(0);
