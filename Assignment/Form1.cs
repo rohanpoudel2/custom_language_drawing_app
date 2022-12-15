@@ -148,6 +148,8 @@ namespace Assignment
                 }
             }
             parser.resetFill();
+            parser.resetColor();
+            parser.runCommand("reset");
         }
     }
 }

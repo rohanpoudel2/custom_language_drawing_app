@@ -50,7 +50,7 @@ namespace Assignment
 
                      if(Int32.Parse(parms) < 0)
                      {
-                            throw new ArgumentOutOfRangeException("helo");
+                            throw new ArgumentOutOfRangeException();
                      }
 
                     }
@@ -103,13 +103,8 @@ namespace Assignment
                         if (command.Equals("drawto") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            /*
-                            if (parameter.Length != 2)
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given for drawto");
-                            }
-                            */
-                            if(checkCommandLength(parameter.Length, 2, "drawto"))
+                            
+                            if(checkCommandLength(parameter.Length, 2))
                             {
                                 myArtWork.drawLine(parameter[0], parameter[1]);
                             }
@@ -118,57 +113,75 @@ namespace Assignment
                                 throw new ArgumentException("Invalid Parameter is Given for drawto");
                             }
                             
-
                         }
 
                         if(command.Equals("square") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if(parameter.Length != 1)
+                           
+                            if(checkCommandLength(parameter.Length, 1))
+                            {
+                                myArtWork.drawSquare(parameter[0]);
+                            }
+                            else
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for square");
                             }
-                            myArtWork.drawSquare(parameter[0]);
+                            
                         }
 
                         if (command.Equals("circle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if (parameter.Length != 1)
+                            
+                            if(checkCommandLength(parameter.Length, 1))
+                            {
+                                myArtWork.drawCircle(parameter[0]);
+                            }
+                            else
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for circle");
                             }
-                            myArtWork.drawCircle(parameter[0]);
+                            
                         }
 
                         if(command.Equals("rectangle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if (parameter.Length != 2)
+                           
+                            if(checkCommandLength(parameter.Length, 2))
+                            {
+                                myArtWork.drawRectangle(parameter[0], parameter[1]);
+                            }
+                            else
                             {
                                 throw new ArgumentException("Invalid Parameter is Given for rectangle");
                             }
-                            myArtWork.drawRectangle(parameter[0], parameter[1]);
+                            
                         }
 
                         if(command.Equals("triangle") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if (parameter.Length != 4)
+                            
+                            if(checkCommandLength(parameter.Length, 4))
+                            {
+                                Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
+                                Point point2 = new Point(parameter[0], parameter[1]);
+                                Point point3 = new Point(parameter[2], parameter[3]);
+
+                                Point[] points =
+                                {
+                                point1, point2, point3
+                            };
+
+                                myArtWork.drawTriangle(points);
+                            }
+                            else
                             {
                                 throw new ArgumentException("Invalid Parameter is Given triangle");
                             }
 
-                            Point point1 = new Point(myArtWork.Xposition, myArtWork.Yposition);
-                            Point point2 = new Point(parameter[0], parameter[1]);
-                            Point point3 = new Point(parameter[2], parameter[3]);
-
-                            Point[] points =
-                            {
-                                point1, point2, point3
-                            };
-
-                            myArtWork.drawTriangle(points);
                         }
 
                     }
@@ -180,22 +193,31 @@ namespace Assignment
 
                     if (command.Equals("clear") == true)
                     {
-                        if (commandSplit.Length != 1)
+           
+                        if(checkCommandLength(commandSplit.Length, 1))
+                        {
+                            myArtWork.clear();
+                            errors.Clear();
+                        }
+                        else
                         {
                             throw new ArgumentException("clear does not require parameters");
                         }
-                        myArtWork.clear();
-                        errors.Clear();
+   
                     }
 
                     if(command.Equals("reset") == true)
                     {
-                        if(commandSplit.Length != 1)
+                        
+                        if(checkCommandLength(commandSplit.Length, 1))
+                        {
+                            myArtWork.reset();
+                        }
+                        else
                         {
                             throw new ArgumentException("reset does not require parameters");
                         }
-                        myArtWork.reset();
-                        errors.Clear();
+                       
                     }
 
                     if (commandSplit.Length == 2)
@@ -203,11 +225,16 @@ namespace Assignment
                         if (command.Equals("moveto") == true)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if (parameter.Length != 2)
+                            
+                            if(checkCommandLength(parameter.Length, 2))
+                            {
+                                myArtWork.moveTo(parameter[0], parameter[1]);
+                            }
+                            else
                             {
                                 throw new ArgumentException("Invalid  Parameter is Given for moveto");
                             }
-                            myArtWork.moveTo(parameter[0], parameter[1]);
+                            
                         }
 
                         if (command.Equals("pen") == true)
@@ -256,7 +283,7 @@ namespace Assignment
             }
         }
 
-        public Boolean checkCommandLength(int length, int tobeLength, string commandName)
+        public Boolean checkCommandLength(int length, int tobeLength)
         {
 
             if(length != tobeLength)
@@ -272,6 +299,11 @@ namespace Assignment
         public void resetFill()
         {
             myArtWork.changeFill("off");
+        }
+
+        public void resetColor()
+        {
+            myArtWork.changeColor("black");
         }
 
         public List<string> showError()

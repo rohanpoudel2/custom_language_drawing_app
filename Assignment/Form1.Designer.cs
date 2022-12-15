@@ -164,7 +164,7 @@
             this.clearScreenButton.Name = "clearScreenButton";
             this.clearScreenButton.Size = new System.Drawing.Size(391, 61);
             this.clearScreenButton.TabIndex = 11;
-            this.clearScreenButton.Text = "CLEAR";
+            this.clearScreenButton.Text = "CLEAR DRAWING";
             this.clearScreenButton.UseVisualStyleBackColor = true;
             this.clearScreenButton.Click += new System.EventHandler(this.clearScreenButton_Click);
             // 
