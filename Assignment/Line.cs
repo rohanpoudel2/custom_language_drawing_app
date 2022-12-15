@@ -2,7 +2,7 @@
 
 namespace Assignment
 {
-    class Line : BasicShape
+    public class Line : BasicShape
     {
         //Declaring variables
         private int toXPos, toYPos;

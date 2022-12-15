@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Assignment
 {
-    class Rectanglee : BasicShape
+    public class Rectanglee : BasicShape
     {
         //Declaring variables
         private int width, height;

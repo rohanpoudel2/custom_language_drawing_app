@@ -9,7 +9,7 @@ namespace Assignment
 {
 
     //Implementing the interface Shapes in this ShapeFactory function
-    class ShapeFactory: Shapes
+    public class ShapeFactory: Shapes
     {
         private Graphics illustrate;
 

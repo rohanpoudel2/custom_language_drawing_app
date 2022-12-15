@@ -2,7 +2,7 @@
 
 namespace Assignment
 {
-    class Square : BasicShape
+    public class Square : BasicShape
     {
         //Declaring variables
         private int size;

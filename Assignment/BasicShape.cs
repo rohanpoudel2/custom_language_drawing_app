@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    abstract class BasicShape
+    public abstract class BasicShape
     {
         //Declaring basic variables needed to create a shape
         protected Pen pen;

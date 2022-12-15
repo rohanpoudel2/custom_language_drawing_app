@@ -2,7 +2,7 @@
 
 namespace Assignment
 {
-    class Triangle : BasicShape
+    public class Triangle : BasicShape
     {
         //Declaring variables
         private Point[] points;

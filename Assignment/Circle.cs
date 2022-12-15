@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Assignment
 {
-    class Circle : BasicShape
+    public class Circle : BasicShape
     {
         //Declaring variables
         private int radius;

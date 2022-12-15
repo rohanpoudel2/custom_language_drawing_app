@@ -71,6 +71,7 @@
             // 
             // programInputWindow
             // 
+            this.programInputWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.programInputWindow.Location = new System.Drawing.Point(1230, 658);
             this.programInputWindow.Name = "programInputWindow";
             this.programInputWindow.Size = new System.Drawing.Size(798, 572);
@@ -128,6 +129,7 @@
             // programLogWindow
             // 
             this.programLogWindow.BackColor = System.Drawing.Color.White;
+            this.programLogWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.programLogWindow.Location = new System.Drawing.Point(1230, 187);
             this.programLogWindow.Name = "programLogWindow";
             this.programLogWindow.ReadOnly = true;
@@ -142,7 +144,7 @@
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(391, 61);
             this.runButton.TabIndex = 9;
-            this.runButton.Text = "RUN";
+            this.runButton.Text = "▶️ RUN";
             this.runButton.UseVisualStyleBackColor = true;
             this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
@@ -153,7 +155,7 @@
             this.clearCodeButton.Name = "clearCodeButton";
             this.clearCodeButton.Size = new System.Drawing.Size(391, 61);
             this.clearCodeButton.TabIndex = 10;
-            this.clearCodeButton.Text = "CLEAR INPUT";
+            this.clearCodeButton.Text = "🗑️ CLEAR INPUT";
             this.clearCodeButton.UseVisualStyleBackColor = true;
             this.clearCodeButton.Click += new System.EventHandler(this.clearCodeButton_Click);
             // 
@@ -164,7 +166,7 @@
             this.clearScreenButton.Name = "clearScreenButton";
             this.clearScreenButton.Size = new System.Drawing.Size(391, 61);
             this.clearScreenButton.TabIndex = 11;
-            this.clearScreenButton.Text = "CLEAR DRAWING";
+            this.clearScreenButton.Text = "🗑️ CLEAR DRAWING";
             this.clearScreenButton.UseVisualStyleBackColor = true;
             this.clearScreenButton.Click += new System.EventHandler(this.clearScreenButton_Click);
             // 
@@ -179,7 +181,7 @@
             this.helpToolStripMenuItem});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
-            this.menuBar.Size = new System.Drawing.Size(2048, 53);
+            this.menuBar.Size = new System.Drawing.Size(2048, 57);
             this.menuBar.TabIndex = 12;
             this.menuBar.Text = "menuStrip1";
             // 
@@ -195,14 +197,14 @@
             // saveCodeButton
             // 
             this.saveCodeButton.Name = "saveCodeButton";
-            this.saveCodeButton.Size = new System.Drawing.Size(359, 54);
+            this.saveCodeButton.Size = new System.Drawing.Size(312, 54);
             this.saveCodeButton.Text = "Save Code";
             this.saveCodeButton.Click += new System.EventHandler(this.saveCodeButton_Click);
             // 
             // loadCodeButton
             // 
             this.loadCodeButton.Name = "loadCodeButton";
-            this.loadCodeButton.Size = new System.Drawing.Size(359, 54);
+            this.loadCodeButton.Size = new System.Drawing.Size(312, 54);
             this.loadCodeButton.Text = "Load Code";
             this.loadCodeButton.Click += new System.EventHandler(this.loadCodeButton_Click);
             // 
@@ -218,14 +220,14 @@
             // aboutButton
             // 
             this.aboutButton.Name = "aboutButton";
-            this.aboutButton.Size = new System.Drawing.Size(359, 54);
+            this.aboutButton.Size = new System.Drawing.Size(321, 54);
             this.aboutButton.Text = "About";
             this.aboutButton.Click += new System.EventHandler(this.aboutButton_Click);
             // 
             // commandsToolStripMenuItem
             // 
             this.commandsToolStripMenuItem.Name = "commandsToolStripMenuItem";
-            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(359, 54);
+            this.commandsToolStripMenuItem.Size = new System.Drawing.Size(321, 54);
             this.commandsToolStripMenuItem.Text = "Commands";
             this.commandsToolStripMenuItem.Click += new System.EventHandler(this.commandsToolStripMenuItem_Click);
             // 
@@ -236,7 +238,7 @@
             this.resetPositionButton.Name = "resetPositionButton";
             this.resetPositionButton.Size = new System.Drawing.Size(391, 61);
             this.resetPositionButton.TabIndex = 13;
-            this.resetPositionButton.Text = "RESET POSITION";
+            this.resetPositionButton.Text = "🧹 RESET POSITION";
             this.resetPositionButton.UseVisualStyleBackColor = true;
             this.resetPositionButton.Click += new System.EventHandler(this.resetPositionButton_Click);
             // 
