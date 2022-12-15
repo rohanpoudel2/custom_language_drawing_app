@@ -9,20 +9,22 @@ namespace UnitTest
     public class UnitTest1
     {
         ArtWork myArt;
+        CommandParser parser;
         dynamic expectedValue, actualValue;
 
         [TestMethod]
         public void TestFillChange()
         {
             myArt = new ArtWork();
+            parser = new CommandParser(myArt);
 
             expectedValue = true;
-            myArt.changeFill("on");
+            parser.runCommand("fill on");
             actualValue = myArt.fill;
             Assert.AreEqual(expectedValue, actualValue);
 
             expectedValue = false;
-            myArt.changeFill("off");
+            parser.runCommand("fill off");
             actualValue = myArt.fill;
             Assert.AreEqual(expectedValue, actualValue);
         }
@@ -88,7 +90,6 @@ namespace UnitTest
 
             CollectionAssert.AreEqual(expectedValue, actualValue);
         }
-
 
 
       

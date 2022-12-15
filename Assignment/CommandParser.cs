@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    class CommandParser
+    public class CommandParser
     {
         // Declaring enumeration for available shape commands
         enum ShapeCommands
@@ -36,6 +36,8 @@ namespace Assignment
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
+
+        public CommandParser() { }
 
         //Constructor for CommandParser class when takes an object of ArtWork for argument
         public CommandParser(ArtWork myArtWork)
