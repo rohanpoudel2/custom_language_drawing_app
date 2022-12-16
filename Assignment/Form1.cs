@@ -130,14 +130,14 @@ namespace Assignment
         //Function responsible to open a new MessageBox showing an about message.
         private void aboutButton_Click(object sender, EventArgs e)
         {
-            string aboutMessage = "Hello World 👋 This Program is made by Rohan Poudel";
+            string aboutMessage = "Hello World 👋 This Program is made by Rohan Poudel \n Designed in Visual Studio 2022\n\r\nSupported Platform: Windows\n\r\nThis program is a kind of programming language allowing the user to draw different shapes at different positions in the ouput screen.\n\r\nUser also have the ability to save or load the commands written to the multi line command window into a RichTextFile in the system\n\r\nPlease read the commands in the Help menu to learn about the commands available";
             MessageBox.Show(aboutMessage, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         //Function responsible to open a new MessageBox showing the available commands
         private void commandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string availableCommands = "moveto int, int\r\ndrawto int, int\r\ncircle int\r\nsquare int\r\nrectangle int int\r\ntriangle point1, point2\r\nfill string \r\npen string\r\nreset\r\nclear\r\nrun\r\n\r\n";
+            string availableCommands = "moveto <positionX: int> <positionY: int>\r\ndrawto <positionX: int> <positionY: int>\r\ncircle <radius: int>\r\nsquare <size: int>\r\nrectangle <width: int> <height: int>\r\ntriangle <pointX: int> <pointY: int> <pointX: int> <pointY: int>\r\nfill <on: string> | <off: string>\r\npen <color: string>\r\nreset\r\nclear\r\nrun";
             MessageBox.Show(availableCommands, "Available Commands", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
