@@ -122,14 +122,64 @@ namespace Assignment
                 {
                     if (Int32.TryParse(commandSplit[1], out int result))
                     {
-                        variable.Add(commandSplit[0], commandSplit[1]);
+                        variable.Add(commandSplit[0].Trim(), commandSplit[1]);
                     }
                     else
                     {
+                        if (commandSplit[1].Contains('+'))
+                        {
+                            string[] newCommand = commandSplit[1].Split('+');
+
+                            if (newCommand[0].All(char.IsDigit) && newCommand[1].All(char.IsDigit))
+                            {
+                                variable.Add(commandSplit[0].Trim(), Int32.Parse(newCommand[0]) + Int32.Parse(newCommand[1]));
+                            }
+                            else if (newCommand[0].All(char.IsDigit) && !newCommand[1].All(char.IsDigit))
+                            {
+                                if (variable.TryGetValue(newCommand[1], out dynamic output))
+                                {
+                                    variable.Add(commandSplit[0].Trim(), Int32.Parse(newCommand[0]) + Int32.Parse(output));
+                                }
+                                else
+                                {
+                                    //Throw Exception
+                                }
+                            }
+                            else if (!newCommand[0].All(char.IsDigit) && newCommand[1].All(char.IsDigit))
+                            {
+                                if (variable.TryGetValue(newCommand[0], out dynamic output))
+                                {
+                                    variable.Add(commandSplit[0].Trim(), Int32.Parse(output) + Int32.Parse(newCommand[1]));
+                                }
+                                else
+                                {
+                                    //Throw Exception
+                                }
+                            }
+                            else if (!newCommand[0].All(char.IsDigit) && !newCommand[1].All(char.IsDigit))
+                            {
+                                if (variable.TryGetValue(newCommand[0], out dynamic output))
+                                {
+                                    if (variable.TryGetValue(newCommand[1], out dynamic output1))
+                                    {
+                                        variable.Add(commandSplit[0].Trim(), Int32.Parse(output) + Int32.Parse(output1));
+                                    }
+                                    else
+                                    {
+                                        //Throw Exception
+                                    }
+                                }
+                                else
+                                {
+                                    //Throw Exception
+                                }
+                            }
+                        }
                         if (variable.TryGetValue(commandSplit[1], out dynamic value))
                         {
-                            variable.Add(commandSplit[0], value);
+                            variable.Add(commandSplit[0].Trim(), value);
                         }
+
                     }
                     
                 }
@@ -166,7 +216,7 @@ namespace Assignment
                         {
                             if (variable.TryGetValue(commandSplit[1], out dynamic value))
                             {
-                                parameter = checkParameter(value, "int");
+                                parameter = checkParameter(value.ToString(), "int");
                             }
                         }
 
