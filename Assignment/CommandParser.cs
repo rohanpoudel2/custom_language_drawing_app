@@ -34,6 +34,8 @@ namespace Assignment
         //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
 
+        IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>(); 
+
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
 
@@ -107,10 +109,37 @@ namespace Assignment
         {
             // Incrementing the errorIndex as this command is called only when the user enters a code
             errorIndex++;
+            string[] commandSplit;
 
-            // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
-            string[] commandSplit = instruction.Split(' ');
-
+            if (instruction.Contains('='))
+            {
+                commandSplit = instruction.Split('=');
+                if (commandSplit[1].Length < 0)
+                {
+                    throw new ArgumentException("Invalid value given to the variable");
+                }
+                else
+                {
+                    if (Int32.TryParse(commandSplit[1], out int result))
+                    {
+                        variable.Add(commandSplit[0], commandSplit[1]);
+                    }
+                    else
+                    {
+                        if (variable.TryGetValue(commandSplit[1], out dynamic value))
+                        {
+                            variable.Add(commandSplit[0], value);
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
+                commandSplit = instruction.Split(' ');
+            }
+   
             // Creating two different arrays from the enums to check if the given command is valid and available to be processed
             string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
@@ -127,7 +156,19 @@ namespace Assignment
 
                     if (commandSplit.Length == 2)
                     {
-                        dynamic parameter = checkParameter(commandSplit[1], "int"); ;
+                        dynamic parameter = "";
+
+                        if (variable.Count == 0)
+                        {
+                            parameter = checkParameter(commandSplit[1], "int");
+                        }
+                        else
+                        {
+                            if (variable.TryGetValue(commandSplit[1], out dynamic value))
+                            {
+                                parameter = checkParameter(value, "int");
+                            }
+                        }
 
                         // Getting the first index of the array commandSplit which is the command
                         string command = commandSplit[0];
@@ -317,6 +358,11 @@ namespace Assignment
                 errors.Add("Index " + (errorIndex - 1) + ": " + e.Message);
                 errors.Add("--------------------------------------");
             }
+        }
+
+        public void clearVariables()
+        {
+            variable.Clear();
         }
 
         //Function responsible to check the Length of the parameter
