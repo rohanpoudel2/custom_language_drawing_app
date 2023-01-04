@@ -127,16 +127,14 @@ namespace Assignment
 
                     if (commandSplit.Length == 2)
                     {
-                        dynamic parameter;
+                        dynamic parameter = checkParameter(commandSplit[1], "int"); ;
 
                         // Getting the first index of the array commandSplit which is the command
                         string command = commandSplit[0];
 
                         if (command.Equals("drawto") == true)
                         {
-                            // Calling the checkParameter to check if the parametes is a valid integer
-                            parameter = checkParameter(commandSplit[1], "int");
-
+                   
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
@@ -151,9 +149,7 @@ namespace Assignment
 
                         if (command.Equals("square") == true)
                         {
-                            // Calling the checkParameter to check if the parametes is a valid integer
-                            parameter = checkParameter(commandSplit[1], "int");
-
+                           
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
@@ -168,9 +164,7 @@ namespace Assignment
 
                         if (command.Equals("circle") == true)
                         {
-                            // Calling the checkParameter to check if the parametes is a valid integer
-                            parameter = checkParameter(commandSplit[1], "int");
-
+                           
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
@@ -185,9 +179,7 @@ namespace Assignment
 
                         if (command.Equals("rectangle") == true)
                         {
-                            // Calling the checkParameter to check if the parametes is a valid integer
-                            parameter = checkParameter(commandSplit[1], "int");
-
+                         
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
@@ -202,9 +194,7 @@ namespace Assignment
 
                         if (command.Equals("triangle") == true)
                         {
-                            // Calling the checkParameter to check if the parametes is a valid integer
-                            parameter = checkParameter(commandSplit[1], "int");
-
+                           
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 4))
                             {
