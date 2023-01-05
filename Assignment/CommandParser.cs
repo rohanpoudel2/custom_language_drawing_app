@@ -34,7 +34,7 @@ namespace Assignment
         //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
 
-        IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>(); 
+        IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -138,11 +138,91 @@ namespace Assignment
                                 if (parm.All(char.IsDigit))
                                 {
                                     tempValue = tempValue + Int32.Parse(parm);
-                                }else if (!parm.All(char.IsDigit))
+                                }
+                                else if (!parm.All(char.IsDigit))
                                 {
-                                    if(variable.TryGetValue(parm, out dynamic output))
+                                    if (variable.TryGetValue(parm, out dynamic output))
                                     {
                                         tempValue = tempValue + Int32.Parse(output);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Exception to be thrown");
+                                    }
+                                }
+                            }
+                            variable.Add(commandSplit[0], tempValue.ToString());
+                        }
+                        if (commandSplit[1].Contains('-'))
+                        {
+                            string[] newCommand = commandSplit[1].Split('-');
+                            int tempValue = 0;
+                            foreach (string parm in newCommand)
+                            {
+                                if (parm.All(char.IsDigit))
+                                {
+                                    tempValue = Int32.Parse(parm) - tempValue;
+                                }
+                                else if (!parm.All(char.IsDigit))
+                                {
+                                    if (variable.TryGetValue(parm, out dynamic output))
+                                    {
+                                        tempValue = Math.Abs(Int32.Parse(output) - tempValue);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Exception to be thrown");
+                                    }
+                                }
+                            }
+                            variable.Add(commandSplit[0], tempValue.ToString());
+                        }
+                        if (commandSplit[1].Contains('*'))
+                        {
+                            string[] newCommand = commandSplit[1].Split('*');
+                            int tempValue = 1;
+                            foreach (string parm in newCommand)
+                            {
+                                if (parm.All(char.IsDigit))
+                                {
+                                    tempValue = tempValue * Int32.Parse(parm);
+                                }
+                                else if (!parm.All(char.IsDigit))
+                                {
+                                    if (variable.TryGetValue(parm, out dynamic output))
+                                    {
+                                        tempValue = tempValue * Int32.Parse(output);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Exception to be thrown");
+                                    }
+                                }
+                            }
+                            variable.Add(commandSplit[0], tempValue.ToString());
+                        }
+                        if (commandSplit[1].Contains('/'))
+                        {
+                            string[] newCommand = commandSplit[1].Split('/');
+                            int tempValue = 1;
+                            foreach (string parm in newCommand)
+                            {
+                                if (parm.All(char.IsDigit))
+                                {
+                                    tempValue =  Int32.Parse(parm)/tempValue;
+                                }
+                                else if (!parm.All(char.IsDigit))
+                                {
+                                    if (variable.TryGetValue(parm, out dynamic output))
+                                    {
+                                        if(tempValue != 1)
+                                        {
+                                            tempValue = tempValue / Int32.Parse(output);
+                                        }
+                                        else
+                                        {
+                                            tempValue = Int32.Parse(output) / tempValue;
+                                        }
                                     }
                                     else
                                     {
@@ -158,7 +238,7 @@ namespace Assignment
                         }
 
                     }
-                    
+
                 }
             }
             else
@@ -166,7 +246,7 @@ namespace Assignment
                 // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
                 commandSplit = instruction.Split(' ');
             }
-   
+
             // Creating two different arrays from the enums to check if the given command is valid and available to be processed
             string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
@@ -193,6 +273,7 @@ namespace Assignment
                         {
                             if (variable.TryGetValue(commandSplit[1], out dynamic value))
                             {
+                                Console.WriteLine(value);
                                 parameter = checkParameter(value.ToString(), "int");
                             }
                         }
@@ -202,7 +283,7 @@ namespace Assignment
 
                         if (command.Equals("drawto") == true)
                         {
-                   
+
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
@@ -217,7 +298,7 @@ namespace Assignment
 
                         if (command.Equals("square") == true)
                         {
-                           
+
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
@@ -232,7 +313,7 @@ namespace Assignment
 
                         if (command.Equals("circle") == true)
                         {
-                           
+
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 1))
                             {
@@ -247,7 +328,7 @@ namespace Assignment
 
                         if (command.Equals("rectangle") == true)
                         {
-                         
+
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 2))
                             {
@@ -262,7 +343,7 @@ namespace Assignment
 
                         if (command.Equals("triangle") == true)
                         {
-                           
+
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
                             if (checkCommandLength(parameter.Length, 4))
                             {
