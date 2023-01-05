@@ -457,7 +457,14 @@ namespace Assignment
                 }
                 else
                 {
-                    throw new ArgumentException("Command Not Available");
+                    if (variable.TryGetValue(commandSplit[0], out dynamic value))
+                    {
+
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Command Not Available");
+                    }
                 }
 
             }
