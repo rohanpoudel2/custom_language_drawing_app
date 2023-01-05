@@ -114,6 +114,9 @@ namespace Assignment
             if (instruction.Contains('='))
             {
                 commandSplit = instruction.Split('=');
+                commandSplit[0] = commandSplit[0].Trim();
+                commandSplit[1] = commandSplit[1].Trim();
+
                 if (commandSplit[1].Length < 0)
                 {
                     throw new ArgumentException("Invalid value given to the variable");
@@ -122,62 +125,36 @@ namespace Assignment
                 {
                     if (Int32.TryParse(commandSplit[1], out int result))
                     {
-                        variable.Add(commandSplit[0].Trim(), commandSplit[1]);
+                        variable.Add(commandSplit[0], commandSplit[1]);
                     }
                     else
                     {
                         if (commandSplit[1].Contains('+'))
                         {
                             string[] newCommand = commandSplit[1].Split('+');
-
-                            if (newCommand[0].All(char.IsDigit) && newCommand[1].All(char.IsDigit))
+                            int tempValue = 0;
+                            foreach (string parm in newCommand)
                             {
-                                variable.Add(commandSplit[0].Trim(), Int32.Parse(newCommand[0]) + Int32.Parse(newCommand[1]));
-                            }
-                            else if (newCommand[0].All(char.IsDigit) && !newCommand[1].All(char.IsDigit))
-                            {
-                                if (variable.TryGetValue(newCommand[1], out dynamic output))
+                                if (parm.All(char.IsDigit))
                                 {
-                                    variable.Add(commandSplit[0].Trim(), Int32.Parse(newCommand[0]) + Int32.Parse(output));
-                                }
-                                else
+                                    tempValue = tempValue + Int32.Parse(parm);
+                                }else if (!parm.All(char.IsDigit))
                                 {
-                                    //Throw Exception
-                                }
-                            }
-                            else if (!newCommand[0].All(char.IsDigit) && newCommand[1].All(char.IsDigit))
-                            {
-                                if (variable.TryGetValue(newCommand[0], out dynamic output))
-                                {
-                                    variable.Add(commandSplit[0].Trim(), Int32.Parse(output) + Int32.Parse(newCommand[1]));
-                                }
-                                else
-                                {
-                                    //Throw Exception
-                                }
-                            }
-                            else if (!newCommand[0].All(char.IsDigit) && !newCommand[1].All(char.IsDigit))
-                            {
-                                if (variable.TryGetValue(newCommand[0], out dynamic output))
-                                {
-                                    if (variable.TryGetValue(newCommand[1], out dynamic output1))
+                                    if(variable.TryGetValue(parm, out dynamic output))
                                     {
-                                        variable.Add(commandSplit[0].Trim(), Int32.Parse(output) + Int32.Parse(output1));
+                                        tempValue = tempValue + Int32.Parse(output);
                                     }
                                     else
                                     {
-                                        //Throw Exception
+                                        Console.WriteLine("Exception to be thrown");
                                     }
                                 }
-                                else
-                                {
-                                    //Throw Exception
-                                }
                             }
+                            variable.Add(commandSplit[0], tempValue.ToString());
                         }
                         if (variable.TryGetValue(commandSplit[1], out dynamic value))
                         {
-                            variable.Add(commandSplit[0].Trim(), value);
+                            variable.Add(commandSplit[0], value);
                         }
 
                     }
