@@ -34,6 +34,8 @@ namespace Assignment
         //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
 
+        Boolean validLoop = false;
+
         IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
 
         //Declaring a int variable to count the nth number of code being processed
@@ -48,8 +50,8 @@ namespace Assignment
         }
 
         /*Function with dynamic return type because the return type can be either an array of int or a string
-          *This function is responsible to check if the parameters are valid or not 
-        */
+         *This function is responsible to check if the parameters are valid or not 
+         */
         public dynamic checkParameter(string parameter, string type)
         {
 
@@ -110,8 +112,9 @@ namespace Assignment
             // Incrementing the errorIndex as this command is called only when the user enters a code
             errorIndex++;
             string[] commandSplit;
+            List<string> actualValue = new List<string>();
 
-            if (instruction.Contains('='))
+            if (instruction.Contains('=') && !instruction.Contains("=="))
             {
                 commandSplit = instruction.Split('=');
                 commandSplit[0] = commandSplit[0].Trim();
@@ -125,7 +128,14 @@ namespace Assignment
                 {
                     if (Int32.TryParse(commandSplit[1], out int result))
                     {
-                        variable.Add(commandSplit[0], commandSplit[1]);
+                        if (!variable.ContainsKey(commandSplit[0]))
+                        {
+                            variable.Add(commandSplit[0], commandSplit[1]);
+                        }
+                        else
+                        {
+                            variable[commandSplit[0]] = commandSplit[1];
+                        }
                     }
                     else
                     {
@@ -151,7 +161,15 @@ namespace Assignment
                                     }
                                 }
                             }
-                            variable.Add(commandSplit[0], tempValue.ToString());
+                            if (!variable.ContainsKey(commandSplit[0]))
+                            {
+                                variable.Add(commandSplit[0], tempValue.ToString());
+                            }
+                            else
+                            {
+                                variable[commandSplit[0]] = tempValue.ToString();
+                            }
+                       
                         }
                         if (commandSplit[1].Contains('-'))
                         {
@@ -167,7 +185,11 @@ namespace Assignment
                                 {
                                     if (variable.TryGetValue(parm, out dynamic output))
                                     {
-                                        tempValue = Math.Abs(Int32.Parse(output) - tempValue);
+                                        if (tempValue != 0)
+                                        {
+                                            tempValue = tempValue - Int32.Parse(output);
+                                        }
+                                        tempValue = Int32.Parse(output) - tempValue;
                                     }
                                     else
                                     {
@@ -175,7 +197,14 @@ namespace Assignment
                                     }
                                 }
                             }
-                            variable.Add(commandSplit[0], tempValue.ToString());
+                            if (!variable.ContainsKey(commandSplit[0]))
+                            {
+                                variable.Add(commandSplit[0], tempValue.ToString());
+                            }
+                            else
+                            {
+                                variable[commandSplit[0]] = tempValue.ToString();
+                            }
                         }
                         if (commandSplit[1].Contains('*'))
                         {
@@ -199,7 +228,14 @@ namespace Assignment
                                     }
                                 }
                             }
-                            variable.Add(commandSplit[0], tempValue.ToString());
+                            if (!variable.ContainsKey(commandSplit[0]))
+                            {
+                                variable.Add(commandSplit[0], tempValue.ToString());
+                            }
+                            else
+                            {
+                                variable[commandSplit[0]] = tempValue.ToString();
+                            }
                         }
                         if (commandSplit[1].Contains('/'))
                         {
@@ -209,13 +245,13 @@ namespace Assignment
                             {
                                 if (parm.All(char.IsDigit))
                                 {
-                                    tempValue =  Int32.Parse(parm)/tempValue;
+                                    tempValue = Int32.Parse(parm) / tempValue;
                                 }
                                 else if (!parm.All(char.IsDigit))
                                 {
                                     if (variable.TryGetValue(parm, out dynamic output))
                                     {
-                                        if(tempValue != 1)
+                                        if (tempValue != 1)
                                         {
                                             tempValue = tempValue / Int32.Parse(output);
                                         }
@@ -230,11 +266,25 @@ namespace Assignment
                                     }
                                 }
                             }
-                            variable.Add(commandSplit[0], tempValue.ToString());
+                            if (!variable.ContainsKey(commandSplit[0]))
+                            {
+                                variable.Add(commandSplit[0], tempValue.ToString());
+                            }
+                            else
+                            {
+                                variable[commandSplit[0]] = tempValue.ToString();
+                            }
                         }
                         if (variable.TryGetValue(commandSplit[1], out dynamic value))
                         {
-                            variable.Add(commandSplit[0], value);
+                            if (!variable.ContainsKey(commandSplit[0]))
+                            {
+                                variable.Add(commandSplit[0], value);
+                            }
+                            else
+                            {
+                                variable[commandSplit[0]] = value;
+                            }
                         }
 
                     }
@@ -245,6 +295,45 @@ namespace Assignment
             {
                 // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
                 commandSplit = instruction.Split(' ');
+            }
+
+            if (commandSplit[0].Contains("while") || validLoop)
+            {
+                string loopCondition = commandSplit[1];
+                string[] loopConditionOperands;
+                List<string> trueOperandsValue = new List<string>();
+                if (commandSplit[1].Contains("=="))
+                {
+                    loopConditionOperands = commandSplit[1].Split(new string[] {"=="}, StringSplitOptions.None);
+
+                    foreach(string operand in loopConditionOperands)
+                    {
+                        if (operand.All(char.IsDigit))
+                        {
+                            trueOperandsValue.Add(operand);
+                        }
+                        else
+                        {
+                            if(variable.TryGetValue(operand, out dynamic value))
+                            {
+                                trueOperandsValue.Add(value);
+                            }
+                            else
+                            {
+                                throw new ArgumentException("Invalid variable used in loop condition");
+                            }
+                        }
+                    }
+
+                    if (trueOperandsValue[0].Equals(trueOperandsValue[1]))
+                    {
+                        validLoop = true;
+                    }
+                    else
+                    {
+                        validLoop = false;
+                    }
+                }
             }
 
             // Creating two different arrays from the enums to check if the given command is valid and available to be processed
@@ -271,10 +360,26 @@ namespace Assignment
                         }
                         else
                         {
-                            if (variable.TryGetValue(commandSplit[1], out dynamic value))
+                            if (commandSplit[1].Length > 1)
                             {
-                                Console.WriteLine(value);
-                                parameter = checkParameter(value.ToString(), "int");
+                                string[] array = commandSplit[1].Split(',');
+                                string b = "";
+                                foreach (string a in array)
+                                {
+                                    if (variable.TryGetValue(a, out dynamic value))
+                                    {
+                                        b = b + value + ",";
+                                    }
+                                }
+                                b = b.Remove(b.Length - 1);
+                                parameter = checkParameter(b, "int");
+                            }
+                            else
+                            {
+                                if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+                                {
+                                    parameter = checkParameter(value.ToString(), "int");
+                                }
                             }
                         }
 
@@ -351,10 +456,11 @@ namespace Assignment
                                 Point point2 = new Point(parameter[0], parameter[1]);
                                 Point point3 = new Point(parameter[2], parameter[3]);
 
-                                Point[] points =
-                                {
-                                point1, point2, point3
-                            };
+                                Point[] points = {
+                  point1,
+                  point2,
+                  point3
+                };
 
                                 myArtWork.drawTriangle(points);
                             }
@@ -362,7 +468,6 @@ namespace Assignment
                             {
                                 throw new ArgumentException("Invalid Parameter is Given triangle");
                             }
-
                         }
 
                     }
