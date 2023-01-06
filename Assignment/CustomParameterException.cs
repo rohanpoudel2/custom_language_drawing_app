@@ -9,5 +9,10 @@ namespace Assignment
     public class CustomParameterException:Exception
     {
         public CustomParameterException(string message) : base(message) { }
+
+        public string Message
+        {
+            get { return base.Message; }
+        }
     }
 }

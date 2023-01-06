@@ -50,6 +50,8 @@
     <Compile Include="BasicShape.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="CustomCommandNotFoundException.cs" />
+    <Compile Include="CustomParameterException.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

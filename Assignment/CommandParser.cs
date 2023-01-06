@@ -89,7 +89,7 @@ namespace Assignment
 
                         if (Int32.Parse(parms) < 0)
                         {
-                            throw new ArgumentOutOfRangeException();
+                            throw new CustomParameterException("Parameter is out of range. Please give a value that is 0 or more");
                         }
 
                     }
@@ -106,7 +106,7 @@ namespace Assignment
                     {
                         if (parms.Any(char.IsDigit))
                         {
-                            throw new ArgumentException("Parameter must be of String Type");
+                            throw new CustomParameterException("Parameter must be of String Type. Please give a parameter of type string");
                         }
                         stringParams.Add(parms);
                     }
@@ -118,10 +118,8 @@ namespace Assignment
             catch (Exception e)
             {
                 // If checking the parameters had thrown an error then the error is added to the global List of errors
-                errors.Add(e.Message);
+                return e;
             }
-
-            return "";
         }
 
         // Function responsible to check the command and call the appopriate function related to that command in the ArtWork class
@@ -806,8 +804,10 @@ namespace Assignment
 
         public void checkSyntax(List<string> commands)
         {
+            errorIndex = 1;
             foreach (string command in commands)
             {
+                errorIndex++;
                 try
                 {
                     if (command.Contains('=') || command.Contains("while") || command.Contains("endwhile") || command.Contains("if") || command.Contains("endif"))
@@ -821,6 +821,10 @@ namespace Assignment
                         if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
                         {
                             parameter = checkParameter(commandSplit[1], "int");
+                            if(!(parameter is Array))
+                            {
+                                throw new CustomParameterException(parameter.Message);
+                            }
                             switch (commandSplit[0])
                             {
                                 case "circle":
@@ -908,13 +912,14 @@ namespace Assignment
                         }
                         else
                         {
-
+                            throw new CustomCommandNotFoundException("Command is not available. Please read the instructions and try again");
                         }
                     }
                 }
                 catch(Exception e)
                 {
-                             
+                    errors.Add("Line " + (errorIndex - 1) + ": " + e.Message);
+                    errors.Add("--------------------------------------");
                 }
         }
     }

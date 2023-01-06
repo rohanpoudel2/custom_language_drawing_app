@@ -9,5 +9,9 @@ namespace Assignment
     public class CustomCommandNotFoundException: Exception
     {
         public CustomCommandNotFoundException(string message):base(message) { }
+        public string Message
+        {
+            get { return base.Message; }
+        }
     }
 }
