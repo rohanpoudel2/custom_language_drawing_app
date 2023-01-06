@@ -34,9 +34,15 @@ namespace Assignment
         //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
 
-        Boolean validLoop = false;
-
         IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
+
+        bool validLoop;
+        bool inLoop;
+        int loopInterval = 0;
+        string loopStatement;
+        List<string> loopCommands = new List<string>();
+        int loopCount = 0;
+
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -112,7 +118,8 @@ namespace Assignment
             // Incrementing the errorIndex as this command is called only when the user enters a code
             errorIndex++;
             string[] commandSplit;
-            List<string> actualValue = new List<string>();
+
+            Console.WriteLine(instruction);
 
             if (instruction.Contains('=') && !instruction.Contains("=="))
             {
@@ -169,7 +176,7 @@ namespace Assignment
                             {
                                 variable[commandSplit[0]] = tempValue.ToString();
                             }
-                       
+
                         }
                         if (commandSplit[1].Contains('-'))
                         {
@@ -297,36 +304,85 @@ namespace Assignment
                 commandSplit = instruction.Split(' ');
             }
 
-            if (commandSplit[0].Contains("while") || validLoop)
+            if (commandSplit[0].Contains("while"))
             {
-                string loopCondition = commandSplit[1];
-                string[] loopConditionOperands;
-                List<string> trueOperandsValue = new List<string>();
-                if (commandSplit[1].Contains("=="))
-                {
-                    loopConditionOperands = commandSplit[1].Split(new string[] {"=="}, StringSplitOptions.None);
+                string[] loopCondition;
+                loopStatement = "while " + commandSplit[1];
+                string operatorr = "";
 
-                    foreach(string operand in loopConditionOperands)
+                if (loopCount == 0)
+                {
+                    inLoop = true;
+                }
+                loopCount++;
+
+                List<string> loopOperands = new List<string>();
+                if (commandSplit[1].Contains('<'))
+                {
+                    loopCondition = commandSplit[1].Split('<');
+                    operatorr = "<";
+                }
+                else if (commandSplit[1].Contains('>'))
+                {
+                    loopCondition = commandSplit[1].Split('>');
+                    operatorr = ">";
+                }
+                else if (commandSplit[1].Contains("=="))
+                {
+                    loopCondition = commandSplit[1].Split(new string[] {"=="}, StringSplitOptions.None);
+                    operatorr = "==";
+                }
+                else
+                {
+                    Console.WriteLine("invalid parameter is given 341");
+                    throw new ArgumentException("expression not supported");
+                }
+
+                foreach(string operand in loopCondition)
+                {
+                    if (operand.All(char.IsDigit))
                     {
-                        if (operand.All(char.IsDigit))
+                        loopOperands.Add(operand);
+                    }
+                    else
+                    {
+                        if(variable.TryGetValue(operand, out dynamic value))
                         {
-                            trueOperandsValue.Add(operand);
+                            loopOperands.Add(value);
                         }
                         else
                         {
-                            if(variable.TryGetValue(operand, out dynamic value))
-                            {
-                                trueOperandsValue.Add(value);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid variable used in loop condition");
-                            }
+                            Console.WriteLine("invalid parameter is given 358");
+                            throw new ArgumentException("variable not available");
                         }
                     }
-
-                    if (trueOperandsValue[0].Equals(trueOperandsValue[1]))
+                }
+                Console.WriteLine(loopOperands[0]+" " + loopOperands[1]);
+                if (operatorr.Equals("<"))
+                {
+                    if (int.Parse(loopOperands[0]) < int.Parse(loopOperands[1]))
                     {
+                        if(loopInterval == 0)
+                        {
+                            loopInterval = int.Parse(loopOperands[1]) - int.Parse(loopOperands[0]) ;
+                        }
+                       
+                        validLoop = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("VALID LOOP FALSE");
+                        validLoop = false;
+                    }
+                }
+                else if (operatorr.Equals(">"))
+                {
+                    if (int.Parse(loopOperands[0]) > int.Parse(loopOperands[1]))
+                    {
+                        if (loopInterval == 0)
+                        {
+                            loopInterval = int.Parse(loopOperands[0]) - int.Parse(loopOperands[1]);
+                        }
                         validLoop = true;
                     }
                     else
@@ -336,253 +392,297 @@ namespace Assignment
                 }
             }
 
+            if (commandSplit[0].Contains("endloop"))
+            {
+                for (int i=0; i<=loopInterval; i++)
+                {
+                    
+                    inLoop = false;
+                   
+                    foreach (string command in loopCommands)
+                    {
+                        if (validLoop)
+                        {
+                            runCommand(command);
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    
+                    if (!validLoop)
+                    {
+                        break;
+                    }
+                }
+            }
+
             // Creating two different arrays from the enums to check if the given command is valid and available to be processed
             string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
-
-            try
+            if (inLoop)
             {
-                // Runs if any shape related commands have been given
-                if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
+                loopCommands.Add(instruction);
+            }
+            else
+            {
+                try
                 {
-                    if (commandSplit.Length != 2)
+                    // Runs if any shape related commands have been given
+                    if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                     {
-                        throw new ArgumentException("Invalid Number of parameters");
-                    }
-
-                    if (commandSplit.Length == 2)
-                    {
-                        dynamic parameter = "";
-
-                        if (variable.Count == 0)
+                        if (commandSplit.Length != 2)
                         {
-                            parameter = checkParameter(commandSplit[1], "int");
+                            Console.WriteLine("Invalid Number of parameters 441");
+                            throw new ArgumentException("Invalid Number of parameters");  
                         }
-                        else
+
+                        if (commandSplit.Length == 2)
                         {
-                            if (commandSplit[1].Length > 1)
+                            dynamic parameter = "";
+
+                            if (variable.Count == 0)
                             {
-                                string[] array = commandSplit[1].Split(',');
-                                string b = "";
-                                foreach (string a in array)
+                                parameter = checkParameter(commandSplit[1], "int");
+                            }
+                            else
+                            {
+                                if (commandSplit[1].Length > 1)
                                 {
-                                    if (variable.TryGetValue(a, out dynamic value))
+                                    string[] array = commandSplit[1].Split(',');
+                                    string b = "";
+                                    foreach (string a in array)
                                     {
-                                        b = b + value + ",";
+                                        if (variable.TryGetValue(a, out dynamic value))
+                                        {
+                                            b = b + value + ",";
+                                        }
+                                    }
+                                    b = b.Remove(b.Length - 1);
+                                    parameter = checkParameter(b, "int");
+                                }
+                                else
+                                {
+                                    if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+                                    {
+                                        parameter = checkParameter(value.ToString(), "int");
                                     }
                                 }
-                                b = b.Remove(b.Length - 1);
-                                parameter = checkParameter(b, "int");
                             }
-                            else
+
+                            // Getting the first index of the array commandSplit which is the command
+                            string command = commandSplit[0];
+
+
+                            if (command.Equals("drawto") == true)
                             {
-                                if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 2))
                                 {
-                                    parameter = checkParameter(value.ToString(), "int");
+                                    myArtWork.drawLine(parameter[0], parameter[1]);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given for drawto 492");
+                                    throw new ArgumentException("Invalid Parameter is Given for drawto");
+                                }
+
+                            }
+
+                            if (command.Equals("square") == true)
+                            {
+
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 1))
+                                {
+                                    myArtWork.drawSquare(parameter[0]);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given 508");
+                                    throw new ArgumentException("Invalid Parameter is Given for square");
+                                }
+
+                            }
+
+                            if (command.Equals("circle") == true)
+                            {
+
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 1))
+                                {
+                                    myArtWork.drawCircle(parameter[0]);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given 524");
+                                    throw new ArgumentException("Invalid Parameter is Given for circle");
+                                }
+
+                            }
+
+                            if (command.Equals("rectangle") == true)
+                            {
+
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 2))
+                                {
+                                    myArtWork.drawRectangle(parameter[0], parameter[1]);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given 540");
+                                    throw new ArgumentException("Invalid Parameter is Given for rectangle");
+                                }
+
+                            }
+
+                            if (command.Equals("triangle") == true)
+                            {
+
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 4))
+                                {
+                                    Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
+                                    Point point2 = new Point(parameter[0], parameter[1]);
+                                    Point point3 = new Point(parameter[2], parameter[3]);
+
+                                    Point[] points = { point1, point2, point3 };
+
+                                    myArtWork.drawTriangle(points);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given 562");
+                                    throw new ArgumentException("Invalid Parameter is Given triangle");
                                 }
                             }
-                        }
 
-                        // Getting the first index of the array commandSplit which is the command
+                        }
+                    }
+                    // Runs if any non shape related commands has been given
+                    else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
+                    {
+                        dynamic parameter;
                         string command = commandSplit[0];
 
-                        if (command.Equals("drawto") == true)
+                        if (command.Equals("clear") == true)
                         {
-
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 2))
+                            if (checkCommandLength(commandSplit.Length, 1))
                             {
-                                myArtWork.drawLine(parameter[0], parameter[1]);
+                                myArtWork.clear();
+                                errors.Clear();
                             }
                             else
                             {
-                                throw new ArgumentException("Invalid Parameter is Given for drawto");
+                                Console.WriteLine("invalid parameter is given 585");
+                                throw new ArgumentException("clear does not require parameters");
                             }
 
                         }
 
-                        if (command.Equals("square") == true)
+                        if (command.Equals("reset") == true)
                         {
-
                             // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 1))
+                            if (checkCommandLength(commandSplit.Length, 1))
                             {
-                                myArtWork.drawSquare(parameter[0]);
+                                myArtWork.reset();
                             }
                             else
                             {
-                                throw new ArgumentException("Invalid Parameter is Given for square");
+                                Console.WriteLine("invalid parameter is given 600");
+                                throw new ArgumentException("reset does not require parameters");
                             }
 
                         }
 
-                        if (command.Equals("circle") == true)
+                        if (commandSplit.Length == 2)
                         {
-
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 1))
+                            if (command.Equals("moveto") == true)
                             {
-                                myArtWork.drawCircle(parameter[0]);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given for circle");
-                            }
+                                parameter = checkParameter(commandSplit[1], "int");
 
-                        }
+                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
+                                if (checkCommandLength(parameter.Length, 2))
+                                {
+                                    myArtWork.moveTo(parameter[0], parameter[1]);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("invalid parameter is given 619");
+                                    throw new ArgumentException("Invalid  Parameter is Given for moveto");
+                                }
 
-                        if (command.Equals("rectangle") == true)
-                        {
-
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 2))
-                            {
-                                myArtWork.drawRectangle(parameter[0], parameter[1]);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given for rectangle");
                             }
 
-                        }
-
-                        if (command.Equals("triangle") == true)
-                        {
-
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 4))
+                            if (command.Equals("pen") == true)
                             {
-                                Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
-                                Point point2 = new Point(parameter[0], parameter[1]);
-                                Point point3 = new Point(parameter[2], parameter[3]);
-
-                                Point[] points = {
-                  point1,
-                  point2,
-                  point3
-                };
-
-                                myArtWork.drawTriangle(points);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given triangle");
-                            }
-                        }
-
-                    }
-                }
-                // Runs if any non shape related commands has been given
-                else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
-                {
-                    dynamic parameter;
-                    string command = commandSplit[0];
-
-                    if (command.Equals("clear") == true)
-                    {
-                        // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                        if (checkCommandLength(commandSplit.Length, 1))
-                        {
-                            myArtWork.clear();
-                            errors.Clear();
-                        }
-                        else
-                        {
-                            throw new ArgumentException("clear does not require parameters");
-                        }
-
-                    }
-
-                    if (command.Equals("reset") == true)
-                    {
-                        // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                        if (checkCommandLength(commandSplit.Length, 1))
-                        {
-                            myArtWork.reset();
-                        }
-                        else
-                        {
-                            throw new ArgumentException("reset does not require parameters");
-                        }
-
-                    }
-
-                    if (commandSplit.Length == 2)
-                    {
-                        if (command.Equals("moveto") == true)
-                        {
-                            parameter = checkParameter(commandSplit[1], "int");
-
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(parameter.Length, 2))
-                            {
-                                myArtWork.moveTo(parameter[0], parameter[1]);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Invalid  Parameter is Given for moveto");
+                                // Calling the checkParameter to check if the parametes is a valid string
+                                parameter = checkParameter(commandSplit[1], "string");
+                                if (parameter.Length != 1)
+                                {
+                                    throw new ArgumentException("Invalid Parameter is Given for pen");
+                                }
+                                myArtWork.changeColor(parameter[0]);
+                                if (myArtWork.changeColor(parameter[0]) == false)
+                                {
+                                    throw new ArgumentException("Invalid Color, Please try with new Color");
+                                }
                             }
 
-                        }
+                            if (command.Equals("fill") == true)
+                            {
+                                // Calling the checkParameter to check if the parametes is a valid string
+                                parameter = checkParameter(commandSplit[1], "string");
+                                if (parameter.Length != 1)
+                                {
+                                    throw new ArgumentException("Invalid Parameter is Given for fill");
+                                }
+                                if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
+                                {
+                                    myArtWork.changeFill(parameter[0]);
+                                }
+                                else
+                                {
+                                    throw new ArgumentException("Fill parameter must be 'on' or 'off'");
+                                }
 
-                        if (command.Equals("pen") == true)
-                        {
-                            // Calling the checkParameter to check if the parametes is a valid string
-                            parameter = checkParameter(commandSplit[1], "string");
-                            if (parameter.Length != 1)
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given for pen");
-                            }
-                            myArtWork.changeColor(parameter[0]);
-                            if (myArtWork.changeColor(parameter[0]) == false)
-                            {
-                                throw new ArgumentException("Invalid Color, Please try with new Color");
                             }
                         }
-
-                        if (command.Equals("fill") == true)
-                        {
-                            // Calling the checkParameter to check if the parametes is a valid string
-                            parameter = checkParameter(commandSplit[1], "string");
-                            if (parameter.Length != 1)
-                            {
-                                throw new ArgumentException("Invalid Parameter is Given for fill");
-                            }
-                            if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
-                            {
-                                myArtWork.changeFill(parameter[0]);
-                            }
-                            else
-                            {
-                                throw new ArgumentException("Fill parameter must be 'on' or 'off'");
-                            }
-
-                        }
-                    }
-                }
-                else
-                {
-                    if (variable.TryGetValue(commandSplit[0], out dynamic value))
-                    {
-
                     }
                     else
                     {
-                        throw new ArgumentException("Command Not Available");
-                    }
-                }
+                        if (variable.TryGetValue(commandSplit[0], out dynamic value))
+                        {
 
+                        }else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop"))
+                        {
+
+                        }
+                        else
+                        {
+                            throw new ArgumentException("Command Not Available");
+                        }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    errors.Add("Index " + (errorIndex - 1) + ": " + e.Message);
+                    errors.Add("--------------------------------------");
+                }
             }
-            catch (Exception e)
-            {
-                errors.Add("Index " + (errorIndex - 1) + ": " + e.Message);
-                errors.Add("--------------------------------------");
-            }
+            
         }
 
         public void clearVariables()
         {
             variable.Clear();
+            loopCommands.Clear();
+            loopCount = 0;
         }
 
         //Function responsible to check the Length of the parameter
