@@ -826,31 +826,31 @@ namespace Assignment
                                 case "circle":
                                     if (!checkCommandLength(parameter.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the circle command. Please try with one parameter only.");
                                     }
                                     break;
                                 case "square":
                                     if (!checkCommandLength(parameter.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the square command. Please try with one parameter only");
                                     }
                                     break;
                                 case "rectangle":
                                     if (!checkCommandLength(parameter.Length, 2))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the rectangle command. Please try with two parameters only");
                                     }
                                     break;
                                 case "triangle":
                                     if (!checkCommandLength(parameter.Length, 4))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the triangle command. Please try with four parameters only.");
                                     }
                                     break;
                                 case "drawto":
                                     if (!checkCommandLength(parameter.Length, 2))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the drawto command. Please try with two parameters only.");
                                     }
                                     break;
                                 default:
@@ -864,42 +864,42 @@ namespace Assignment
                                 case "clear":
                                     if(!checkCommandLength(commandSplit.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("clear command is not supposed to have any parameters");
                                     }
                                     break;
                                 case "reset":
                                     if (!checkCommandLength(commandSplit.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("reset command is not supposed to have any parameters");
                                     }
                                     break;
                                 case "pen":
                                     parameter = checkParameter(commandSplit[1], "string");
                                     if (!checkCommandLength(parameter.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the pen command. Please try with one parameter only.");
                                     }
                                     if (myArtWork.changeColor(parameter[0]) == false)
                                     {
-
+                                        throw new CustomParameterException(parameter[0]+" is not a valid color. Please try something else");
                                     }
                                         break;
                                 case "fill":
                                     parameter = checkParameter(commandSplit[1], "string");
                                     if (!checkCommandLength(parameter.Length, 1))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the fill command. Please try with one parameter only.");
                                     }
                                     if (parameter[0].Equals("on") != true || parameter[0].Equals("off") != true)
                                     {
-                            
+                                        throw new CustomParameterException("Invalid Parameter given. Please try with 'on' and 'off' only.");
                                     }
                                     break;
                                 case "moveto":
                                     parameter = checkParameter(commandSplit[1], "int");
                                     if (!checkCommandLength(parameter.Length, 2))
                                     {
-
+                                        throw new CustomParameterException("Invalid Number of parameter is given for the moveto command. Please try with two parameter only.");
                                     }
                                     break;
                                 default:
