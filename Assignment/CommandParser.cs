@@ -812,108 +812,190 @@ namespace Assignment
                 {
                     if (command.Contains('=') || command.Contains("while") || command.Contains("endwhile") || command.Contains("if") || command.Contains("endif"))
                     {
+                        if (command.Contains('=') && !command.Contains("=="))
+                        {
+                            commandSplit = command.Split('=');
 
+                            commandSplit[0] = commandSplit[0].Trim();
+                            commandSplit[1] = commandSplit[1].Trim();
+
+                            if (commandSplit[1].Length < 0)
+                            {
+                                throw new CustomValueException("Null value cannot be assigned to the variable. Please try to assign a valid value.");
+                            }
+                            else
+                            {
+                                if (!Int32.TryParse(commandSplit[1], out int result))
+                                {
+                                    if (commandSplit[1].Contains('+'))
+                                    {
+                                        checkVariables(commandSplit[1], '+');
+                                    }
+                                    else if (commandSplit[1].Contains('-'))
+                                    {
+                                        checkVariables(commandSplit[1], '-');
+                                    }
+                                    else if (commandSplit[1].Contains('*'))
+                                    {
+                                        checkVariables(commandSplit[1], '*');
+                                    }
+                                    else if (commandSplit[1].Contains('/'))
+                                    {
+                                        checkVariables(commandSplit[1], '/');
+                                    }
+                                }
+                                else
+                                {
+                                    if (!variable.ContainsKey(commandSplit[0]))
+                                    {
+                                        variable.Add(commandSplit[0], commandSplit[1]);
+                                    }
+                                    else
+                                    {
+                                        variable[commandSplit[0]] = commandSplit[1];
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
                         commandSplit = command.Split(' ');
-
-                        if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
+                    }
+                    if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
+                    {
+                        if(variable.Count == 0)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
-                            if(!(parameter is Array))
-                            {
-                                throw new CustomParameterException(parameter.Message);
-                            }
-                            switch (commandSplit[0])
-                            {
-                                case "circle":
-                                    if (!checkCommandLength(parameter.Length, 1))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the circle command. Please try with one parameter only.");
-                                    }
-                                    break;
-                                case "square":
-                                    if (!checkCommandLength(parameter.Length, 1))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the square command. Please try with one parameter only");
-                                    }
-                                    break;
-                                case "rectangle":
-                                    if (!checkCommandLength(parameter.Length, 2))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the rectangle command. Please try with two parameters only");
-                                    }
-                                    break;
-                                case "triangle":
-                                    if (!checkCommandLength(parameter.Length, 4))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the triangle command. Please try with four parameters only.");
-                                    }
-                                    break;
-                                case "drawto":
-                                    if (!checkCommandLength(parameter.Length, 2))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the drawto command. Please try with two parameters only.");
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        else if (Enum.IsDefined(typeof(OtherCommands), commandSplit[0]))
-                        {
-                            switch (commandSplit[0])
-                            {
-                                case "clear":
-                                    if(!checkCommandLength(commandSplit.Length, 1))
-                                    {
-                                        throw new CustomParameterException("clear command is not supposed to have any parameters");
-                                    }
-                                    break;
-                                case "reset":
-                                    if (!checkCommandLength(commandSplit.Length, 1))
-                                    {
-                                        throw new CustomParameterException("reset command is not supposed to have any parameters");
-                                    }
-                                    break;
-                                case "pen":
-                                    parameter = checkParameter(commandSplit[1], "string");
-                                    if (!checkCommandLength(parameter.Length, 1))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the pen command. Please try with one parameter only.");
-                                    }
-                                    if (myArtWork.changeColor(parameter[0]) == false)
-                                    {
-                                        throw new CustomParameterException(parameter[0]+" is not a valid color. Please try something else");
-                                    }
-                                        break;
-                                case "fill":
-                                    parameter = checkParameter(commandSplit[1], "string");
-                                    if (!checkCommandLength(parameter.Length, 1))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the fill command. Please try with one parameter only.");
-                                    }
-                                    if (parameter[0].Equals("on") != true || parameter[0].Equals("off") != true)
-                                    {
-                                        throw new CustomParameterException("Invalid Parameter given. Please try with 'on' and 'off' only.");
-                                    }
-                                    break;
-                                case "moveto":
-                                    parameter = checkParameter(commandSplit[1], "int");
-                                    if (!checkCommandLength(parameter.Length, 2))
-                                    {
-                                        throw new CustomParameterException("Invalid Number of parameter is given for the moveto command. Please try with two parameter only.");
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
                         }
                         else
                         {
-                            throw new CustomCommandNotFoundException("Command is not available. Please read the instructions and try again");
+                            if (commandSplit[1].All(char.IsDigit))
+                            {
+                                parameter = checkParameter(commandSplit[1], "int");
+                            }
+                            else
+                            {
+                                if (commandSplit[1].Length > 1)
+                                {
+                                    string[] array = commandSplit[1].Split(',');
+                                    string b = "";
+                                    foreach (string a in array)
+                                    {
+                                        if (variable.TryGetValue(a, out dynamic value))
+                                        {
+                                            b = b + value + ",";
+                                        }
+                                    }
+                                    b = b.Remove(b.Length - 1);
+                                    parameter = checkParameter(b, "int");
+                                }
+                                else
+                                {
+                                    if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+                                    {
+                                        parameter = checkParameter(value.ToString(), "int");
+                                    }
+                                }
+                            }
                         }
+                        if (!(parameter is Array))
+                        {
+                            throw new CustomParameterException(parameter.Message);
+                        }
+                        switch (commandSplit[0])
+                        {
+                            case "circle":
+                                if (!checkCommandLength(parameter.Length, 1))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the circle command. Please try with one parameter only.");
+                                }
+                                break;
+                            case "square":
+                                if (!checkCommandLength(parameter.Length, 1))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the square command. Please try with one parameter only");
+                                }
+                                break;
+                            case "rectangle":
+                                if (!checkCommandLength(parameter.Length, 2))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the rectangle command. Please try with two parameters only");
+                                }
+                                break;
+                            case "triangle":
+                                if (!checkCommandLength(parameter.Length, 4))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the triangle command. Please try with four parameters only.");
+                                }
+                                break;
+                            case "drawto":
+                                if (!checkCommandLength(parameter.Length, 2))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the drawto command. Please try with two parameters only.");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else if (Enum.IsDefined(typeof(OtherCommands), commandSplit[0]))
+                    {
+                        switch (commandSplit[0])
+                        {
+                            case "clear":
+                                if (!checkCommandLength(commandSplit.Length, 1))
+                                {
+                                    throw new CustomParameterException("clear command is not supposed to have any parameters");
+                                }
+                                break;
+                            case "reset":
+                                if (!checkCommandLength(commandSplit.Length, 1))
+                                {
+                                    throw new CustomParameterException("reset command is not supposed to have any parameters");
+                                }
+                                break;
+                            case "pen":
+                                parameter = checkParameter(commandSplit[1], "string");
+                                if (!checkCommandLength(parameter.Length, 1))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the pen command. Please try with one parameter only.");
+                                }
+                                if (myArtWork.changeColor(parameter[0]) == false)
+                                {
+                                    throw new CustomParameterException(parameter[0] + " is not a valid color. Please try something else");
+                                }
+                                break;
+                            case "fill":
+                                parameter = checkParameter(commandSplit[1], "string");
+                                if (!checkCommandLength(parameter.Length, 1))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the fill command. Please try with one parameter only.");
+                                }
+                                if (parameter[0].Equals("on") != true || parameter[0].Equals("off") != true)
+                                {
+                                    throw new CustomParameterException("Invalid Parameter given. Please try with 'on' and 'off' only.");
+                                }
+                                break;
+                            case "moveto":
+                                parameter = checkParameter(commandSplit[1], "int");
+                                if (!checkCommandLength(parameter.Length, 2))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the moveto command. Please try with two parameter only.");
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        if(variable.TryGetValue(commandSplit[0], out dynamic value)) { }
+                        else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop") || commandSplit[0].Equals("if") || commandSplit[0].Equals("endif")) { }
+                        else
+                        {
+                            throw new CustomCommandNotFoundException("Command is not available. Please read the instructions and try again");
+                        }      
                     }
                 }
                 catch(Exception e)
@@ -923,6 +1005,59 @@ namespace Assignment
                 }
         }
     }
+
+        public dynamic checkVariables(string values, char Operator)
+        {
+            string[] newCommand = values.Split(Operator);
+            int tempValue = 0;
+            if (Operator.Equals('*') || Operator.Equals('/'))
+                tempValue = 1;
+            foreach (string parm in newCommand)
+            {
+                if (!parm.All(char.IsDigit))
+                {
+                    if(variable.TryGetValue(parm, out dynamic output))
+                    {
+                        if(Operator.Equals('+'))
+                            tempValue = tempValue + Int32.Parse(output);
+                        if(Operator.Equals('-'))
+                            if(tempValue!=0)
+                                tempValue = tempValue - Int32.Parse(output);
+                            tempValue = Int32.Parse(output) - tempValue;
+                        if(Operator.Equals('*'))
+                            tempValue = tempValue * Int32.Parse(output);
+                        if (Operator.Equals('/'))
+                            if (tempValue != 1)
+                                tempValue = tempValue / Int32.Parse(output);
+                            else
+                                tempValue = Int32.Parse(output) / tempValue;
+                    }
+                    else
+                    {
+                        return new CustomValueException("The variable trying to be assigned does not exist. Please try again.");
+                    }
+                }
+                else
+                {   if (Operator.Equals('+'))
+                        tempValue = tempValue + Int32.Parse(parm);
+                    else if (Operator.Equals('-'))
+                        tempValue = Int32.Parse(parm) - tempValue;
+                    else if (Operator.Equals('*'))
+                        tempValue = tempValue * Int32.Parse(parm);
+                    else if (Operator.Equals('/'))
+                        tempValue = Int32.Parse(parm) / tempValue;
+                }
+            }
+            if (!variable.ContainsKey(commandSplit[0]))
+            {
+                variable.Add(commandSplit[0], tempValue.ToString());
+            }
+            else
+            {
+                variable[commandSplit[0]] = tempValue.ToString();
+            }
+            return true;
+        }
 
         public void clearVariables()
         {

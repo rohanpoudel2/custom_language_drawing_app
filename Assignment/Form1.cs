@@ -176,12 +176,12 @@ namespace Assignment
                     commands.Add(command);
                 }
             }
-            parser.checkSyntax(commands);
             // Reseting everthing for the next run
             parser.resetFill();
             parser.resetColor();
             parser.runCommand("reset");
             parser.clearVariables();
+            parser.checkSyntax(commands);
         }
     }
 }
