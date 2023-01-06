@@ -172,16 +172,16 @@ namespace Assignment
                 else
                 {
                     //Sending the code one at a time to the CommandParser Class
-                    parser.runCommand(command);
+                    //parser.runCommand(command);
                     commands.Add(command);
                 }
             }
+            parser.checkSyntax(commands);
             // Reseting everthing for the next run
             parser.resetFill();
             parser.resetColor();
             parser.runCommand("reset");
             parser.clearVariables();
-            parser.checkSyntax(commands);
         }
     }
 }

@@ -125,196 +125,14 @@ namespace Assignment
         // Function responsible to check the command and call the appopriate function related to that command in the ArtWork class
         public void runCommand(string instruction)
         {
-            // Incrementing the errorIndex as this command is called only when the user enters a code
-                errorIndex++;
-
-            if (instruction.Contains('=') && !instruction.Contains("=="))
-            {
-                commandSplit = instruction.Split('=');
-                commandSplit[0] = commandSplit[0].Trim();
-                commandSplit[1] = commandSplit[1].Trim();
-
-                if (commandSplit[1].Length < 0)
-                {
-                    throw new ArgumentException("Invalid value given to the variable");
-                }
-                else
-                {
-                    if (Int32.TryParse(commandSplit[1], out int result))
-                    {
-                        if (!variable.ContainsKey(commandSplit[0]))
-                        {
-                            variable.Add(commandSplit[0], commandSplit[1]);
-                        }
-                        else
-                        {
-                            variable[commandSplit[0]] = commandSplit[1];
-                        }
-                    }
-                    else
-                    {
-                        if (commandSplit[1].Contains('+'))
-                        {
-                            string[] newCommand = commandSplit[1].Split('+');
-                            int tempValue = 0;
-                            foreach (string parm in newCommand)
-                            {
-                                if (parm.All(char.IsDigit))
-                                {
-                                    tempValue = tempValue + Int32.Parse(parm);
-                                }
-                                else if (!parm.All(char.IsDigit))
-                                {
-                                    if (variable.TryGetValue(parm, out dynamic output))
-                                    {
-                                        tempValue = tempValue + Int32.Parse(output);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Exception to be thrown");
-                                    }
-                                }
-                            }
-                            if (!variable.ContainsKey(commandSplit[0]))
-                            {
-                                variable.Add(commandSplit[0], tempValue.ToString());
-                            }
-                            else
-                            {
-                                variable[commandSplit[0]] = tempValue.ToString();
-                            }
-
-                        }
-                        if (commandSplit[1].Contains('-'))
-                        {
-                            string[] newCommand = commandSplit[1].Split('-');
-                            int tempValue = 0;
-                            foreach (string parm in newCommand)
-                            {
-                                if (parm.All(char.IsDigit))
-                                {
-                                    tempValue = Int32.Parse(parm) - tempValue;
-                                }
-                                else if (!parm.All(char.IsDigit))
-                                {
-                                    if (variable.TryGetValue(parm, out dynamic output))
-                                    {
-                                        if (tempValue != 0)
-                                        {
-                                            tempValue = tempValue - Int32.Parse(output);
-                                        }
-                                        tempValue = Int32.Parse(output) - tempValue;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Exception to be thrown");
-                                    }
-                                }
-                            }
-                            if (!variable.ContainsKey(commandSplit[0]))
-                            {
-                                variable.Add(commandSplit[0], tempValue.ToString());
-                            }
-                            else
-                            {
-                                variable[commandSplit[0]] = tempValue.ToString();
-                            }
-                        }
-                        if (commandSplit[1].Contains('*'))
-                        {
-                            string[] newCommand = commandSplit[1].Split('*');
-                            int tempValue = 1;
-                            foreach (string parm in newCommand)
-                            {
-                                if (parm.All(char.IsDigit))
-                                {
-                                    tempValue = tempValue * Int32.Parse(parm);
-                                }
-                                else if (!parm.All(char.IsDigit))
-                                {
-                                    if (variable.TryGetValue(parm, out dynamic output))
-                                    {
-                                        tempValue = tempValue * Int32.Parse(output);
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Exception to be thrown");
-                                    }
-                                }
-                            }
-                            if (!variable.ContainsKey(commandSplit[0]))
-                            {
-                                variable.Add(commandSplit[0], tempValue.ToString());
-                            }
-                            else
-                            {
-                                variable[commandSplit[0]] = tempValue.ToString();
-                            }
-                        }
-                        if (commandSplit[1].Contains('/'))
-                        {
-                            string[] newCommand = commandSplit[1].Split('/');
-                            int tempValue = 1;
-                            foreach (string parm in newCommand)
-                            {
-                                if (parm.All(char.IsDigit))
-                                {
-                                    tempValue = Int32.Parse(parm) / tempValue;
-                                }
-                                else if (!parm.All(char.IsDigit))
-                                {
-                                    if (variable.TryGetValue(parm, out dynamic output))
-                                    {
-                                        if (tempValue != 1)
-                                        {
-                                            tempValue = tempValue / Int32.Parse(output);
-                                        }
-                                        else
-                                        {
-                                            tempValue = Int32.Parse(output) / tempValue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Exception to be thrown");
-                                    }
-                                }
-                            }
-                            if (!variable.ContainsKey(commandSplit[0]))
-                            {
-                                variable.Add(commandSplit[0], tempValue.ToString());
-                            }
-                            else
-                            {
-                                variable[commandSplit[0]] = tempValue.ToString();
-                            }
-                        }
-                        if (variable.TryGetValue(commandSplit[1], out dynamic value))
-                        {
-                            if (!variable.ContainsKey(commandSplit[0]))
-                            {
-                                variable.Add(commandSplit[0], value);
-                            }
-                            else
-                            {
-                                variable[commandSplit[0]] = value;
-                            }
-                        }
-
-                    }
-
-                }
-            }
-            else
-            {
-                // Splitting the given code with the split function at a whitespace to seperate the command and the parameter
-                commandSplit = instruction.Split(' ');
-            }
+            
+            commandSplit = instruction.Split(' ');
 
             //FOR LOOP
 
             if (commandSplit[0].Contains("while"))
             {
+                Console.WriteLine("HELLO AGAIN");
                 string[] loopCondition;
                 loopStatement = "while " + commandSplit[1];
                 string operatorr = "";
@@ -404,11 +222,14 @@ namespace Assignment
             {
                 for (int i=0; i<=loopInterval; i++)
                 {
-                    
                     inLoop = false;
                     errorIndex--;
                     foreach (string command in loopCommands)
                     {
+                        if (command.Contains("="))
+                        {
+                            assignVariables(command);
+                        }
                         if (validLoop)
                         {
                             runCommand(command);
@@ -545,19 +366,12 @@ namespace Assignment
             }
             else
             {
-                try
-                {
+         
                     // Runs if any shape related commands have been given
                     if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                     {
-                        if (commandSplit.Length != 2)
-                        {
-                            Console.WriteLine("Invalid Number of parameters 441");
-                            throw new ArgumentException("Invalid Number of parameters");  
-                        }
-
-                        if (commandSplit.Length == 2)
-                        {
+                        
+                       
                             if (variable.Count == 0)
                             {
                                 parameter = checkParameter(commandSplit[1], "int");
@@ -602,73 +416,44 @@ namespace Assignment
                             if (command.Equals("drawto") == true)
                             {
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 2))
-                                {
                                     myArtWork.drawLine(parameter[0], parameter[1]);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given for drawto 492");
-                                    throw new ArgumentException("Invalid Parameter is Given for drawto");
-                                }
+
+                               
 
                             }
 
                             if (command.Equals("square") == true)
                             {
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 1))
-                                {
+                             
                                     myArtWork.drawSquare(parameter[0]);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given 508");
-                                    throw new ArgumentException("Invalid Parameter is Given for square");
-                                }
+                              
+                              
 
                             }
 
                             if (command.Equals("circle") == true)
                             {
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 1))
-                                {
+                           
                                     myArtWork.drawCircle(parameter[0]);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given 524");
-                                    throw new ArgumentException("Invalid Parameter is Given for circle");
-                                }
+                        
+                              
 
                             }
 
                             if (command.Equals("rectangle") == true)
                             {
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 2))
-                                {
-                                    myArtWork.drawRectangle(parameter[0], parameter[1]);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given 540");
-                                    throw new ArgumentException("Invalid Parameter is Given for rectangle");
-                                }
+
+                        myArtWork.drawRectangle(parameter[0], parameter[1]);
 
                             }
 
                             if (command.Equals("triangle") == true)
                             {
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 4))
-                                {
+                              
                                     Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
                                     Point point2 = new Point(parameter[0], parameter[1]);
                                     Point point3 = new Point(parameter[2], parameter[3]);
@@ -676,15 +461,11 @@ namespace Assignment
                                     Point[] points = { point1, point2, point3 };
 
                                     myArtWork.drawTriangle(points);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given 562");
-                                    throw new ArgumentException("Invalid Parameter is Given triangle");
-                                }
+                                
+                                
                             }
 
-                        }
+                        
                     }
                     // Runs if any non shape related commands has been given
                     else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
@@ -694,32 +475,20 @@ namespace Assignment
 
                         if (command.Equals("clear") == true)
                         {
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(commandSplit.Length, 1))
-                            {
+                           
                                 myArtWork.clear();
                                 errors.Clear();
-                            }
-                            else
-                            {
-                                Console.WriteLine("invalid parameter is given 585");
-                                throw new ArgumentException("clear does not require parameters");
-                            }
+                           
+                            
 
                         }
 
                         if (command.Equals("reset") == true)
                         {
-                            // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                            if (checkCommandLength(commandSplit.Length, 1))
-                            {
+                         
                                 myArtWork.reset();
-                            }
-                            else
-                            {
-                                Console.WriteLine("invalid parameter is given 600");
-                                throw new ArgumentException("reset does not require parameters");
-                            }
+                      
+                        
 
                         }
 
@@ -729,16 +498,10 @@ namespace Assignment
                             {
                                 parameter = checkParameter(commandSplit[1], "int");
 
-                                // Checking if valid number of parameters have been provided and calling appropriate methods in the ArtWork class 
-                                if (checkCommandLength(parameter.Length, 2))
-                                {
+                           
                                     myArtWork.moveTo(parameter[0], parameter[1]);
-                                }
-                                else
-                                {
-                                    Console.WriteLine("invalid parameter is given 619");
-                                    throw new ArgumentException("Invalid  Parameter is Given for moveto");
-                                }
+                               
+                                
 
                             }
 
@@ -746,58 +509,25 @@ namespace Assignment
                             {
                                 // Calling the checkParameter to check if the parametes is a valid string
                                 parameter = checkParameter(commandSplit[1], "string");
-                                if (parameter.Length != 1)
-                                {
-                                    throw new ArgumentException("Invalid Parameter is Given for pen");
-                                }
+                             
                                 myArtWork.changeColor(parameter[0]);
-                                if (myArtWork.changeColor(parameter[0]) == false)
-                                {
-                                    throw new ArgumentException("Invalid Color, Please try with new Color");
-                                }
+                               
                             }
 
                             if (command.Equals("fill") == true)
                             {
                                 // Calling the checkParameter to check if the parametes is a valid string
                                 parameter = checkParameter(commandSplit[1], "string");
-                                if (parameter.Length != 1)
-                                {
-                                    throw new ArgumentException("Invalid Parameter is Given for fill");
-                                }
-                                if (parameter[0].Equals("on") == true || parameter[0].Equals("off") == true)
-                                {
+                              
+                               
                                     myArtWork.changeFill(parameter[0]);
-                                }
-                                else
-                                {
-                                    throw new ArgumentException("Fill parameter must be 'on' or 'off'");
-                                }
+                                
+                              
 
                             }
                         }
                     }
-                    else
-                    {
-                        if (variable.TryGetValue(commandSplit[0], out dynamic value))
-                        {
-
-                        }else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop") || commandSplit[0].Equals("if") || commandSplit[0].Equals("endif"))
-                        {
-
-                        }
-                        else
-                        {
-                            throw new ArgumentException("Command Not Available");
-                        }
-                    }
-
-                }
-                catch (Exception e)
-                {
-                    errors.Add("Index " + (errorIndex - 1) + ": " + e.Message);
-                    errors.Add("--------------------------------------");
-                }
+                    
             }
             
         }
@@ -810,58 +540,15 @@ namespace Assignment
                 errorIndex++;
                 try
                 {
-                    if (command.Contains('=') || command.Contains("while") || command.Contains("endwhile") || command.Contains("if") || command.Contains("endif"))
+                    if (command.Contains('=') && !command.Contains("=="))
                     {
-                        if (command.Contains('=') && !command.Contains("=="))
-                        {
-                            commandSplit = command.Split('=');
-
-                            commandSplit[0] = commandSplit[0].Trim();
-                            commandSplit[1] = commandSplit[1].Trim();
-
-                            if (commandSplit[1].Length < 0)
-                            {
-                                throw new CustomValueException("Null value cannot be assigned to the variable. Please try to assign a valid value.");
-                            }
-                            else
-                            {
-                                if (!Int32.TryParse(commandSplit[1], out int result))
-                                {
-                                    if (commandSplit[1].Contains('+'))
-                                    {
-                                        checkVariables(commandSplit[1], '+');
-                                    }
-                                    else if (commandSplit[1].Contains('-'))
-                                    {
-                                        checkVariables(commandSplit[1], '-');
-                                    }
-                                    else if (commandSplit[1].Contains('*'))
-                                    {
-                                        checkVariables(commandSplit[1], '*');
-                                    }
-                                    else if (commandSplit[1].Contains('/'))
-                                    {
-                                        checkVariables(commandSplit[1], '/');
-                                    }
-                                }
-                                else
-                                {
-                                    if (!variable.ContainsKey(commandSplit[0]))
-                                    {
-                                        variable.Add(commandSplit[0], commandSplit[1]);
-                                    }
-                                    else
-                                    {
-                                        variable[commandSplit[0]] = commandSplit[1];
-                                    }
-                                }
-                            }
-                        }
+                        assignVariables(command);
                     }
                     else
                     {
                         commandSplit = command.Split(' ');
                     }
+
                     if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
                     {
                         if(variable.Count == 0)
@@ -899,10 +586,12 @@ namespace Assignment
                                 }
                             }
                         }
+
                         if (!(parameter is Array))
                         {
                             throw new CustomParameterException(parameter.Message);
                         }
+                        
                         switch (commandSplit[0])
                         {
                             case "circle":
@@ -1003,34 +692,116 @@ namespace Assignment
                     errors.Add("Line " + (errorIndex - 1) + ": " + e.Message);
                     errors.Add("--------------------------------------");
                 }
+            }
+            //No error so command is to be executed
+            if (errors.Count == 0)
+            {
+                foreach(string command in commands)
+                {
+                    runCommand(command);
+                }
+            }
         }
-    }
+
+        public dynamic assignVariables(string command)
+        {
+            try
+            {
+                commandSplit = command.Split('=');
+
+                commandSplit[0] = commandSplit[0].Trim();
+                commandSplit[1] = commandSplit[1].Trim();
+
+                if (commandSplit[1].Length < 0)
+                {
+                    throw new CustomValueException("Null value cannot be assigned to the variable. Please try to assign a valid value.");
+                }
+                else
+                {
+                    if (!Int32.TryParse(commandSplit[1], out int result))
+                    {
+                        if (commandSplit[1].Contains('+'))
+                        {
+                            checkVariables(commandSplit[1], '+');
+                        }
+                        else if (commandSplit[1].Contains('-'))
+                        {
+                            checkVariables(commandSplit[1], '-');
+                        }
+                        else if (commandSplit[1].Contains('*'))
+                        {
+                            checkVariables(commandSplit[1], '*');
+                        }
+                        else if (commandSplit[1].Contains('/'))
+                        {
+                            checkVariables(commandSplit[1], '/');
+                        }
+                    }
+                    else
+                    {
+                        if (!variable.ContainsKey(commandSplit[0]))
+                        {
+                            variable.Add(commandSplit[0], commandSplit[1]);
+                        }
+                        else
+                        {
+                            variable[commandSplit[0]] = commandSplit[1];
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+            return "";
+        }
 
         public dynamic checkVariables(string values, char Operator)
         {
             string[] newCommand = values.Split(Operator);
             int tempValue = 0;
             if (Operator.Equals('*') || Operator.Equals('/'))
+            {
                 tempValue = 1;
+            }   
             foreach (string parm in newCommand)
             {
                 if (!parm.All(char.IsDigit))
                 {
                     if(variable.TryGetValue(parm, out dynamic output))
                     {
-                        if(Operator.Equals('+'))
+                        if (Operator.Equals('+'))
+                        {
                             tempValue = tempValue + Int32.Parse(output);
+                        }
                         if(Operator.Equals('-'))
-                            if(tempValue!=0)
+                        {
+                            if (tempValue != 0)
+                            {
                                 tempValue = tempValue - Int32.Parse(output);
+                            }
+                            
                             tempValue = Int32.Parse(output) - tempValue;
-                        if(Operator.Equals('*'))
+                        }
+                        if (Operator.Equals('*'))
+                        {
                             tempValue = tempValue * Int32.Parse(output);
+                        }
                         if (Operator.Equals('/'))
+                        {
                             if (tempValue != 1)
+                            {
                                 tempValue = tempValue / Int32.Parse(output);
+                            }
+
                             else
+                            {
                                 tempValue = Int32.Parse(output) / tempValue;
+                            }
+                                
+                        }
+                            
                     }
                     else
                     {
@@ -1039,13 +810,25 @@ namespace Assignment
                 }
                 else
                 {   if (Operator.Equals('+'))
+                    {
                         tempValue = tempValue + Int32.Parse(parm);
+                    }
+                        
                     else if (Operator.Equals('-'))
+                    {
                         tempValue = Int32.Parse(parm) - tempValue;
+                    }
+                       
                     else if (Operator.Equals('*'))
+                    {
                         tempValue = tempValue * Int32.Parse(parm);
+                    }
+                        
                     else if (Operator.Equals('/'))
+                    {
                         tempValue = Int32.Parse(parm) / tempValue;
+                    }
+                       
                 }
             }
             if (!variable.ContainsKey(commandSplit[0]))
