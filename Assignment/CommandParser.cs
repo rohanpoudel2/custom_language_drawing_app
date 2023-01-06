@@ -43,6 +43,12 @@ namespace Assignment
         List<string> loopCommands = new List<string>();
         int loopCount = 0;
 
+        int ifCount = 0;
+        bool inCondition;
+        bool validIf;
+        List<string> conditionCommands = new List<string>();
+
+
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -116,10 +122,9 @@ namespace Assignment
         public void runCommand(string instruction)
         {
             // Incrementing the errorIndex as this command is called only when the user enters a code
-            errorIndex++;
-            string[] commandSplit;
+                errorIndex++;
 
-            Console.WriteLine(instruction);
+            string[] commandSplit;
 
             if (instruction.Contains('=') && !instruction.Contains("=="))
             {
@@ -304,6 +309,8 @@ namespace Assignment
                 commandSplit = instruction.Split(' ');
             }
 
+            //FOR LOOP
+
             if (commandSplit[0].Contains("while"))
             {
                 string[] loopCondition;
@@ -398,7 +405,7 @@ namespace Assignment
                 {
                     
                     inLoop = false;
-                   
+                    errorIndex--;
                     foreach (string command in loopCommands)
                     {
                         if (validLoop)
@@ -418,12 +425,127 @@ namespace Assignment
                 }
             }
 
+            //For IF
+
+            if (commandSplit[0].Contains("if") && commandSplit[0].IndexOf("endif") == -1)
+            {
+                string[] ifCondition;
+                string operatorr = "";
+                if (ifCount == 0)
+                {
+                    inCondition = true;
+                }
+                ifCount++;
+
+                List<string> ifOperands = new List<string>();
+                if (commandSplit[1].Contains('<'))
+                {
+                    ifCondition = commandSplit[1].Split('<');
+                    operatorr = "<";
+                }
+                else if (commandSplit[1].Contains('>'))
+                {
+                    ifCondition = commandSplit[1].Split('>');
+                    operatorr = ">";
+                }
+                else if (commandSplit[1].Contains("=="))
+                {
+                    ifCondition = commandSplit[1].Split(new string[] { "==" }, StringSplitOptions.None);
+                    operatorr = "==";
+                }
+                else
+                {
+                    Console.WriteLine("invalid parameter is given 460");
+                    throw new ArgumentException("expression not supported");
+                }
+
+                foreach (string operand in ifCondition)
+                {
+                    if (operand.All(char.IsDigit))
+                    {
+                        ifOperands.Add(operand);
+                    }
+                    else
+                    {
+                        if (variable.TryGetValue(operand, out dynamic value))
+                        {
+                            ifOperands.Add(value);
+                        }
+                        else
+                        {
+                            Console.WriteLine("invalid parameter is given 478");
+                            throw new ArgumentException("variable not available");
+                        }
+                    }
+                }
+
+                if (operatorr.Equals("<"))
+                {
+                    if (int.Parse(ifOperands[0]) < int.Parse(ifOperands[1]))
+                    {
+                        validIf = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("VALID IF FALSE");
+                        validIf = false;
+                    }
+                }
+                else if (operatorr.Equals(">"))
+                {
+                    if (int.Parse(ifOperands[1]) < int.Parse(ifOperands[0]))
+                    {
+                        validIf = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("VALID IF FALSE");
+                        validIf = false;
+                    }
+                }
+                else if (operatorr.Equals("=="))
+                {
+                    if (int.Parse(ifOperands[0]) == int.Parse(ifOperands[1]))
+                    {
+                        validIf = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("VALID IF FALSE");
+                        validIf = false;
+                    }
+                }
+                Console.WriteLine("Loop Status: "+validIf);
+            }
+
+            if (commandSplit[0].Contains("endif"))
+            {
+                inCondition = false;
+
+                foreach(string command in conditionCommands)
+                {
+                    Console.WriteLine("commands: "+command);
+                    if (validIf)
+                    {
+                        runCommand(command);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
             // Creating two different arrays from the enums to check if the given command is valid and available to be processed
             string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
             string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
             if (inLoop)
             {
                 loopCommands.Add(instruction);
+            }
+            else if (inCondition)
+            {
+                conditionCommands.Add(instruction);
             }
             else
             {
@@ -448,27 +570,35 @@ namespace Assignment
                             }
                             else
                             {
-                                if (commandSplit[1].Length > 1)
+                                if (commandSplit[1].All(char.IsDigit))
                                 {
-                                    string[] array = commandSplit[1].Split(',');
-                                    string b = "";
-                                    foreach (string a in array)
-                                    {
-                                        if (variable.TryGetValue(a, out dynamic value))
-                                        {
-                                            b = b + value + ",";
-                                        }
-                                    }
-                                    b = b.Remove(b.Length - 1);
-                                    parameter = checkParameter(b, "int");
+                                    parameter = checkParameter(commandSplit[1], "int");
                                 }
                                 else
                                 {
-                                    if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+                                    if (commandSplit[1].Length > 1)
                                     {
-                                        parameter = checkParameter(value.ToString(), "int");
+                                        string[] array = commandSplit[1].Split(',');
+                                        string b = "";
+                                        foreach (string a in array)
+                                        {
+                                            if (variable.TryGetValue(a, out dynamic value))
+                                            {
+                                                b = b + value + ",";
+                                            }
+                                        }
+                                        b = b.Remove(b.Length - 1);
+                                        parameter = checkParameter(b, "int");
+                                    }
+                                    else
+                                    {
+                                        if ((variable.TryGetValue(commandSplit[1], out dynamic value)))
+                                        {
+                                            parameter = checkParameter(value.ToString(), "int");
+                                        }
                                     }
                                 }
+                                
                             }
 
                             // Getting the first index of the array commandSplit which is the command
@@ -658,7 +788,7 @@ namespace Assignment
                         if (variable.TryGetValue(commandSplit[0], out dynamic value))
                         {
 
-                        }else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop"))
+                        }else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop") || commandSplit[0].Equals("if") || commandSplit[0].Equals("endif"))
                         {
 
                         }
@@ -683,6 +813,8 @@ namespace Assignment
             variable.Clear();
             loopCommands.Clear();
             loopCount = 0;
+            conditionCommands.Clear();
+            ifCount = 0;
         }
 
         //Function responsible to check the Length of the parameter

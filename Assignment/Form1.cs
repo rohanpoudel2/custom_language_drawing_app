@@ -12,7 +12,7 @@ namespace Assignment
 {
     public partial class drawingProgram : Form
     {
-        const int bitmapWidth = 700, bitmapHeight = 700; 
+        const int bitmapWidth = 1920, bitmapHeight = 1080; 
 
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
 
