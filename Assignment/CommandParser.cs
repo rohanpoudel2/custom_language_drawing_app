@@ -820,17 +820,38 @@ namespace Assignment
 
                         if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
                         {
+                            parameter = checkParameter(commandSplit[1], "int");
                             switch (commandSplit[0])
                             {
                                 case "circle":
+                                    if (!checkCommandLength(parameter.Length, 1))
+                                    {
+
+                                    }
                                     break;
                                 case "square":
+                                    if (!checkCommandLength(parameter.Length, 1))
+                                    {
+
+                                    }
                                     break;
                                 case "rectangle":
+                                    if (!checkCommandLength(parameter.Length, 2))
+                                    {
+
+                                    }
                                     break;
                                 case "triangle":
+                                    if (!checkCommandLength(parameter.Length, 4))
+                                    {
+
+                                    }
                                     break;
                                 case "drawto":
+                                    if (!checkCommandLength(parameter.Length, 2))
+                                    {
+
+                                    }
                                     break;
                                 default:
                                     break;
@@ -841,14 +862,45 @@ namespace Assignment
                             switch (commandSplit[0])
                             {
                                 case "clear":
+                                    if(!checkCommandLength(commandSplit.Length, 1))
+                                    {
+
+                                    }
                                     break;
                                 case "reset":
+                                    if (!checkCommandLength(commandSplit.Length, 1))
+                                    {
+
+                                    }
                                     break;
                                 case "pen":
-                                    break;
+                                    parameter = checkParameter(commandSplit[1], "string");
+                                    if (!checkCommandLength(parameter.Length, 1))
+                                    {
+
+                                    }
+                                    if (myArtWork.changeColor(parameter[0]) == false)
+                                    {
+
+                                    }
+                                        break;
                                 case "fill":
+                                    parameter = checkParameter(commandSplit[1], "string");
+                                    if (!checkCommandLength(parameter.Length, 1))
+                                    {
+
+                                    }
+                                    if (parameter[0].Equals("on") != true || parameter[0].Equals("off") != true)
+                                    {
+                            
+                                    }
                                     break;
                                 case "moveto":
+                                    parameter = checkParameter(commandSplit[1], "int");
+                                    if (!checkCommandLength(parameter.Length, 2))
+                                    {
+
+                                    }
                                     break;
                                 default:
                                     break;
@@ -879,7 +931,6 @@ namespace Assignment
         //Function responsible to check the Length of the parameter
         public Boolean checkCommandLength(int length, int tobeLength)
         {
-
             if (length != tobeLength)
             {
                 return false;
