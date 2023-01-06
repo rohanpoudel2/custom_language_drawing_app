@@ -31,11 +31,18 @@ namespace Assignment
 
         ArtWork myArtWork;
 
+        //For Commands
+        string[] commandSplit;
+        //For Commands parameters
+        dynamic parameter = "";
+
         //Creating a new List to store the errors that might occure in scope of this class
         List<string> errors = new List<string>();
 
+        //For Variables
         IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
 
+        //For Loop Functionality
         bool validLoop;
         bool inLoop;
         int loopInterval = 0;
@@ -43,12 +50,11 @@ namespace Assignment
         List<string> loopCommands = new List<string>();
         int loopCount = 0;
 
+        //For Condition Functionality
         int ifCount = 0;
         bool inCondition;
         bool validIf;
         List<string> conditionCommands = new List<string>();
-
-
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -123,8 +129,6 @@ namespace Assignment
         {
             // Incrementing the errorIndex as this command is called only when the user enters a code
                 errorIndex++;
-
-            string[] commandSplit;
 
             if (instruction.Contains('=') && !instruction.Contains("=="))
             {
@@ -378,7 +382,6 @@ namespace Assignment
                     }
                     else
                     {
-                        Console.WriteLine("VALID LOOP FALSE");
                         validLoop = false;
                     }
                 }
@@ -487,7 +490,6 @@ namespace Assignment
                     }
                     else
                     {
-                        Console.WriteLine("VALID IF FALSE");
                         validIf = false;
                     }
                 }
@@ -499,7 +501,6 @@ namespace Assignment
                     }
                     else
                     {
-                        Console.WriteLine("VALID IF FALSE");
                         validIf = false;
                     }
                 }
@@ -511,11 +512,9 @@ namespace Assignment
                     }
                     else
                     {
-                        Console.WriteLine("VALID IF FALSE");
                         validIf = false;
                     }
                 }
-                Console.WriteLine("Loop Status: "+validIf);
             }
 
             if (commandSplit[0].Contains("endif"))
@@ -524,7 +523,6 @@ namespace Assignment
 
                 foreach(string command in conditionCommands)
                 {
-                    Console.WriteLine("commands: "+command);
                     if (validIf)
                     {
                         runCommand(command);
@@ -562,8 +560,6 @@ namespace Assignment
 
                         if (commandSplit.Length == 2)
                         {
-                            dynamic parameter = "";
-
                             if (variable.Count == 0)
                             {
                                 parameter = checkParameter(commandSplit[1], "int");
@@ -807,6 +803,69 @@ namespace Assignment
             }
             
         }
+
+        public void checkSyntax(List<string> commands)
+        {
+            foreach (string command in commands)
+            {
+                try
+                {
+                    if (command.Contains('=') || command.Contains("while") || command.Contains("endwhile") || command.Contains("if") || command.Contains("endif"))
+                    {
+
+                    }
+                    else
+                    {
+                        commandSplit = command.Split(' ');
+
+                        if (Enum.IsDefined(typeof(ShapeCommands), commandSplit[0]))
+                        {
+                            switch (commandSplit[0])
+                            {
+                                case "circle":
+                                    break;
+                                case "square":
+                                    break;
+                                case "rectangle":
+                                    break;
+                                case "triangle":
+                                    break;
+                                case "drawto":
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else if (Enum.IsDefined(typeof(OtherCommands), commandSplit[0]))
+                        {
+                            switch (commandSplit[0])
+                            {
+                                case "clear":
+                                    break;
+                                case "reset":
+                                    break;
+                                case "pen":
+                                    break;
+                                case "fill":
+                                    break;
+                                case "moveto":
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                             
+                }
+        }
+    }
 
         public void clearVariables()
         {
