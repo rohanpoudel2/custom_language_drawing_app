@@ -182,6 +182,7 @@ namespace Assignment
             parser.resetColor();
             parser.runCommand("reset");
             parser.clearVariables();
+            commands.Clear();
         }
     }
 }
