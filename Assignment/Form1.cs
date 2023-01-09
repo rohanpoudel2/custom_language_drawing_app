@@ -151,9 +151,10 @@ namespace Assignment
         private void runCode()
         {
             //Clearing the output screen for every rerun of the code
+            List<string> commands = new List<string>();
             parser.runCommand("clear");
 
-            List<string> commands = new List<string>();
+            commands.Clear();
 
             // Adding every line of code in the multi line Rich Text Box to the multiCommands Generic List
             for (int i = 0; i < programInputWindow.Lines.Length; i++)
@@ -182,7 +183,6 @@ namespace Assignment
             parser.resetColor();
             parser.runCommand("reset");
             parser.clearVariables();
-            commands.Clear();
         }
     }
 }
