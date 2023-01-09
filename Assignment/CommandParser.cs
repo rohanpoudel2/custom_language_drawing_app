@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assignment
@@ -64,6 +65,7 @@ namespace Assignment
         string calledMethod = "";
         IDictionary<string, dynamic> methods = new Dictionary<string, dynamic>();
         List<string> methodCommands = new List<string>();
+        string currentMethodname = "";
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -134,6 +136,7 @@ namespace Assignment
         // Function responsible to check the command and call the appopriate function related to that command in the ArtWork class
         public void runCommand(string instruction)
         {
+            Console.WriteLine("This: " + instruction);
             try
             {
                 errorIndex++;
@@ -374,6 +377,7 @@ namespace Assignment
                     int endIndex = commandSplit[1].IndexOf(')');
 
                     methodName = commandSplit[1].Substring(0, startIndex);
+                    currentMethodname = methodName;
 
                     if (methodName.All(char.IsDigit))
                     {
@@ -413,7 +417,14 @@ namespace Assignment
                 if (commandSplit[0].Equals("endmethod"))
                 {
                     inMethod = false;
-                    methodCommands.RemoveAt(0);
+                    foreach(string m in methodCommands)
+                    {
+                        if (m.Contains("method"))
+                        {
+                            methodCommands.Remove(m);
+                            break;
+                        }
+                    }
                 }
 
                 if (commandSplit[0].Contains('(') && commandSplit[0].Contains(')') && !commandSplit[0].Contains("method")) 
@@ -435,7 +446,7 @@ namespace Assignment
                             {
                                 foreach(string command in methodCommands)
                                 {
-                                    runCommand(command);
+                                   runCommand(command);
                                 }
                             }
                             else
@@ -512,10 +523,12 @@ namespace Assignment
                                     throw new CustomParameterException("Method does not take any parameters");
                                 }
 
+
                                 foreach (string command in methodCommands)
                                 {
                                     runCommand(command);
                                 }
+
 
                             }
                             break;
@@ -545,7 +558,6 @@ namespace Assignment
                 }
                 else
                 {
-                    Console.WriteLine(instruction);
                     // Runs if any shape related commands have been given
                     if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                     {
@@ -556,7 +568,7 @@ namespace Assignment
                         }
                         else
                         {
-                            if (commandSplit[1].All(char.IsDigit))
+                            if (commandSplit[1].All(char.IsDigit) || Regex.IsMatch(commandSplit[1], @"^[\d,]+$"))
                             {
                                 parameter = checkParameter(commandSplit[1], "int");
                             }
@@ -606,7 +618,6 @@ namespace Assignment
 
                         if (command.Equals("circle") == true)
                         {
-                            Console.WriteLine("HELLO: "+parameter[0]);
                             myArtWork.drawCircle(parameter[0]);
                         }
 
@@ -625,10 +636,10 @@ namespace Assignment
                             Point point3 = new Point(parameter[2], parameter[3]);
 
                             Point[] points = {
-                point1,
-                point2,
-                point3
-              };
+                               point1,
+                               point2,
+                               point3
+                            };
 
                             myArtWork.drawTriangle(points);
 
@@ -721,7 +732,7 @@ namespace Assignment
                         }
                         else
                         {
-                            if (commandSplit[1].All(char.IsDigit))
+                            if (commandSplit[1].All(char.IsDigit) || Regex.IsMatch(commandSplit[1], @"^[\d,]+$"))
                             {
                                 parameter = checkParameter(commandSplit[1], "int");
                             }
@@ -876,10 +887,6 @@ namespace Assignment
                                             }
                                         }
                                     }
-                                }
-                                foreach(string var in variable.Keys)
-                                {
-                                    Console.WriteLine("HELO "+var);
                                 }
                             }
                         }
@@ -1055,6 +1062,7 @@ namespace Assignment
             methodCount = 0;
             methods.Clear();
             methodCommands.Clear();
+            currentMethodname = "";
         }
 
         //Function responsible to check the Length of the parameter
