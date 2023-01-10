@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment
@@ -67,6 +68,16 @@ namespace Assignment
         IDictionary<string, dynamic> methods = new Dictionary<string, dynamic>();
         List<string> methodCommands = new List<string>();
         string currentMethodname = "";
+
+        //For flashing
+        List<string> shapeCommands = new List<string>();
+        int colorIndex = 0;
+        string[] flashingColors;
+        int flashingInterval = 1000;
+        bool flashStatus = false;
+
+        dynamic refreshMethod;
+       
 
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
@@ -562,7 +573,6 @@ namespace Assignment
                     // Runs if any shape related commands have been given
                     if (availableShapeCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
                     {
-
                         if (variable.Count == 0)
                         {
                             parameter = checkParameter(commandSplit[1], "int");
@@ -605,33 +615,34 @@ namespace Assignment
 
                         if (command.Equals("drawto") == true)
                         {
-
+                            shapeCommands.Add(command+" " + parameter[0] + "," + parameter[1]);
                             myArtWork.drawLine(parameter[0], parameter[1]);
 
                         }
 
                         if (command.Equals("square") == true)
                         {
-
+                            shapeCommands.Add(command + " " + parameter[0]);
                             myArtWork.drawSquare(parameter[0]);
 
                         }
 
                         if (command.Equals("circle") == true)
                         {
+                            shapeCommands.Add(command + " " + parameter[0]);
                             myArtWork.drawCircle(parameter[0]);
                         }
 
                         if (command.Equals("rectangle") == true)
                         {
-
+                            shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
                             myArtWork.drawRectangle(parameter[0], parameter[1]);
 
                         }
 
                         if (command.Equals("triangle") == true)
                         {
-
+                            shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1] + "," + parameter[2] + "," + parameter[3]);
                             Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
                             Point point2 = new Point(parameter[0], parameter[1]);
                             Point point3 = new Point(parameter[2], parameter[3]);
@@ -672,8 +683,9 @@ namespace Assignment
                         {
                             if (command.Equals("moveto") == true)
                             {
+              
                                 parameter = checkParameter(commandSplit[1], "int");
-
+                                shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
                                 myArtWork.moveTo(parameter[0], parameter[1]);
 
                             }
@@ -698,8 +710,19 @@ namespace Assignment
 
                             if(command.Equals("flash") == true)
                             {
+                                flashStatus = true;
                                 parameter = checkParameter(commandSplit[1],"string");
 
+
+
+                                if (shapeCommands.Count == 0)
+                                {
+                                    throw new CustomValueException("No shape commands have been given. Please draw a shape and try again");
+                                }
+                                this.flashingColors = parameter;
+                                Thread flashShapes = new Thread(new ThreadStart(startFlashing));
+                                flashShapes.Start();
+                                
                             }
                         }
                     }
@@ -714,8 +737,34 @@ namespace Assignment
             }
         }
 
+        public void startFlashing()
+        {
+            string[] colors = flashingColors;
+
+            while (true)
+            {
+                colorIndex = (colorIndex + 1) % colors.Length;
+                string currentColor = colors[colorIndex];
+                runCommand("pen "+currentColor);
+                runCommand("fill on");
+                foreach (string shape in shapeCommands.ToList())
+                {
+                    runCommand(shape);
+                }
+                refreshMethod();
+                Thread.Sleep(flashingInterval);
+                
+            }
+        }
+
+        public void refresh(Action method)
+        {
+            this.refreshMethod = method;
+        }
+
         public void checkSyntax(List<string> commands)
         {
+            shapeCommands.Clear();
             errorIndex = 1;
             foreach (string command in commands)
             {

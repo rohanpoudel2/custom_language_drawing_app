@@ -114,6 +114,18 @@ namespace Assignment
             }
         }
 
+        public void forceRefresh()
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new MethodInvoker(forceRefresh));
+            }
+            else
+            {
+                Refresh();
+            }
+        }
+
         //Funciton responsible to Load Code from a RTF file in the system to the multiline code input textarea
         private void loadCodeButton_Click(object sender, EventArgs e)
         {
@@ -153,7 +165,7 @@ namespace Assignment
             //Clearing the output screen for every rerun of the code
             List<string> commands = new List<string>();
             parser.runCommand("clear");
-
+            parser.refresh(forceRefresh);
             commands.Clear();
 
             // Adding every line of code in the multi line Rich Text Box to the multiCommands Generic List
@@ -184,5 +196,7 @@ namespace Assignment
             parser.runCommand("reset");
             parser.clearVariables();
         }
+
+        
     }
 }
