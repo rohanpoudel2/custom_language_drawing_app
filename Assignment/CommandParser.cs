@@ -75,6 +75,8 @@ namespace Assignment
         string[] flashingColors;
         int flashingInterval = 1000;
         bool flashStatus = false;
+        bool stopFlash = false;
+        Thread flashShapes;
 
         dynamic refreshMethod;
        
@@ -615,34 +617,49 @@ namespace Assignment
 
                         if (command.Equals("drawto") == true)
                         {
-                            shapeCommands.Add(command+" " + parameter[0] + "," + parameter[1]);
+                            if (!flashStatus)
+                            {
+                                shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
+                            }
                             myArtWork.drawLine(parameter[0], parameter[1]);
 
                         }
 
                         if (command.Equals("square") == true)
                         {
-                            shapeCommands.Add(command + " " + parameter[0]);
+                            if (!flashStatus)
+                            {
+                                shapeCommands.Add(command + " " + parameter[0]);
+                            }
                             myArtWork.drawSquare(parameter[0]);
 
                         }
 
                         if (command.Equals("circle") == true)
                         {
-                            shapeCommands.Add(command + " " + parameter[0]);
+                            if (!flashStatus)
+                            {
+                                shapeCommands.Add(command + " " + parameter[0]);
+                            }
                             myArtWork.drawCircle(parameter[0]);
                         }
 
                         if (command.Equals("rectangle") == true)
                         {
+                            if (!flashStatus)
+                            {
                             shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
+                            }
                             myArtWork.drawRectangle(parameter[0], parameter[1]);
 
                         }
 
                         if (command.Equals("triangle") == true)
                         {
-                            shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1] + "," + parameter[2] + "," + parameter[3]);
+                            if (!flashStatus)
+                            {
+                                shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1] + "," + parameter[2] + "," + parameter[3]);
+                            }
                             Point point1 = new Point(myArtWork.xPosition, myArtWork.yPosition);
                             Point point2 = new Point(parameter[0], parameter[1]);
                             Point point3 = new Point(parameter[2], parameter[3]);
@@ -685,7 +702,10 @@ namespace Assignment
                             {
               
                                 parameter = checkParameter(commandSplit[1], "int");
-                                shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
+                                if (!flashStatus) {
+                                    shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
+                                }
+                                
                                 myArtWork.moveTo(parameter[0], parameter[1]);
 
                             }
@@ -720,7 +740,7 @@ namespace Assignment
                                     throw new CustomValueException("No shape commands have been given. Please draw a shape and try again");
                                 }
                                 this.flashingColors = parameter;
-                                Thread flashShapes = new Thread(new ThreadStart(startFlashing));
+                                flashShapes = new Thread(new ThreadStart(startFlashing));
                                 flashShapes.Start();
                                 
                             }
@@ -739,22 +759,38 @@ namespace Assignment
 
         public void startFlashing()
         {
-            string[] colors = flashingColors;
-
-            while (true)
+            try
             {
-                colorIndex = (colorIndex + 1) % colors.Length;
-                string currentColor = colors[colorIndex];
-                runCommand("pen "+currentColor);
-                runCommand("fill on");
-                foreach (string shape in shapeCommands.ToList())
+                string[] colors = flashingColors;
+
+                while (!stopFlash)
                 {
-                    runCommand(shape);
+                    colorIndex = (colorIndex + 1) % colors.Length;
+                    string currentColor = colors[colorIndex];
+                    runCommand("pen " + currentColor);
+                    runCommand("fill on");
+                    foreach (string shape in shapeCommands.ToList())
+                    {
+                        runCommand(shape);
+                    }
+                    refreshMethod();
+                    Thread.Sleep(flashingInterval);
+
                 }
-                refreshMethod();
-                Thread.Sleep(flashingInterval);
-                
             }
+            catch(Exception e)
+            {
+                errors.Add("Flashing Stopped");
+                errors.Add("--------------------------------------");
+            }
+        }
+
+        public void stopFlashing()
+        {
+            stopFlash = true;
+            resetFill();
+            resetColor();
+            flashShapes.Interrupt();
         }
 
         public void refresh(Action method)
@@ -914,7 +950,8 @@ namespace Assignment
                                 {
                                     throw new CustomParameterException("Invalid Number of color is given for the flash command. Please try with two colors only.");
                                 }
-                                if (!checkColor(parameter[0]) && !checkColor(parameter[1])){
+                                Console.WriteLine("first-color: " + checkColor(parameter[0])+","+"second-color: " + checkColor(parameter[1]));
+                                if (!checkColor(parameter[0]) || !checkColor(parameter[1])){
                                     throw new CustomParameterException(parameter[0]+" or " + parameter[1] + " is not a valid color. Please verify and try again.");
                                 }
                                 break;

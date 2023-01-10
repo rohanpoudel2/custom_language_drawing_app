@@ -67,6 +67,10 @@ namespace Assignment
                 {
                     runCode();
                 }
+                else if(code == "stopflash")
+                {
+                    parser.stopFlashing();
+                }
                 else
                 {
                     //If the users input was not run then it is assumed to be a single command. So, the code it passed to the CommandParser class
