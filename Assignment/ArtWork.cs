@@ -18,7 +18,7 @@ namespace Assignment
         ShapeFactory shape;
 
         public int xPosition, yPosition;
-    
+
         public ArtWork() { }
 
         // Constructor of ArtWork class which takes a Graphics object as the parameter

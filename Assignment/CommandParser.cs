@@ -29,7 +29,8 @@ namespace Assignment
             clear,
             moveto,
             pen,
-            fill
+            fill,
+            flash
         }
 
         ArtWork myArtWork;
@@ -694,6 +695,12 @@ namespace Assignment
                                 myArtWork.changeFill(parameter[0]);
 
                             }
+
+                            if(command.Equals("flash") == true)
+                            {
+                                parameter = checkParameter(commandSplit[1],"string");
+
+                            }
                         }
                     }
 
@@ -850,6 +857,16 @@ namespace Assignment
                                 if (!checkCommandLength(parameter.Length, 2))
                                 {
                                     throw new CustomParameterException("Invalid Number of parameter is given for the moveto command. Please try with two parameter only.");
+                                }
+                                break;
+                            case "flash":
+                                parameter = checkParameter(commandSplit[1], "string");
+                                if(!checkCommandLength(parameter.Length, 2))
+                                {
+                                    throw new CustomParameterException("Invalid Number of color is given for the flash command. Please try with two colors only.");
+                                }
+                                if (!checkColor(parameter[0]) && !checkColor(parameter[1])){
+                                    throw new CustomParameterException(parameter[0]+" or " + parameter[1] + " is not a valid color. Please verify and try again.");
                                 }
                                 break;
                             default:
@@ -1077,6 +1094,18 @@ namespace Assignment
                 return true;
             }
 
+        }
+
+        public Boolean checkColor(string color)
+        {
+            if (Color.FromName(color).IsKnownColor)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //Function responsible to reset the Fill to off
