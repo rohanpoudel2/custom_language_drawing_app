@@ -47,6 +47,7 @@
             this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetPositionButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +55,7 @@
             // outputWindow
             // 
             this.outputWindow.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.outputWindow.Location = new System.Drawing.Point(12, 187);
+            this.outputWindow.Location = new System.Drawing.Point(835, 150);
             this.outputWindow.Name = "outputWindow";
             this.outputWindow.Size = new System.Drawing.Size(1201, 1110);
             this.outputWindow.TabIndex = 0;
@@ -63,7 +64,7 @@
             // 
             // singleCommandLine
             // 
-            this.singleCommandLine.Location = new System.Drawing.Point(1230, 1296);
+            this.singleCommandLine.Location = new System.Drawing.Point(25, 603);
             this.singleCommandLine.Name = "singleCommandLine";
             this.singleCommandLine.Size = new System.Drawing.Size(798, 31);
             this.singleCommandLine.TabIndex = 1;
@@ -72,18 +73,21 @@
             // programInputWindow
             // 
             this.programInputWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.programInputWindow.Location = new System.Drawing.Point(1230, 658);
+            this.programInputWindow.Location = new System.Drawing.Point(131, 735);
             this.programInputWindow.Name = "programInputWindow";
-            this.programInputWindow.Size = new System.Drawing.Size(798, 572);
+            this.programInputWindow.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.programInputWindow.Size = new System.Drawing.Size(689, 572);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
+            this.programInputWindow.VScroll += new System.EventHandler(this.programInputWindow_VScroll);
+            this.programInputWindow.TextChanged += new System.EventHandler(this.programInputWindow_TextChanged);
             // 
             // outputBoxLabel
             // 
             this.outputBoxLabel.AutoSize = true;
             this.outputBoxLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
             this.outputBoxLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outputBoxLabel.Location = new System.Drawing.Point(12, 111);
+            this.outputBoxLabel.Location = new System.Drawing.Point(837, 73);
             this.outputBoxLabel.Name = "outputBoxLabel";
             this.outputBoxLabel.Padding = new System.Windows.Forms.Padding(5);
             this.outputBoxLabel.Size = new System.Drawing.Size(375, 65);
@@ -95,7 +99,7 @@
             this.logsLabel.AutoSize = true;
             this.logsLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
             this.logsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.logsLabel.Location = new System.Drawing.Point(1229, 111);
+            this.logsLabel.Location = new System.Drawing.Point(22, 73);
             this.logsLabel.Name = "logsLabel";
             this.logsLabel.Padding = new System.Windows.Forms.Padding(5);
             this.logsLabel.Size = new System.Drawing.Size(334, 65);
@@ -107,7 +111,7 @@
             this.programInputWindowLabel.AutoSize = true;
             this.programInputWindowLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
             this.programInputWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.programInputWindowLabel.Location = new System.Drawing.Point(1230, 580);
+            this.programInputWindowLabel.Location = new System.Drawing.Point(22, 656);
             this.programInputWindowLabel.Name = "programInputWindowLabel";
             this.programInputWindowLabel.Padding = new System.Windows.Forms.Padding(5);
             this.programInputWindowLabel.Size = new System.Drawing.Size(543, 65);
@@ -119,7 +123,7 @@
             this.singleCommandWindowLabel.AutoSize = true;
             this.singleCommandWindowLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(78)))), ((int)(((byte)(52)))));
             this.singleCommandWindowLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singleCommandWindowLabel.Location = new System.Drawing.Point(1230, 1243);
+            this.singleCommandWindowLabel.Location = new System.Drawing.Point(24, 541);
             this.singleCommandWindowLabel.Name = "singleCommandWindowLabel";
             this.singleCommandWindowLabel.Padding = new System.Windows.Forms.Padding(5);
             this.singleCommandWindowLabel.Size = new System.Drawing.Size(354, 41);
@@ -130,7 +134,7 @@
             // 
             this.programLogWindow.BackColor = System.Drawing.Color.White;
             this.programLogWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.programLogWindow.Location = new System.Drawing.Point(1230, 187);
+            this.programLogWindow.Location = new System.Drawing.Point(22, 150);
             this.programLogWindow.Name = "programLogWindow";
             this.programLogWindow.ReadOnly = true;
             this.programLogWindow.Size = new System.Drawing.Size(798, 369);
@@ -140,7 +144,7 @@
             // runButton
             // 
             this.runButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.runButton.Location = new System.Drawing.Point(1230, 1343);
+            this.runButton.Location = new System.Drawing.Point(12, 1333);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(391, 61);
             this.runButton.TabIndex = 9;
@@ -151,7 +155,7 @@
             // clearCodeButton
             // 
             this.clearCodeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearCodeButton.Location = new System.Drawing.Point(1637, 1343);
+            this.clearCodeButton.Location = new System.Drawing.Point(430, 1333);
             this.clearCodeButton.Name = "clearCodeButton";
             this.clearCodeButton.Size = new System.Drawing.Size(391, 61);
             this.clearCodeButton.TabIndex = 10;
@@ -162,9 +166,9 @@
             // clearScreenButton
             // 
             this.clearScreenButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clearScreenButton.Location = new System.Drawing.Point(12, 1343);
+            this.clearScreenButton.Location = new System.Drawing.Point(835, 1282);
             this.clearScreenButton.Name = "clearScreenButton";
-            this.clearScreenButton.Size = new System.Drawing.Size(391, 61);
+            this.clearScreenButton.Size = new System.Drawing.Size(528, 112);
             this.clearScreenButton.TabIndex = 11;
             this.clearScreenButton.Text = "🗑️ CLEAR DRAWING";
             this.clearScreenButton.UseVisualStyleBackColor = true;
@@ -181,7 +185,7 @@
             this.helpToolStripMenuItem});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
-            this.menuBar.Size = new System.Drawing.Size(2048, 57);
+            this.menuBar.Size = new System.Drawing.Size(2048, 53);
             this.menuBar.TabIndex = 12;
             this.menuBar.Text = "menuStrip1";
             // 
@@ -234,13 +238,22 @@
             // resetPositionButton
             // 
             this.resetPositionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetPositionButton.Location = new System.Drawing.Point(429, 1343);
+            this.resetPositionButton.Location = new System.Drawing.Point(1517, 1282);
             this.resetPositionButton.Name = "resetPositionButton";
-            this.resetPositionButton.Size = new System.Drawing.Size(391, 61);
+            this.resetPositionButton.Size = new System.Drawing.Size(519, 112);
             this.resetPositionButton.TabIndex = 13;
             this.resetPositionButton.Text = "🧹 RESET POSITION";
             this.resetPositionButton.UseVisualStyleBackColor = true;
             this.resetPositionButton.Click += new System.EventHandler(this.resetPositionButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(22, 735);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(103, 572);
+            this.panel1.TabIndex = 14;
             // 
             // drawingProgram
             // 
@@ -248,6 +261,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(236)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(2048, 1432);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.resetPositionButton);
             this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
@@ -292,6 +306,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutButton;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.Button resetPositionButton;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

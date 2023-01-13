@@ -499,6 +499,7 @@ namespace Assignment
                 if (commandSplit[0].Equals("endmethod"))
                 {
                     inMethod = false;
+                    methodCount = 0;
                     foreach(string m in methodCommands)
                     {
                         if (m.Contains("method"))
@@ -515,6 +516,8 @@ namespace Assignment
                     string methodParameter;
                     string[] methodParameters;
 
+                    bool hasMethod = false;
+
                     int startIndex = commandSplit[0].IndexOf('(');
                     int endIndex = commandSplit[0].IndexOf(')');
 
@@ -524,6 +527,8 @@ namespace Assignment
                     {
                         if (methodName.Equals(method))
                         {
+                            hasMethod = true;
+                            Console.WriteLine("methodthis: "+methodName);
                             if (startIndex == endIndex - 1)
                             {
                                 foreach(string command in methodCommands)
@@ -617,7 +622,10 @@ namespace Assignment
                         }
                         else
                         {
-                            throw new MethodAccessException("Method does not exist. Please try again.");
+                            if (!hasMethod)
+                            {
+                                throw new MethodAccessException("Method does not exist. Please try again.");
+                            }
                         }
                     }
 
@@ -626,6 +634,11 @@ namespace Assignment
                 // Creating two different arrays from the enums to check if the given command is valid and available to be processed
                 string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
                 string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
+                foreach(string a in methods.Keys)
+                {
+                    Console.WriteLine("METHOD NAME: "+a);
+                    Console.WriteLine(inMethod);
+                }
                 if (inLoop)
                 {
                     loopCommands.Add(instruction);
@@ -690,7 +703,6 @@ namespace Assignment
                                 shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
                             }
                             myArtWork.drawLine(parameter[0], parameter[1]);
-
                         }
 
                         if (command.Equals("square") == true)
@@ -700,7 +712,6 @@ namespace Assignment
                                 shapeCommands.Add(command + " " + parameter[0]);
                             }
                             myArtWork.drawSquare(parameter[0]);
-
                         }
 
                         if (command.Equals("circle") == true)
