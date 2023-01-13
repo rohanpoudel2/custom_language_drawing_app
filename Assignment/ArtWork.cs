@@ -11,7 +11,7 @@ namespace Assignment
     public class ArtWork
     {
         //Declaring variables
-        Pen pen;
+        Pen pen = new Pen(Color.Black, 1);
         Graphics illustrate;
         Font drawFont = new Font("Arial", 16);
         SolidBrush drawBrush = new SolidBrush(Color.Black);
@@ -20,11 +20,11 @@ namespace Assignment
 
         public int xPosition, yPosition;
 
-        public List<Shape> shapes = new List<Shape>();
+        public List<KeyValuePair<Shape,Tuple<bool,Pen>>> shapes = new List<KeyValuePair<Shape,Tuple<bool, Pen>>>();
 
         public void AddShape(Shape shape)
         {
-            shapes.Add(shape);
+            shapes.Add(new KeyValuePair<Shape,Tuple<bool,Pen>>(shape,new Tuple<bool,Pen>(fill,pen)));
         }
 
         public Iterator CreateIterator()
@@ -39,7 +39,6 @@ namespace Assignment
         {
             this.illustrate = g;
             xPosition = yPosition = 0;
-            pen = new Pen(Color.Black, 1);
             shape = new ShapeFactory(illustrate);
         }
 
@@ -59,15 +58,15 @@ namespace Assignment
         //Function responsible to draw a square
         public void drawSquare(int size)
         {
-          
-                AddShape(shape.drawSquare(pen, xPosition, yPosition, size));
+            Console.WriteLine("tHIS Square COLOR: " + pen.Color);
+            AddShape(shape.drawSquare(pen, xPosition, yPosition, size));
 
         }
 
         // Function responsible to draw Circle
         public void drawCircle(int radius)
         {
-        
+            Console.WriteLine("tHIS CIRCLE COLOR: "+ pen.Color);
                 AddShape(shape.drawCircle(pen, xPosition, yPosition, radius));
 
 
@@ -92,8 +91,13 @@ namespace Assignment
         {
             Iterator iterator = CreateIterator();
             while (iterator.HasNext()){
-                Shape shape = (Shape)iterator.Next();
-
+                KeyValuePair<Shape, Tuple<bool, Pen>> kvp = (KeyValuePair<Shape, Tuple<bool, Pen>>)iterator.Next();
+                Shape shape = kvp.Key;
+                Tuple<bool,Pen> variables = kvp.Value;
+                bool fill = variables.Item1;
+                Pen pen = variables.Item2;
+                this.drawBrush = new SolidBrush(pen.Color);
+                Console.WriteLine("This COLOR: "+ pen.Color);
                 if (fill)
                 {
                     shape.Draw(drawBrush);

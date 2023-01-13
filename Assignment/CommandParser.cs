@@ -995,7 +995,7 @@ namespace Assignment
                                 {
                                     throw new CustomParameterException("Invalid Number of parameter is given for the pen command. Please try with one parameter only.");
                                 }
-                                if (myArtWork.changeColor(parameter[0]) == false)
+                                if (checkColor(parameter[0]) == false)
                                 {
                                     throw new CustomParameterException(parameter[0] + " is not a valid color. Please try something else");
                                 }
