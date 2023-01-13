@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtWork.cs" />
+    <Compile Include="ArtWorkIterator.cs" />
     <Compile Include="BasicShape.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="CommandParser.cs" />
@@ -60,10 +61,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Iterator.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectanglee.cs" />
+    <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="Shapes.cs" />
     <Compile Include="Square.cs" />

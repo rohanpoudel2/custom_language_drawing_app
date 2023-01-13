@@ -16,7 +16,12 @@ namespace Assignment
         }
 
         // Function responsible to draw the Desired shape
-        public void Draw()
+        public override void Draw()
+        {
+            illustrate.DrawLine(pen, xPosition, yPosition, toXPos, toYPos);
+        }
+
+        public override void Draw(SolidBrush brush)
         {
             illustrate.DrawLine(pen, xPosition, yPosition, toXPos, toYPos);
         }

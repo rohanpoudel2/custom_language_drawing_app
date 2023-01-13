@@ -17,13 +17,13 @@ namespace Assignment
         }
  
         // Function responsible to draw the Desired shape
-        public void Draw()
+        public override void Draw()
         {
            illustrate.DrawEllipse(pen, xPosition - radius, yPosition - radius, (radius * 2), (radius * 2));
         }
 
         //Overloading the Draw function with a parameter. Function to be used to draw filled shapes
-        public void Draw(SolidBrush brush)
+        public override void Draw(SolidBrush brush)
         {
             illustrate.FillEllipse(brush, xPosition - radius, yPosition - radius, (radius * 2), (radius * 2));
         }

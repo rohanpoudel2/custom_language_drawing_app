@@ -15,13 +15,13 @@ namespace Assignment
         }
 
         // Function responsible to draw the Desired shape
-        public void Draw()
+        public override void Draw()
         {
             illustrate.DrawRectangle(pen, xPosition, yPosition, size,  size);
         }
 
         //Overloading the Draw function with a parameter. Function to be used to draw filled shapes
-        public void Draw(SolidBrush brush)
+        public override void Draw(SolidBrush brush)
         {
             illustrate.FillRectangle(brush, xPosition, yPosition, size, size);
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
-    public abstract class BasicShape
+    public abstract class BasicShape : Shape
     {
         //Declaring basic variables needed to create a shape
         protected Pen pen;
@@ -22,5 +22,8 @@ namespace Assignment
             this.xPosition = xPosition;
             this.yPosition = yPosition;
         }
+        public abstract void Draw();
+
+        public abstract void Draw(SolidBrush brush);
     }
 }

@@ -84,8 +84,6 @@ namespace Assignment
         //Declaring a int variable to count the nth number of code being processed
         int errorIndex = 0;
 
-        public CommandParser() { }
-
         //Constructor for CommandParser class when takes an object of ArtWork for argument
         public CommandParser(ArtWork myArtWork)
         {
@@ -648,7 +646,7 @@ namespace Assignment
                         {
                             if (!flashStatus)
                             {
-                            shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
+                                shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
                             }
                             myArtWork.drawRectangle(parameter[0], parameter[1]);
 
@@ -733,8 +731,6 @@ namespace Assignment
                                 flashStatus = true;
                                 parameter = checkParameter(commandSplit[1],"string");
 
-
-
                                 if (shapeCommands.Count == 0)
                                 {
                                     throw new CustomValueException("No shape commands have been given. Please draw a shape and try again");
@@ -773,6 +769,7 @@ namespace Assignment
                     {
                         runCommand(shape);
                     }
+                    myArtWork.DrawNow();
                     refreshMethod();
                     Thread.Sleep(flashingInterval);
 
@@ -1011,10 +1008,12 @@ namespace Assignment
             {
                 //No error so command is to be executed
                 errorIndex = 0;
+                myArtWork.shapes.Clear();
                 foreach (string command in commands)
                 {
                     runCommand(command);
                 }
+                myArtWork.DrawNow();
             }
 
         }
