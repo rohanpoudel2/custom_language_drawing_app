@@ -169,15 +169,25 @@ namespace Assignment
                     loopCount++;
 
                     List<string> loopOperands = new List<string>();
-                    if (commandSplit[1].Contains('<'))
+                    if (commandSplit[1].Contains('<') && !commandSplit[1].Contains("<="))
                     {
                         loopCondition = commandSplit[1].Split('<');
                         operatorr = "<";
                     }
-                    else if (commandSplit[1].Contains('>'))
+                    else if (commandSplit[1].Contains('>') && !commandSplit[1].Contains(">="))
                     {
                         loopCondition = commandSplit[1].Split('>');
                         operatorr = ">";
+                    }
+                    else if (commandSplit[1].Contains("<="))
+                    {
+                        loopCondition = commandSplit[1].Split(new string[] {"<="}, StringSplitOptions.None);
+                        operatorr = "<=";
+                    }
+                    else if (commandSplit[1].Contains(">="))
+                    {
+                        loopCondition = commandSplit[1].Split(new string[] {">="}, StringSplitOptions.None);
+                        operatorr = ">=";
                     }
                     else
                     {
@@ -234,6 +244,36 @@ namespace Assignment
                             validLoop = false;
                         }
                     }
+                    else if (operatorr.Equals("<="))
+                    {
+                        if (int.Parse(loopOperands[0]) <= int.Parse(loopOperands[1]))
+                        {
+                            if(loopInterval == 0)
+                            {
+                                loopInterval = (int.Parse(loopOperands[1]) - int.Parse(loopOperands[0])) +1;
+                            }
+                            validLoop = true;
+                        }
+                        else
+                        {
+                            validLoop = false;
+                        }
+                    }
+                    else if (operatorr.Equals(">="))
+                    {
+                        if (int.Parse(loopOperands[0]) >= int.Parse(loopOperands[1]))
+                        {
+                            if(loopInterval == 0)
+                            {
+                                loopInterval = (int.Parse(loopOperands[0]) - int.Parse(loopOperands[1]))+1;
+                            }
+                            validLoop = true;
+                        }
+                        else
+                        {
+                            validLoop = false;
+                        }
+                    }
                 }
 
                 if (commandSplit[0].Contains("endloop"))
@@ -278,22 +318,30 @@ namespace Assignment
                     ifCount++;
 
                     List<string> ifOperands = new List<string>();
-                    if (commandSplit[1].Contains('<'))
+                    if (commandSplit[1].Contains('<') && !commandSplit[1].Contains("<="))
                     {
                         ifCondition = commandSplit[1].Split('<');
                         operatorr = "<";
                     }
-                    else if (commandSplit[1].Contains('>'))
+                    else if (commandSplit[1].Contains('>') && !commandSplit[1].Contains(">="))
                     {
                         ifCondition = commandSplit[1].Split('>');
                         operatorr = ">";
                     }
                     else if (commandSplit[1].Contains("=="))
                     {
-                        ifCondition = commandSplit[1].Split(new string[] {
-              "=="
-            }, StringSplitOptions.None);
+                        ifCondition = commandSplit[1].Split(new string[] {"=="}, StringSplitOptions.None);
                         operatorr = "==";
+                    }
+                    else if (commandSplit[1].Contains("<="))
+                    {
+                        ifCondition = commandSplit[1].Split(new string[] {"<="}, StringSplitOptions.None);
+                        operatorr = "<=";
+                    }
+                    else if (commandSplit[1].Contains(">="))
+                    {
+                        ifCondition = commandSplit[1].Split(new string[] {">="}, StringSplitOptions.None);
+                        operatorr = ">=";
                     }
                     else
                     {
@@ -302,6 +350,7 @@ namespace Assignment
 
                     foreach (string operand in ifCondition)
                     {
+                        Console.WriteLine(operand);
                         if (operand.All(char.IsDigit))
                         {
                             ifOperands.Add(operand);
@@ -345,6 +394,27 @@ namespace Assignment
                     {
                         if (int.Parse(ifOperands[0]) == int.Parse(ifOperands[1]))
                         {
+                            validIf = true;
+                        }
+                        else
+                        {
+                            validIf = false;
+                        }
+                    }
+                    else if (operatorr.Equals("<="))
+                    {
+                        if (int.Parse(ifOperands[0]) <= int.Parse(ifOperands[1]))
+                        {
+                            validIf = true;
+                        }
+                        else
+                        {
+                            validIf = false;
+                        }
+                    }
+                    else if (operatorr.Equals(">="))
+                    {
+                        if (int.Parse(ifOperands[0]) >= int.Parse(ifOperands[1])){
                             validIf = true;
                         }
                         else
@@ -804,7 +874,7 @@ namespace Assignment
                 errorIndex++;
                 try
                 {
-                    if (command.Contains('=') && !command.Contains("=="))
+                    if (command.Contains('=') && !command.Contains("==") && !command.Contains("<=") && !command.Contains(">="))
                     {
                         assignVariables(command);
                     }
