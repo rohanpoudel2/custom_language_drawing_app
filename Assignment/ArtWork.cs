@@ -17,6 +17,7 @@ namespace Assignment
         SolidBrush drawBrush = new SolidBrush(Color.Black);
         public Boolean fill = false;
         ShapeFactory shape;
+        private readonly ReaderWriterLockSlim _rwLock = new ReaderWriterLockSlim();
 
         public int xPosition, yPosition;
 
@@ -89,24 +90,32 @@ namespace Assignment
 
         public void DrawNow()
         {
-            Iterator iterator = CreateIterator();
-            while (iterator.HasNext()){
-                KeyValuePair<Shape, Tuple<bool, Pen>> kvp = (KeyValuePair<Shape, Tuple<bool, Pen>>)iterator.Next();
-                Shape shape = kvp.Key;
-                Tuple<bool,Pen> variables = kvp.Value;
-                bool fill = variables.Item1;
-                Pen pen = variables.Item2;
-                this.drawBrush = new SolidBrush(pen.Color);
-                Console.WriteLine("This COLOR: "+ pen.Color);
-                if (fill)
+            _rwLock.EnterReadLock();
+            try
+            {
+                Iterator iterator = CreateIterator();
+                while (iterator.HasNext())
                 {
-                    shape.Draw(drawBrush);
-                }
-                else
-                {
-                    shape.Draw();
-                }
+                    KeyValuePair<Shape, Tuple<bool, Pen>> kvp = (KeyValuePair<Shape, Tuple<bool, Pen>>)iterator.Next();
+                    Shape shape = kvp.Key;
+                    Tuple<bool, Pen> variables = kvp.Value;
+                    bool fill = variables.Item1;
+                    Pen pen = variables.Item2;
+                    this.drawBrush = new SolidBrush(pen.Color);
+                    Console.WriteLine("This COLOR: " + pen.Color);
+                    if (fill)
+                    {
+                        shape.Draw(drawBrush);
+                    }
+                    else
+                    {
+                        shape.Draw();
+                    }
 
+                }
+            }finally
+            {
+                _rwLock.ExitReadLock();
             }
         }
 
