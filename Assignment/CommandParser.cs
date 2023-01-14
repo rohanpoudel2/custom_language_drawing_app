@@ -869,7 +869,26 @@ namespace Assignment
             }
             try
             {
-                string[] colors = flashingColors;
+                string[] colors = new string[] {};
+                if (flashingColors.Length == 1)
+                {
+                    if (flashingColors[0].Equals("redgreen"))
+                    {
+                        colors = new string[] { "red","green"};
+                    }
+                    else if(flashingColors[0].Equals("blueyellow"))
+                    {
+                        colors = new string[] { "blue", "yellow" };
+                    }
+                    else if (flashingColors[0].Equals("blackwhite"))
+                    {
+                        colors = new string[] {"black","white"};
+                    }
+                }
+                else
+                {
+                    colors = flashingColors;
+                }
 
                 while (!stopFlash)
                 {
@@ -1055,13 +1074,22 @@ namespace Assignment
                                 break;
                             case "flash":
                                 parameter = checkParameter(commandSplit[1], "string");
-                                if(!checkCommandLength(parameter.Length, 2))
+
+                                if (commandSplit[1].Equals("redgreen") || commandSplit[1].Equals("blueyellow") || commandSplit[1].Equals("blackwhite"))
                                 {
-                                    throw new CustomParameterException("Invalid Number of color is given for the flash command. Please try with two colors only.");
+
                                 }
-                                Console.WriteLine("first-color: " + checkColor(parameter[0])+","+"second-color: " + checkColor(parameter[1]));
-                                if (!checkColor(parameter[0]) || !checkColor(parameter[1])){
-                                    throw new CustomParameterException(parameter[0]+" or " + parameter[1] + " is not a valid color. Please verify and try again.");
+                                else
+                                {
+                                    if (!checkCommandLength(parameter.Length, 2))
+                                    {
+                                        throw new CustomParameterException("Invalid Number of color is given for the flash command. Please try with two colors only.");
+                                    }
+                                    Console.WriteLine("first-color: " + checkColor(parameter[0]) + "," + "second-color: " + checkColor(parameter[1]));
+                                    if (!checkColor(parameter[0]) || !checkColor(parameter[1]))
+                                    {
+                                        throw new CustomParameterException(parameter[0] + " or " + parameter[1] + " is not a valid color. Please verify and try again.");
+                                    }
                                 }
                                 break;
                             default:
