@@ -71,6 +71,7 @@ namespace Assignment
 
         //For flashing
         List<string> shapeCommands = new List<string>();
+        List<string> shapeCommandsCopy = new List<string>();
         int colorIndex = 0;
         string[] flashingColors;
         int flashingInterval = 1000;
@@ -832,15 +833,19 @@ namespace Assignment
                             {
                                 flashStatus = true;
                                 parameter = checkParameter(commandSplit[1],"string");
-
+                                foreach (string s in shapeCommands) {
+                                    Console.WriteLine("SHAPES: "+s);
+                                }
                                 if (shapeCommands.Count == 0)
                                 {
                                     throw new CustomValueException("No shape commands have been given. Please draw a shape and try again");
                                 }
                                 this.flashingColors = parameter;
-                                flashShapes = new Thread(new ThreadStart(startFlashing));
+                                shapeCommandsCopy = new List<string>(shapeCommands);
+                                //flashShapes = new Thread(new ThreadStart(startFlashing));
+                                flashShapes = new Thread(() => startFlashing(shapeCommandsCopy));
                                 flashShapes.Start();
-                                
+                                shapeCommands.Clear();
                             }
                         }
                     }
@@ -855,8 +860,13 @@ namespace Assignment
             }
         }
 
-        public void startFlashing()
+        public void startFlashing(List<string> shapeCommandsCopy)
         {
+            stopFlash = false;
+            foreach(string s in this.shapeCommandsCopy)
+            {
+                Console.WriteLine("INSIDE ANOTHER THREAD: "+s);
+            }
             try
             {
                 string[] colors = flashingColors;
@@ -867,7 +877,7 @@ namespace Assignment
                     string currentColor = colors[colorIndex];
                     runCommand("pen " + currentColor);
                     runCommand("fill on");
-                    foreach (string shape in shapeCommands.ToList())
+                    foreach (string shape in this.shapeCommandsCopy)
                     {
                         runCommand(shape);
                     }
@@ -887,9 +897,10 @@ namespace Assignment
         public void stopFlashing()
         {
             stopFlash = true;
+            flashStatus = false;
             resetFill();
             resetColor();
-            flashShapes.Interrupt();
+            flashShapes.Join();
         }
 
         public void refresh(Action method)
@@ -899,7 +910,6 @@ namespace Assignment
 
         public void checkSyntax(List<string> commands)
         {
-            shapeCommands.Clear();
             errorIndex = 1;
             foreach (string command in commands)
             {
