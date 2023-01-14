@@ -47,7 +47,6 @@
             this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetPositionButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
@@ -73,14 +72,12 @@
             // programInputWindow
             // 
             this.programInputWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.programInputWindow.Location = new System.Drawing.Point(131, 735);
+            this.programInputWindow.Location = new System.Drawing.Point(22, 735);
             this.programInputWindow.Name = "programInputWindow";
-            this.programInputWindow.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.programInputWindow.Size = new System.Drawing.Size(689, 572);
+            this.programInputWindow.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.programInputWindow.Size = new System.Drawing.Size(798, 572);
             this.programInputWindow.TabIndex = 2;
             this.programInputWindow.Text = "";
-            this.programInputWindow.VScroll += new System.EventHandler(this.programInputWindow_VScroll);
-            this.programInputWindow.TextChanged += new System.EventHandler(this.programInputWindow_TextChanged);
             // 
             // outputBoxLabel
             // 
@@ -246,22 +243,12 @@
             this.resetPositionButton.UseVisualStyleBackColor = true;
             this.resetPositionButton.Click += new System.EventHandler(this.resetPositionButton_Click);
             // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(22, 735);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(103, 572);
-            this.panel1.TabIndex = 14;
-            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(236)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(2048, 1432);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.resetPositionButton);
             this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
@@ -306,7 +293,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutButton;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.Button resetPositionButton;
-        private System.Windows.Forms.Panel panel1;
     }
 }
 

@@ -35,8 +35,6 @@ namespace Assignment
 
             //Assigning object reference and passing ArtWork class's object reference to the CommandParser class constructor
             parser = new CommandParser(myArtWork);
-
-          //  programInputWindow.TextChanged += new EventHandler(programInputWindow_TextChanged);
         }
 
         //Function responsible to get the current graphics from the pictureBox and draw an unscaled image using bitmapOutput
@@ -165,29 +163,6 @@ namespace Assignment
             parser.runCommand("reset");
         }
 
-        private void programInputWindow_TextChanged(object sender, EventArgs e)
-        {
-            panel1.Controls.Clear();
-            int lineCount = programInputWindow.Lines.Length;
-            panel1.AutoScrollMinSize = new Size(0, lineCount * programInputWindow.Font.Height);
-            for (int i =1; i<=lineCount; i++)
-            {
-                Label lbl = new Label();
-                lbl.Text = i.ToString();
-                lbl.Width = 30;
-                lbl.TextAlign = ContentAlignment.MiddleRight;
-                lbl.Top = (i - 1) * programInputWindow.Font.Height;
-                panel1.Controls.Add(lbl);
-            }
-        }
-
-        private void programInputWindow_VScroll(object sender, EventArgs e)
-        {
-            int firstChar = programInputWindow.GetCharIndexFromPosition(new Point(0, 0));
-            int firstLine = programInputWindow.GetLineFromCharIndex(firstChar);
-            Point point = programInputWindow.GetPositionFromCharIndex(programInputWindow.GetFirstCharIndexOfCurrentLine());
-            panel1.AutoScrollPosition = new Point(0, -point.Y);
-        }
 
         //Function responsible to send the multi line commands at a time to the CommandParser class
         private void runCode()

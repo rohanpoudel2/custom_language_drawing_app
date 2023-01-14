@@ -350,7 +350,7 @@ namespace Assignment
 
                     foreach (string operand in ifCondition)
                     {
-                        Console.WriteLine(operand);
+                
                         if (operand.All(char.IsDigit))
                         {
                             ifOperands.Add(operand);
@@ -498,6 +498,10 @@ namespace Assignment
 
                 if (commandSplit[0].Equals("endmethod"))
                 {
+                    foreach(string a in methods.Keys)
+                    {
+                        Console.WriteLine("This is a Method: "+ a);
+                    }
                     inMethod = false;
                     methodCount = 0;
                     foreach(string m in methodCommands)
@@ -517,18 +521,18 @@ namespace Assignment
                     string[] methodParameters;
 
                     bool hasMethod = false;
-
+                    Console.WriteLine("HasMethod: "+hasMethod);
                     int startIndex = commandSplit[0].IndexOf('(');
                     int endIndex = commandSplit[0].IndexOf(')');
 
                     methodName = commandSplit[0].Substring(0, startIndex);
-
+                    Console.WriteLine("This is the called method: "+ methodName);
                     foreach(string method in methods.Keys)
                     {
+                        Console.WriteLine("method given: "+methodName+", method compared to: "+method);
                         if (methodName.Equals(method))
                         {
                             hasMethod = true;
-                            Console.WriteLine("methodthis: "+methodName);
                             if (startIndex == endIndex - 1)
                             {
                                 foreach(string command in methodCommands)
@@ -618,15 +622,16 @@ namespace Assignment
 
 
                             }
+                     
+                        }
+                        if (hasMethod)
+                        {
                             break;
                         }
-                        else
-                        {
-                            if (!hasMethod)
-                            {
-                                throw new MethodAccessException("Method does not exist. Please try again.");
-                            }
-                        }
+                    }
+                    if (!hasMethod)
+                    {
+                        throw new MethodAccessException("Method does not exist. Please try again.");
                     }
 
                 }
@@ -634,11 +639,7 @@ namespace Assignment
                 // Creating two different arrays from the enums to check if the given command is valid and available to be processed
                 string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
                 string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
-                foreach(string a in methods.Keys)
-                {
-                    Console.WriteLine("METHOD NAME: "+a);
-                    Console.WriteLine(inMethod);
-                }
+  
                 if (inLoop)
                 {
                     loopCommands.Add(instruction);
