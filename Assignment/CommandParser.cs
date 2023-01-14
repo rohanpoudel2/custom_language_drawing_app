@@ -66,7 +66,7 @@ namespace Assignment
         bool inMethod;
         string calledMethod = "";
         IDictionary<string, dynamic> methods = new Dictionary<string, dynamic>();
-        List<string> methodCommands = new List<string>();
+        Dictionary<string,List<string>> methodCommands = new Dictionary<string, List<string>>();
         string currentMethodname = "";
 
         //For flashing
@@ -504,14 +504,15 @@ namespace Assignment
                     }
                     inMethod = false;
                     methodCount = 0;
-                    foreach(string m in methodCommands)
+                    
+                    foreach(var m in methodCommands)
                     {
-                        if (m.Contains("method"))
+                        if (m.Value.Remove("method"))
                         {
-                            methodCommands.Remove(m);
-                            break;
+                            Console.WriteLine("DONE"); 
                         }
                     }
+
                 }
 
                 if (commandSplit[0].Contains('(') && commandSplit[0].Contains(')') && !commandSplit[0].Contains("method")) 
@@ -535,9 +536,15 @@ namespace Assignment
                             hasMethod = true;
                             if (startIndex == endIndex - 1)
                             {
-                                foreach(string command in methodCommands)
+                                foreach(string command in methodCommands.Keys)
                                 {
-                                   runCommand(command);
+                                    if (command.Equals(methodName))
+                                    {
+                                        foreach (string cmd in methodCommands[command])
+                                        {
+                                            runCommand(cmd);
+                                        }
+                                    }
                                 }
                             }
                             else
@@ -615,9 +622,15 @@ namespace Assignment
                                 }
 
 
-                                foreach (string command in methodCommands)
+                                foreach (string command in methodCommands.Keys)
                                 {
-                                    runCommand(command);
+                                    if (command.Equals(methodName))
+                                    {
+                                        foreach (string cmd in methodCommands[command])
+                                        {
+                                            runCommand(cmd);
+                                        }
+                                    }
                                 }
 
 
@@ -650,7 +663,14 @@ namespace Assignment
                 }
                 else if (inMethod)
                 {
-                    methodCommands.Add(instruction);
+                    if (!methodCommands.ContainsKey(currentMethodname))
+                    {
+                        methodCommands[currentMethodname] = new List<string>();
+                    }
+                    else
+                    {
+                        methodCommands[currentMethodname].Add(instruction);
+                    }
                 }
                 else
                 {
