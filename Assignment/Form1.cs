@@ -166,16 +166,24 @@ namespace Assignment
         /// <param name="e">Event arguments.</param>
         private void saveCodeButton_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFile = new SaveFileDialog();
-
-            saveFile.DefaultExt = "*.rtf";
-            saveFile.Filter = "RTF Files|*.rtf";
-
-            // Checking if user had given a valid name for the file and selected OK in the dialog window
-            if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFile.FileName.Length > 0)
+            try
             {
-                programInputWindow.SaveFile(saveFile.FileName);
+                SaveFileDialog saveFile = new SaveFileDialog();
+
+                saveFile.DefaultExt = "*.rtf";
+                saveFile.Filter = "RTF Files|*.rtf";
+
+                // Checking if user had given a valid name for the file and selected OK in the dialog window
+                if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && saveFile.FileName.Length > 0)
+                {
+                    programInputWindow.SaveFile(saveFile.FileName);
+                }
             }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }
+            
         }
 
         /// <summary>
@@ -202,13 +210,21 @@ namespace Assignment
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void loadCodeButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFile = new OpenFileDialog();
-
-            //Checking if the user saved file had been saved properly and if the user selected ok in the dialog window
-            if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFile.CheckFileExists == true)
+            try
             {
-                programInputWindow.LoadFile(openFile.FileName);
+                OpenFileDialog openFile = new OpenFileDialog();
+
+                //Checking if the user saved file had been saved properly and if the user selected ok in the dialog window
+                if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFile.CheckFileExists == true)
+                {
+                    programInputWindow.LoadFile(openFile.FileName);
+                }
             }
+            catch(Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }
+           
 
         }
 
