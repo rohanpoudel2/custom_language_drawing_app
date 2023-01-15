@@ -11,9 +11,16 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
+    /// <summary>
+    /// The CommandParser class is responsible for parsing and executing the commands provided by the user.
+    /// It contains methods to assign variables, check syntax, execute shape commands, handle loops and conditions, and more.
+    /// </summary>
     public class CommandParser
     {
-        // Declaring enumeration for available shape commands
+        /// <summary>
+        /// The `ShapeCommands` enumeration defines a list of possible shape commands that can be used in the application.
+        /// The enumeration contains the following values: circle, drawto, square, rectangle, and triangle.
+        /// </summary>
         enum ShapeCommands
         {
             circle,
@@ -23,7 +30,10 @@ namespace Assignment
             triangle
         }
 
-        //Declaring enumeration for available commands apart for shape commands
+        /// <summary>
+        /// The `OtherCommands` enumeration defines a list of possible other commands that can be used in the application.
+        /// The enumeration contains the following values: reset, clear, moveto, pen, fill, and flash.
+        /// </summary>
         enum OtherCommands
         {
             reset,
@@ -34,66 +44,176 @@ namespace Assignment
             flash
         }
 
+        /// <summary>
+        /// The `myArtWork` variable is an instance of the `ArtWork` class that holds the information and methods related to the artwork being drawn.
+        /// </summary>
         ArtWork myArtWork;
 
-        //For Commands
+        /// <summary>
+        /// The `commandSplit` variable is a string array that is used to store the results of splitting a command string into individual elements.
+        /// </summary>
         string[] commandSplit;
-        //For Commands parameters
+
+        /// <summary>
+        /// The `parameter` variable holds the parameter of a command.
+        /// </summary>
         dynamic parameter = "";
 
-        //Creating a new List to store the errors that might occure in scope of this class
+        /// <summary>
+        /// The `errors` list holds the errors that occur during the parsing of the commands.
+        /// </summary>
         List<string> errors = new List<string>();
 
-        //For Variables
+        /// <summary>
+        /// The `variable` dictionary holds the user-defined variables and their values.
+        /// </summary>
         IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
 
-        //For Loop Functionality
+        /// <summary>
+        /// The `validLoop` variable indicates if the current loop statement is valid.
+        /// </summary>
         bool validLoop;
+
+        /// <summary>
+        /// The `inLoop` variable indicates if the parser is currently inside a loop block.
+        /// </summary>
         bool inLoop;
+
+        /// <summary>
+        /// The `loopInterval` variable holds the interval at which the loop block should be executed.
+        /// </summary>
         int loopInterval = 0;
+
+        /// <summary>
+        /// The `loopStatement` variable holds the loop statement.
+        /// </summary>
         string loopStatement;
+
+        /// <summary>
+        /// The `loopCommands` list holds the commands that should be executed in the loop block.
+        /// </summary>
         List<string> loopCommands = new List<string>();
+
+        /// <summary>
+        /// The `loopCount` variable holds the number of times the loop block has been executed.
+        /// </summary>
         int loopCount = 0;
 
-        //For Condition Functionality
+        /// <summary>
+        /// The `ifCount` variable holds the number of if blocks encountered.
+        /// </summary>
         int ifCount = 0;
+
+        /// <summary>
+        /// The `inCondition` variable indicates if the parser is currently inside an if block.
+        /// </summary>
         bool inCondition;
+
+        /// <summary>
+        /// The `validIf` variable indicates if the current if statement is valid.
+        /// </summary>
         bool validIf;
+
+        /// <summary>
+        /// The `conditionCommands` list holds the commands that should be executed in the if block.
+        ///</summary>
         List<string> conditionCommands = new List<string>();
 
-        //For Method Functionality
+        /// <summary>
+        /// The `methodCount` variable holds the number of method blocks encountered.
+        /// </summary>
         int methodCount = 0;
+
+        /// <summary>
+        /// The `inMethod` variable indicates if the parser is currently inside a method block.
+        /// </summary>
         bool inMethod;
+
+        /// <summary>
+        /// The `calledMethod` variable holds the name of the method that is currently being called.
+        /// </summary>
         string calledMethod = "";
+
+        /// <summary>
+        /// The `methods` dictionary holds the user-defined methods and their corresponding commands.
+        /// </summary>
         IDictionary<string, dynamic> methods = new Dictionary<string, dynamic>();
-        Dictionary<string,List<string>> methodCommands = new Dictionary<string, List<string>>();
+
+        /// <summary>
+        /// The `methodCommands` dictionary holds the commands of the user-defined methods, keyed by method name.
+        /// </summary>
+        Dictionary<string, List<string>> methodCommands = new Dictionary<string, List<string>>();
+
+        /// <summary>
+        /// The `currentMethodname` variable holds the name of the current method being parsed.
+        /// </summary>
         string currentMethodname = "";
 
-        //For flashing
+        /// <summary>
+        /// The `shapeCommands` list holds the shape commands that are encountered.
+        /// </summary>
         List<string> shapeCommands = new List<string>();
+
+        /// <summary>
+        /// The `shapeCommandsCopy` list holds a copy of the shape commands that are encountered.
+        /// </summary>
         List<string> shapeCommandsCopy = new List<string>();
+
+        /// <summary>
+        /// The `colorIndex` variable holds the index of the current color in the flashing colors array.
+        /// </summary>
         int colorIndex = 0;
+
+        /// <summary>
+        /// The `flashingColors` array holds the colors that the shapes should flash between.
+        /// </summary>
         string[] flashingColors;
+
+        /// <summary>
+        /// The `flashingInterval` variable holds the interval, in milliseconds, at which the shapes should flash between colors.
+        /// </summary>
         int flashingInterval = 1000;
+
+        /// <summary>
+        /// The `flashStatus` variable indicates the current flash status of the shapes.
+        /// </summary>
         bool flashStatus = false;
+
+        /// <summary>
+        /// The `stopFlash` variable indicates if the flash thread should stop running.
+        /// </summary>
         bool stopFlash = false;
+
+        /// <summary>
+        /// The `flashShapes` variable is a thread that is responsible for flashing the shapes.
+        /// </summary>
         Thread flashShapes;
 
+        /// <summary>
+        /// The `refreshMethod` variable holds a reference to a method that is responsible for refreshing the artwork.
+        /// </summary>
         dynamic refreshMethod;
-       
 
-        //Declaring a int variable to count the nth number of code being processed
+        /// <summary>
+        /// The `errorIndex` variable holds the index of the current error encountered.
+        /// </summary>
         int errorIndex = 0;
 
-        //Constructor for CommandParser class when takes an object of ArtWork for argument
+        /// <summary>
+        /// The constructor of the CommandParser class which initializes an instance of ArtWork.
+        /// </summary>
+        /// <param name="myArtWork">An instance of the ArtWork class.</param>
         public CommandParser(ArtWork myArtWork)
         {
             this.myArtWork = myArtWork;
         }
 
-        /*Function with dynamic return type because the return type can be either an array of int or a string
-         *This function is responsible to check if the parameters are valid or not 
-         */
+        /// <summary>
+        /// The `checkParameter` method is used to check the validity of a given parameter and convert it to the specified type.
+        /// </summary>
+        /// <param name="parameter">The parameter to be checked.</param>
+        /// <param name="type">The type of the parameter. Can be either "int" or "string".</param>
+        /// <returns>An array of the converted parameter or an exception if the parameter is invalid.</returns>
         public dynamic checkParameter(string parameter, string type)
         {
 
@@ -146,7 +266,14 @@ namespace Assignment
             }
         }
 
-        // Function responsible to check the command and call the appopriate function related to that command in the ArtWork class
+        /// <summary>
+        /// Runs the command passed in the instruction parameter.
+        /// It splits the instruction by space and checks for the first word of the command.
+        /// It checks if the command is a valid shape command or other command and processes it accordingly.
+        /// It also checks if the command is being run inside a loop, condition or a method and processes it accordingly.
+        /// It also starts a new thread to flash the shapes that have been drawn.
+        /// </summary>
+        /// <param name="instruction">The instruction to be run as a command.</param>
         public void runCommand(string instruction)
         {
             Console.WriteLine("This: " + instruction);
@@ -535,7 +662,8 @@ namespace Assignment
                         if (methodName.Equals(method))
                         {
                             hasMethod = true;
-                            if (startIndex == endIndex - 1)
+                            Console.WriteLine("method: "+methods[method].Length);
+                            if (startIndex == endIndex - 1 && methods[method].Length == 0)
                             {
                                 foreach(string command in methodCommands.Keys)
                                 {
@@ -547,6 +675,10 @@ namespace Assignment
                                         }
                                     }
                                 }
+                            }
+                            else if(startIndex == endIndex - 1 && methods[method].Length != 0)
+                            {
+                                throw new CustomParameterException("Please check the parameter and try again.");
                             }
                             else
                             {
@@ -860,6 +992,14 @@ namespace Assignment
             }
         }
 
+        /// <summary>
+        /// This method starts flashing the shapes that have been drawn.
+        /// It takes a list of shape commands as an input and flashes them in the specified colors. 
+        /// The flashing can be stopped by setting the stopFlash variable to true. 
+        /// It uses the runCommand method to run the shape commands and the flashing interval can be adjusted by changing the value of the `flashingInterva` variable.
+        /// Any errors thrown will be added to the errors list for further handling.
+        /// </summary>
+        /// <param name="shapeCommandsCopy"></param>
         public void startFlashing(List<string> shapeCommandsCopy)
         {
             stopFlash = false;
@@ -913,6 +1053,10 @@ namespace Assignment
             }
         }
 
+        /// <summary>
+        /// This function is used to stop the flashing of the shapes on the screen. 
+        /// It sets the stopFlash flag to true, flashStatus flag to false, reset the fill and color, and waits for the flashShapes thread to complete.
+        /// </summary>
         public void stopFlashing()
         {
             stopFlash = true;
@@ -922,11 +1066,22 @@ namespace Assignment
             flashShapes.Join();
         }
 
+        /// <summary>
+        /// This method assigns a method to be used as the refresh method for the current object.
+        /// </summary>
+        /// <param name="method">The method to be used as the refresh method.</param>
         public void refresh(Action method)
         {
             this.refreshMethod = method;
         }
 
+        /// <summary>
+        /// This method checks the syntax of the given commands by verifying whether the command is an assignment statement.
+        /// If not, it checks whether the command is a valid shape command or other command. If the command is a shape command or other available command, it checks the
+        /// number of parameters passed to the command and whether they are valid parameters. If any errors are found, they are
+        /// added to the errors list. If errors had been found it does not forward the commands to `runCommand` function.
+        /// </summary>
+        /// <param name="commands">The list of commands to be checked for syntax errors</param>
         public void checkSyntax(List<string> commands)
         {
             errorIndex = 1;
@@ -1158,6 +1313,11 @@ namespace Assignment
 
         }
 
+        /// <summary>
+        /// Assigns a value to a variable or performs arithmetic operations on variables and assigns the result to a variable.
+        /// </summary>
+        /// <param name="command">The command to assign the value or perform arithmetic operation on</param>
+        /// <returns>Empty string if assignment is successful, otherwise returns an exception message</returns>
         public dynamic assignVariables(string command)
         {
             try
@@ -1212,6 +1372,13 @@ namespace Assignment
             return "";
         }
 
+        /// <summary>
+        /// This method checks the variables in the command string that is passed in and performs mathematical operations on them, such as addition, subtraction, multiplication, and division, based on the operator passed in.
+        /// The result of these operations is then assigned to a variable.
+        /// </summary>
+        /// <param name="values">A string that contains the variable names and values to be used in the mathematical operations.</param>
+        /// <param name="Operator">A char that represents the mathematical operation to be performed on the variables. Can be '+', '-', '*', or '/'.</param>
+        /// <returns>A dynamic type that returns a CustomValueException if an error occurs, or 'true' if the operations are successful.</returns>
         public dynamic checkVariables(string values, char Operator)
         {
             string[] newCommand = values.Split(Operator);
@@ -1294,6 +1461,9 @@ namespace Assignment
             return true;
         }
 
+        /// <summary>
+        /// This method clears all the variables, loop commands, loop count, condition commands, if count, method count, methods, method commands, and current method name.
+        /// </summary>
         public void clearVariables()
         {
             variable.Clear();
@@ -1307,7 +1477,12 @@ namespace Assignment
             currentMethodname = "";
         }
 
-        //Function responsible to check the Length of the parameter
+        /// <summary>
+        /// This method checks if the length of the command given is equal to the expected length
+        /// </summary>
+        /// <param name="length">The length of the given command</param>
+        /// <param name="tobeLength">The expected length of the command</param>
+        /// <returns>returns true if the length of the command is equal to the expected length, otherwise false</returns>
         public Boolean checkCommandLength(int length, int tobeLength)
         {
             if (length != tobeLength)
@@ -1321,6 +1496,11 @@ namespace Assignment
 
         }
 
+        /// <summary>
+        /// checkColor method is used to check whether the given color name is a known color or not.
+        /// </summary>
+        /// <param name="color">string color name to be checked</param>
+        /// <returns>returns true if the color name is known color and false if it is not a known color</returns>
         public Boolean checkColor(string color)
         {
             if (Color.FromName(color).IsKnownColor)
@@ -1333,19 +1513,26 @@ namespace Assignment
             }
         }
 
-        //Function responsible to reset the Fill to off
+        /// <summary>
+        /// This method is used to reset the fill of the shape.
+        /// </summary>
         public void resetFill()
         {
             myArtWork.changeFill("off");
         }
 
-        //Function responsible to reset the color to black
+        /// <summary>
+        /// This method is used to reset the color of the shape to black.
+        /// </summary>
         public void resetColor()
         {
             myArtWork.changeColor("black");
         }
 
-        //Function responsible to return errors List
+        /// <summary>
+        /// This method is used to return the list of errors.
+        /// </summary>
+        /// <returns>A list of errors that occurred during the execution of the commands</returns>
         public List<string> showError()
         {
             errorIndex = 0;

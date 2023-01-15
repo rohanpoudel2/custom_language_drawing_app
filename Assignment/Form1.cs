@@ -10,21 +10,49 @@ using System.Windows.Forms;
 
 namespace Assignment
 {
+    /// <summary>
+    /// The drawingProgram class is the main class that is responsible for creating the UI, handling user inputs and running the code.
+    /// It contains all the event handlers and methods necessary to run the commands entered by the user,
+    /// display the output and handle saving, loading and clearing of the code.
+    /// It creates the objects of ArtWork and CommandParser classes and calls their respective functions accordingly.
+    /// </summary>
     public partial class drawingProgram : Form
     {
-        const int bitmapWidth = 1201, bitmapHeight = 1110; 
+        /// <summary>
+        /// The width of the bitmap that is used to draw the shapes on the output screen.
+        /// </summary>
+        const int bitmapWidth = 1201;
 
+        /// <summary>
+        /// The height of the bitmap that is used to draw the shapes on the output screen.
+        /// </summary>
+        const int bitmapHeight = 1110;
+
+        /// <summary>
+        /// The bitmap object that is used to draw the shapes on the output screen.
+        /// </summary>
         Bitmap bitmapOutput = new Bitmap(bitmapWidth, bitmapHeight);
 
+        /// <summary>
+        /// The object reference to the ArtWork class, which is responsible for drawing the shapes on the output screen.
+        /// </summary>
         ArtWork myArtWork;
 
+        /// <summary>
+        /// The object reference to the CommandParser class, which is responsible for parsing the commands.
+        /// </summary>
         CommandParser parser;
 
-        // Generic List of string type to store the multiline commands
+        /// <summary>
+        /// A generic list of strings that is used to store the multiline commands entered by the user.
+        /// </summary>
         List<string> multiCommands = new List<string>();
 
-        /*Constructor for drawingProgram class which calls the InitializeComponent method , sets size for the main screen 
-         *and created object references for both ArtWork and CommandParser class*/
+
+        /// <summary>
+        /// Constructor for drawingProgram class which calls the InitializeComponent method, sets size for the main screen
+        /// and created object references for both ArtWork and CommandParser class
+        /// </summary>
         public drawingProgram()
         {
             InitializeComponent();
@@ -37,14 +65,22 @@ namespace Assignment
             parser = new CommandParser(myArtWork);
         }
 
-        //Function responsible to get the current graphics from the pictureBox and draw an unscaled image using bitmapOutput
+        /// <summary>
+        /// This method is used to draw an unscaled image using bitmapOutput on the current graphics of the pictureBox
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">Event arguments that contains the event data.</param>
         private void outputWindow_Paint(object sender, PaintEventArgs e)
         {
             Graphics currentIllustration = e.Graphics;
             currentIllustration.DrawImageUnscaled(bitmapOutput, 0, 0);
         }
 
-        //Function responsible to call the runCode function when user presses run button in the UI
+        /// <summary>
+        /// This function is responsible to call the runCode function when the user presses the run button in the UI.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
         private void runButton_Click(object sender, EventArgs e)
         {
             runCode();
@@ -53,7 +89,15 @@ namespace Assignment
             Refresh();
         }
 
-        //Function responsible to trim and lower the case of users input and pass the code accordingly
+        /// <summary>
+        /// Event handler for the singleCommandLine textbox when the enter key is pressed.
+        /// Trims and changes the case of the input code and checks if it is "run" or "stopflash".
+        /// If it is "run", calls the runCode() function. If it is "stopflash", calls the stopFlashing() function of the CommandParser class.
+        /// Otherwise, passes the code to the runCommand() function of the CommandParser class.
+        /// Also, clears the singleCommandLine textbox, updates the programLogWindow with the error messages and calls Refresh() to update the output screen.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
         private void singleCommand_KeyDown(object sender, KeyEventArgs e)
         {
             //Goes to this scope if user presses enter key
@@ -89,21 +133,36 @@ namespace Assignment
 
         }
 
-        //Function responsible to Clear the RichTextBox where user clicks Clear Input Button
+        /// <summary>
+        /// This function is responsible for clearing the code from the program input window when user clicks the clear code button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event</param>
+        /// <param name="e">Event arguments</param>
         private void clearCodeButton_Click(object sender, EventArgs e)
         {
             multiCommands.Clear();
             programInputWindow.Clear();
         }
 
-        //Function responsible to Clear the Output screen when user clicks Clear Screen Button
+        /// <summary>
+        /// This function is responsible to clear the Output screen when user clicks Clear Screen Button.
+        /// It calls the runCommand function of the CommandParser class and passes "clear" as the argument.
+        /// Refresh function is also called to make the changes appear on the screen.
+        /// </summary>
+        /// <param name="sender">The object which raised the event.</param>
+        /// <param name="e">Event argument which contains the data related to the event.</param>
         private void clearScreenButton_Click(object sender, EventArgs e)
         {
             parser.runCommand("clear");
             Refresh();
         }
 
-        //Function responsible to Save the given multiline code to the users desired location in the system as a RichTextFile
+        /// <summary>
+        /// Handles the event when the user clicks the 'Save Code' button. 
+        /// It opens a SaveFileDialog for the user to select the location and name of the file and saves the contents of the programInputWindow in RichTextFormat.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
         private void saveCodeButton_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFile = new SaveFileDialog();
@@ -118,6 +177,9 @@ namespace Assignment
             }
         }
 
+        /// <summary>
+        /// Method responsible for forcing the refresh of the output screen.
+        /// </summary>
         public void forceRefresh()
         {
             if (InvokeRequired)
@@ -130,7 +192,13 @@ namespace Assignment
             }
         }
 
-        //Funciton responsible to Load Code from a RTF file in the system to the multiline code input textarea
+
+        /// <summary>
+        ///  Handles the click event of the load code button. 
+        ///  It allows the user to load a previously saved code file in RTF format
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void loadCodeButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFile = new OpenFileDialog();
@@ -143,28 +211,45 @@ namespace Assignment
 
         }
 
-        //Function responsible to open a new MessageBox showing an about message.
+        /// <summary>
+        ///  This method handles the click event of the about button, it displays a message box containing information about the program
+        /// </summary>
+        /// <param name="sender">The object that raised the event</param>
+        /// <param name="e">Event arguments</param>
         private void aboutButton_Click(object sender, EventArgs e)
         {
             string aboutMessage = "Hello World 👋 This Program is made by Rohan Poudel \n Designed in Visual Studio 2022\n\r\nSupported Platform: Windows\n\r\nThis program is a kind of programming language allowing the user to draw different shapes at different positions in the ouput screen.\n\r\nUser also have the ability to save or load the commands written to the multi line command window into a RichTextFile in the system\n\r\nPlease read the commands in the Help menu to learn about the commands available";
             MessageBox.Show(aboutMessage, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //Function responsible to open a new MessageBox showing the available commands
+        /// <summary>
+        ///  This method is responsible to open a new MessageBox showing the available commands to the user.
+        /// </summary>
+        /// <param name="sender">The object that raised the event</param>
+        /// <param name="e">Event arguments</param>
         private void commandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string availableCommands = "moveto <positionX: int> <positionY: int>\r\ndrawto <positionX: int> <positionY: int>\r\ncircle <radius: int>\r\nsquare <size: int>\r\nrectangle <width: int> <height: int>\r\ntriangle <pointX: int> <pointY: int> <pointX: int> <pointY: int>\r\nfill <on: string> | <off: string>\r\npen <color: string>\r\nreset\r\nclear\r\nrun";
             MessageBox.Show(availableCommands, "Available Commands", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        //Function responsible to reset the position of the cursor when the user presses reset position button
+        /// <summary>
+        ///  This method is responsible to reset the position of the cursor when the user presses reset position button.
+        /// </summary>
+        /// <param name="sender">The object that raised the event</param>
+        /// <param name="e">Event arguments</param>
         private void resetPositionButton_Click(object sender, EventArgs e)
         {
             parser.runCommand("reset");
         }
 
 
-        //Function responsible to send the multi line commands at a time to the CommandParser class
+        /// <summary>
+        /// This method is responsible for running the code entered by the user in the multi-line input window. 
+        /// It clears the output screen for every rerun of the code, trims the input code of any whitespaces and empty lines,
+        /// and sends each line of code to the CommandParser class for execution. It also calls the resetFill and resetColor method 
+        /// of the CommandParser class and clears all the variables stored by the program.
+        /// </summary>
         private void runCode()
         {
             //Clearing the output screen for every rerun of the code

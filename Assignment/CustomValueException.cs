@@ -6,10 +6,20 @@ using System.Threading.Tasks;
 
 namespace Assignment
 {
+    /// <summary>
+    /// Custom exception class used to handle exceptional cases in the application
+    /// </summary>
     public class CustomValueException:Exception
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomValueException"/> class.
+        /// </summary>
+        /// <param name="message">The message that describes the error.</param>
         public CustomValueException(string message) : base(message) { }
 
+        /// <summary>
+        /// Gets the message that describes the error.
+        /// </summary>
         public string Message
         {
             get { return base.Message; }
