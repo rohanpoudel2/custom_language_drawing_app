@@ -310,12 +310,12 @@ namespace Assignment
                     }
                     else if (commandSplit[1].Contains("<="))
                     {
-                        loopCondition = commandSplit[1].Split(new string[] {"<="}, StringSplitOptions.None);
+                        loopCondition = commandSplit[1].Split(new string[] { "<=" }, StringSplitOptions.None);
                         operatorr = "<=";
                     }
                     else if (commandSplit[1].Contains(">="))
                     {
-                        loopCondition = commandSplit[1].Split(new string[] {">="}, StringSplitOptions.None);
+                        loopCondition = commandSplit[1].Split(new string[] { ">=" }, StringSplitOptions.None);
                         operatorr = ">=";
                     }
                     else
@@ -377,9 +377,9 @@ namespace Assignment
                     {
                         if (int.Parse(loopOperands[0]) <= int.Parse(loopOperands[1]))
                         {
-                            if(loopInterval == 0)
+                            if (loopInterval == 0)
                             {
-                                loopInterval = (int.Parse(loopOperands[1]) - int.Parse(loopOperands[0])) +1;
+                                loopInterval = (int.Parse(loopOperands[1]) - int.Parse(loopOperands[0])) + 1;
                             }
                             validLoop = true;
                         }
@@ -392,9 +392,9 @@ namespace Assignment
                     {
                         if (int.Parse(loopOperands[0]) >= int.Parse(loopOperands[1]))
                         {
-                            if(loopInterval == 0)
+                            if (loopInterval == 0)
                             {
-                                loopInterval = (int.Parse(loopOperands[0]) - int.Parse(loopOperands[1]))+1;
+                                loopInterval = (int.Parse(loopOperands[0]) - int.Parse(loopOperands[1])) + 1;
                             }
                             validLoop = true;
                         }
@@ -459,17 +459,17 @@ namespace Assignment
                     }
                     else if (commandSplit[1].Contains("=="))
                     {
-                        ifCondition = commandSplit[1].Split(new string[] {"=="}, StringSplitOptions.None);
+                        ifCondition = commandSplit[1].Split(new string[] { "==" }, StringSplitOptions.None);
                         operatorr = "==";
                     }
                     else if (commandSplit[1].Contains("<="))
                     {
-                        ifCondition = commandSplit[1].Split(new string[] {"<="}, StringSplitOptions.None);
+                        ifCondition = commandSplit[1].Split(new string[] { "<=" }, StringSplitOptions.None);
                         operatorr = "<=";
                     }
                     else if (commandSplit[1].Contains(">="))
                     {
-                        ifCondition = commandSplit[1].Split(new string[] {">="}, StringSplitOptions.None);
+                        ifCondition = commandSplit[1].Split(new string[] { ">=" }, StringSplitOptions.None);
                         operatorr = ">=";
                     }
                     else
@@ -479,7 +479,7 @@ namespace Assignment
 
                     foreach (string operand in ifCondition)
                     {
-                
+
                         if (operand.All(char.IsDigit))
                         {
                             ifOperands.Add(operand);
@@ -543,7 +543,8 @@ namespace Assignment
                     }
                     else if (operatorr.Equals(">="))
                     {
-                        if (int.Parse(ifOperands[0]) >= int.Parse(ifOperands[1])){
+                        if (int.Parse(ifOperands[0]) >= int.Parse(ifOperands[1]))
+                        {
                             validIf = true;
                         }
                         else
@@ -627,46 +628,46 @@ namespace Assignment
 
                 if (commandSplit[0].Equals("endmethod"))
                 {
-                    foreach(string a in methods.Keys)
+                    foreach (string a in methods.Keys)
                     {
-                        Console.WriteLine("This is a Method: "+ a);
+                        Console.WriteLine("This is a Method: " + a);
                     }
                     inMethod = false;
                     methodCount = 0;
-                    
-                    foreach(var m in methodCommands)
+
+                    foreach (var m in methodCommands)
                     {
                         if (m.Value.Remove("method"))
                         {
-                            Console.WriteLine("DONE"); 
+                            Console.WriteLine("DONE");
                         }
                     }
 
                 }
 
-                if (commandSplit[0].Contains('(') && commandSplit[0].Contains(')') && !commandSplit[0].Contains("method")) 
+                if (commandSplit[0].Contains('(') && commandSplit[0].Contains(')') && !commandSplit[0].Contains("method"))
                 {
                     string methodName;
                     string methodParameter;
                     string[] methodParameters;
 
                     bool hasMethod = false;
-                    Console.WriteLine("HasMethod: "+hasMethod);
+                    Console.WriteLine("HasMethod: " + hasMethod);
                     int startIndex = commandSplit[0].IndexOf('(');
                     int endIndex = commandSplit[0].IndexOf(')');
 
                     methodName = commandSplit[0].Substring(0, startIndex);
-                    Console.WriteLine("This is the called method: "+ methodName);
-                    foreach(string method in methods.Keys)
+                    Console.WriteLine("This is the called method: " + methodName);
+                    foreach (string method in methods.Keys)
                     {
-                        Console.WriteLine("method given: "+methodName+", method compared to: "+method);
+                        Console.WriteLine("method given: " + methodName + ", method compared to: " + method);
                         if (methodName.Equals(method))
                         {
                             hasMethod = true;
-                            Console.WriteLine("method: "+methods[method].Length);
+                            Console.WriteLine("method: " + methods[method].Length);
                             if (startIndex == endIndex - 1 && methods[method].Length == 0)
                             {
-                                foreach(string command in methodCommands.Keys)
+                                foreach (string command in methodCommands.Keys)
                                 {
                                     if (command.Equals(methodName))
                                     {
@@ -677,7 +678,7 @@ namespace Assignment
                                     }
                                 }
                             }
-                            else if(startIndex == endIndex - 1 && methods[method].Length != 0)
+                            else if (startIndex == endIndex - 1 && methods[method].Length != 0)
                             {
                                 throw new CustomParameterException("Please check the parameter and try again.");
                             }
@@ -693,9 +694,9 @@ namespace Assignment
                                 {
                                     string tempValue = "0";
 
-                                   if (methodParameters.Length == methods[method].Length)
-                                   {
-                                        for (int i = 0; i<methodParameters.Length; i++)
+                                    if (methodParameters.Length == methods[method].Length)
+                                    {
+                                        for (int i = 0; i < methodParameters.Length; i++)
                                         {
                                             if (methodParameters[i].All(char.IsDigit))
                                             {
@@ -703,7 +704,7 @@ namespace Assignment
                                             }
                                             else
                                             {
-                                                foreach(string var in variable.Keys)
+                                                foreach (string var in variable.Keys)
                                                 {
                                                     if (var.Equals(methodParameters[i]))
                                                     {
@@ -717,16 +718,16 @@ namespace Assignment
                                                 variable[methods[method][i]] = tempValue;
                                             }
                                         }
-                                   }
-                                   else
-                                   {
+                                    }
+                                    else
+                                    {
                                         throw new CustomParameterException("Please match the number of parameters required in the method.");
-                                   }
+                                    }
                                 }
                                 else if (!string.IsNullOrEmpty(methods[method]) && methods[method] is string)
                                 {
                                     string tempValue = "0";
-                                    if(methodParameters.Length > 1)
+                                    if (methodParameters.Length > 1)
                                     {
                                         throw new CustomParameterException("Method only takes one parameter");
                                     }
@@ -736,7 +737,7 @@ namespace Assignment
                                     }
                                     else
                                     {
-                                        foreach(string var in variable.Keys)
+                                        foreach (string var in variable.Keys)
                                         {
                                             if (var.Equals(methodParameters[0]))
                                             {
@@ -769,7 +770,7 @@ namespace Assignment
 
 
                             }
-                     
+
                         }
                         if (hasMethod)
                         {
@@ -786,7 +787,7 @@ namespace Assignment
                 // Creating two different arrays from the enums to check if the given command is valid and available to be processed
                 string[] availableShapeCommands = Enum.GetNames(typeof(ShapeCommands));
                 string[] availableOtherCommands = Enum.GetNames(typeof(OtherCommands));
-  
+
                 if (inLoop)
                 {
                     loopCommands.Add(instruction);
@@ -914,7 +915,7 @@ namespace Assignment
                             {
                                 shapeCommands.Add(command + " " + parameter[0]);
                             }
-                      
+
                             int outerRadius = parameter[0];
                             int innerRadius = outerRadius / 2;
                             Point center = new Point(myArtWork.xPosition, myArtWork.yPosition);
@@ -936,7 +937,7 @@ namespace Assignment
                             Point[] points1 = points.ToArray();
 
                             myArtWork.drawStar(points1);
-                            
+
                         }
 
                     }
@@ -965,12 +966,13 @@ namespace Assignment
                         {
                             if (command.Equals("moveto") == true)
                             {
-              
+
                                 parameter = checkParameter(commandSplit[1], "int");
-                                if (!flashStatus) {
+                                if (!flashStatus)
+                                {
                                     shapeCommands.Add(command + " " + parameter[0] + "," + parameter[1]);
                                 }
-                                
+
                                 myArtWork.moveTo(parameter[0], parameter[1]);
 
                             }
@@ -993,12 +995,13 @@ namespace Assignment
 
                             }
 
-                            if(command.Equals("flash") == true)
+                            if (command.Equals("flash") == true)
                             {
                                 flashStatus = true;
-                                parameter = checkParameter(commandSplit[1],"string");
-                                foreach (string s in shapeCommands) {
-                                    Console.WriteLine("SHAPES: "+s);
+                                parameter = checkParameter(commandSplit[1], "string");
+                                foreach (string s in shapeCommands)
+                                {
+                                    Console.WriteLine("SHAPES: " + s);
                                 }
                                 if (shapeCommands.Count == 0)
                                 {
@@ -1035,26 +1038,26 @@ namespace Assignment
         public void startFlashing(List<string> shapeCommandsCopy)
         {
             stopFlash = false;
-            foreach(string s in this.shapeCommandsCopy)
+            foreach (string s in this.shapeCommandsCopy)
             {
-                Console.WriteLine("INSIDE ANOTHER THREAD: "+s);
+                Console.WriteLine("INSIDE ANOTHER THREAD: " + s);
             }
             try
             {
-                string[] colors = new string[] {};
+                string[] colors = new string[] { };
                 if (flashingColors.Length == 1)
                 {
                     if (flashingColors[0].Equals("redgreen"))
                     {
-                        colors = new string[] { "red","green"};
+                        colors = new string[] { "red", "green" };
                     }
-                    else if(flashingColors[0].Equals("blueyellow"))
+                    else if (flashingColors[0].Equals("blueyellow"))
                     {
                         colors = new string[] { "blue", "yellow" };
                     }
                     else if (flashingColors[0].Equals("blackwhite"))
                     {
-                        colors = new string[] {"black","white"};
+                        colors = new string[] { "black", "white" };
                     }
                 }
                 else
@@ -1078,7 +1081,7 @@ namespace Assignment
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 errors.Add("Flashing Stopped");
                 errors.Add("--------------------------------------");
@@ -1292,7 +1295,8 @@ namespace Assignment
                     else
                     {
                         if (variable.TryGetValue(commandSplit[0], out dynamic value)) { }
-                        else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop") || commandSplit[0].Equals("if") || commandSplit[0].Equals("endif") || commandSplit[0].Equals("method") || commandSplit[0].Equals("endmethod")) {
+                        else if (commandSplit[0].Equals("while") || commandSplit[0].Equals("endloop") || commandSplit[0].Equals("if") || commandSplit[0].Equals("endif") || commandSplit[0].Equals("method") || commandSplit[0].Equals("endmethod"))
+                        {
                             if (commandSplit[0].Equals("method"))
                             {
                                 int startIndex = commandSplit[1].IndexOf('(');
@@ -1311,12 +1315,12 @@ namespace Assignment
                                         {
                                             if (methodParameters.Length == 1)
                                             {
-                                                assignVariables(methodParameters[0]+"="+"0");
+                                                assignVariables(methodParameters[0] + "=" + "0");
                                                 break;
                                             }
                                             else
                                             {
-                                                assignVariables(methodParam+"="+"0");
+                                                assignVariables(methodParam + "=" + "0");
                                             }
                                         }
                                     }

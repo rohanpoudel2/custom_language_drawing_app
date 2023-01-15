@@ -47,6 +47,7 @@
             this.aboutButton = new System.Windows.Forms.ToolStripMenuItem();
             this.commandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetPositionButton = new System.Windows.Forms.Button();
+            this.positionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.menuBar.SuspendLayout();
             this.SuspendLayout();
@@ -243,12 +244,23 @@
             this.resetPositionButton.UseVisualStyleBackColor = true;
             this.resetPositionButton.Click += new System.EventHandler(this.resetPositionButton_Click);
             // 
+            // positionLabel
+            // 
+            this.positionLabel.AutoSize = true;
+            this.positionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.positionLabel.Location = new System.Drawing.Point(1560, 82);
+            this.positionLabel.Name = "positionLabel";
+            this.positionLabel.Size = new System.Drawing.Size(366, 44);
+            this.positionLabel.TabIndex = 14;
+            this.positionLabel.Text = "Current Position: 0,0";
+            // 
             // drawingProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(236)))), ((int)(((byte)(217)))));
             this.ClientSize = new System.Drawing.Size(2048, 1432);
+            this.Controls.Add(this.positionLabel);
             this.Controls.Add(this.resetPositionButton);
             this.Controls.Add(this.clearScreenButton);
             this.Controls.Add(this.clearCodeButton);
@@ -293,6 +305,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutButton;
         private System.Windows.Forms.ToolStripMenuItem commandsToolStripMenuItem;
         private System.Windows.Forms.Button resetPositionButton;
+        private System.Windows.Forms.Label positionLabel;
     }
 }
 

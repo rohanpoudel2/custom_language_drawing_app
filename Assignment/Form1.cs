@@ -241,6 +241,7 @@ namespace Assignment
         private void resetPositionButton_Click(object sender, EventArgs e)
         {
             parser.runCommand("reset");
+            positionLabel.Text = "Current Position: " + myArtWork.xPosition + "," + myArtWork.yPosition;
         }
 
 
@@ -280,13 +281,12 @@ namespace Assignment
                 }
             }
             parser.checkSyntax(commands);
+            positionLabel.Text = "Current Position: " + myArtWork.xPosition + "," + myArtWork.yPosition;
             // Reseting everthing for the next run
             parser.resetFill();
             parser.resetColor();
             parser.runCommand("reset");
             parser.clearVariables();
         }
-
-        
     }
 }
