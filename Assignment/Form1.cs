@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Assignment
 {
@@ -111,7 +112,7 @@ namespace Assignment
                 {
                     runCode();
                 }
-                else if(code == "stopflash")
+                else if (code == "stopflash")
                 {
                     parser.stopFlashing();
                 }
@@ -123,7 +124,7 @@ namespace Assignment
 
                 // Reseting Every thing for next time
                 singleCommandLine.Text = "";
-                
+
                 programLogWindow.Lines = parser.showError().ToArray();
 
                 multiCommands.Clear();
@@ -204,7 +205,7 @@ namespace Assignment
             OpenFileDialog openFile = new OpenFileDialog();
 
             //Checking if the user saved file had been saved properly and if the user selected ok in the dialog window
-            if(openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFile.CheckFileExists == true)
+            if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK && openFile.CheckFileExists == true)
             {
                 programInputWindow.LoadFile(openFile.FileName);
             }
@@ -288,5 +289,7 @@ namespace Assignment
             parser.runCommand("reset");
             parser.clearVariables();
         }
+
+    
     }
 }

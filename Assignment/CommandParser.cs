@@ -19,7 +19,7 @@ namespace Assignment
     {
         /// <summary>
         /// The `ShapeCommands` enumeration defines a list of possible shape commands that can be used in the application.
-        /// The enumeration contains the following values: circle, drawto, square, rectangle, and triangle.
+        /// The enumeration contains the following values: circle, drawto, square, rectangle, triangle and star.
         /// </summary>
         enum ShapeCommands
         {
@@ -63,12 +63,12 @@ namespace Assignment
         /// <summary>
         /// The `errors` list holds the errors that occur during the parsing of the commands.
         /// </summary>
-        List<string> errors = new List<string>();
+        public List<string> errors = new List<string>();
 
         /// <summary>
         /// The `variable` dictionary holds the user-defined variables and their values.
         /// </summary>
-        IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
+        public IDictionary<string, dynamic> variable = new Dictionary<string, dynamic>();
 
         /// <summary>
         /// The `validLoop` variable indicates if the current loop statement is valid.
@@ -183,12 +183,12 @@ namespace Assignment
         /// <summary>
         /// The `stopFlash` variable indicates if the flash thread should stop running.
         /// </summary>
-        bool stopFlash = false;
+        public bool stopFlash = false;
 
         /// <summary>
         /// The `flashShapes` variable is a thread that is responsible for flashing the shapes.
         /// </summary>
-        Thread flashShapes;
+        public Thread flashShapes;
 
         /// <summary>
         /// The `refreshMethod` variable holds a reference to a method that is responsible for refreshing the artwork.
@@ -1393,6 +1393,10 @@ namespace Assignment
                         {
                             checkVariables(commandSplit[1], '/');
                         }
+                        else
+                        {
+                            checkVariables(commandSplit[1], '+');
+                        }
                     }
                     else
                     {
@@ -1479,7 +1483,14 @@ namespace Assignment
                     }
                     else if (Operator.Equals('-'))
                     {
-                        tempValue = Int32.Parse(parm) - tempValue;
+                        if (tempValue > Int32.Parse(parm))
+                        {
+                            tempValue = tempValue - Int32.Parse(parm);
+                        }
+                        else
+                        {
+                            tempValue = Int32.Parse(parm) - tempValue;
+                        }
                     }
                     else if (Operator.Equals('*'))
                     {
@@ -1487,7 +1498,15 @@ namespace Assignment
                     }
                     else if (Operator.Equals('/'))
                     {
-                        tempValue = Int32.Parse(parm) / tempValue;
+                        if (tempValue > Int32.Parse(parm))
+                        {
+                            tempValue = tempValue / Int32.Parse(parm);
+                        }
+                        else
+                        {
+                            tempValue = Int32.Parse(parm) / tempValue;
+                        }
+                       
                     }
 
                 }

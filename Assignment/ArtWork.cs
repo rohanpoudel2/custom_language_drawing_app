@@ -22,12 +22,12 @@ namespace Assignment
         /// <summary>
         /// The pen used to draw the shapes
         /// </summary>
-        Pen pen = new Pen(Color.Black, 1);
+        public Pen pen = new Pen(Color.Black, 2);
 
         /// <summary>
         /// The graphics object used to draw the shapes
         /// </summary>
-        Graphics illustrate;
+        public Graphics illustrate;
 
         /// <summary>
         /// The font used for text

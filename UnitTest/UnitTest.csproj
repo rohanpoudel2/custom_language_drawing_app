@@ -51,8 +51,14 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="IteratorDesignTest.cs" />
+    <Compile Include="OtherCommandsTest.cs" />
+    <Compile Include="ParameterCheckingTest.cs" />
+    <Compile Include="ShapeFactoryTesting.cs" />
+    <Compile Include="SyntaxCheckingTesting.cs" />
+    <Compile Include="ThreadTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VariableAssignmentTesting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
