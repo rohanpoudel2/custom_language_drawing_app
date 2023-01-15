@@ -104,6 +104,7 @@ namespace Assignment
             //Goes to this scope if user presses enter key
             if (e.KeyCode == Keys.Enter)
             {
+                List<string> commands = new List<string>();
                 // Triming and Lowering the case of the user input code to make the code incase sensitive
                 string code = singleCommandLine.Text.Trim().ToLower();
 
@@ -119,9 +120,12 @@ namespace Assignment
                 else
                 {
                     //If the users input was not run then it is assumed to be a single command. So, the code it passed to the CommandParser class
-                    parser.runCommand(code);
+                    commands.Add(code);
+                    parser.checkSyntax(commands);
+                    
                 }
 
+                positionLabel.Text = "Current Position: " + myArtWork.xPosition + "," + myArtWork.yPosition;
                 // Reseting Every thing for next time
                 singleCommandLine.Text = "";
 
