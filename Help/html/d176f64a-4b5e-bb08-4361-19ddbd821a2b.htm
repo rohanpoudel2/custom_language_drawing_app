@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>Assignment Namespace</title><meta name="Title" content="Assignment" /><meta name="Help.Id" content="N:Assignment" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="Assignment" /><meta name="guid" content="d176f64a-4b5e-bb08-4361-19ddbd821a2b" /><meta name="tocFile" content="../toc/Root.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div id="DocumentationTitle" class="level-item">A Sandcastle Documented Class Library</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="TopicContent" class="column content is-7"><h1>Assignment Namespace</h1><div class="summary"> </div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Classes</h2><div id="IDACASection"><table id="classList" class="table is-hoverable"><tr><td><a href="fed341ef-f990-6bd7-54e6-ae0283121b71.htm">ArtWork</a></td><td>
+            The ArtWork class is responsible for creating and drawing various shapes on the output screen, such as lines, squares, circles, rectangles, and triangles.
+            It also contains various properties and methods for managing the state of the drawn shapes, such as fill, pen, and position.
+            <h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Remarks</h2><div id="IDBGACASection"><p>
+            The class contains a ReaderWriterLockSlim object called '_rwLock' which is used to provide thread-safety while accessing the list of shapes.
+            </p></div></td></tr><tr><td><a href="d6d1f3df-5269-d36e-98f9-0f7193a2487d.htm">ArtWorkIterator</a></td><td>
+            This class represents an iterator for the ArtWork class.
+            It allows iteration through the shapes in the ArtWork's shape list.
+            <h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Remarks</h2><div id="IDBHBCASection">
+            The class implements the Iterator interface, and has two methods: HasNext() and Next().
+            HasNext() checks if there are more shapes in the list to iterate through and Next() returns the next shape in the list.
+            </div></td></tr><tr><td><a href="d0ff641f-8184-fdcc-bc19-61000785c82b.htm">BasicShape</a></td><td>
+            The BasicShape class serves as a base class for different shape classes. It contains the basic variables and constructor needed to create a shape.
+            </td></tr><tr><td><a href="ca2ae14b-743e-2a53-1299-bc7013f2de99.htm">Circle</a></td><td>
+            The Circle class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a circle on the Graphics object.
+            </td></tr><tr><td><a href="6bdb4391-152e-562e-3e8f-1298ec0b64dc.htm">CommandParser</a></td><td>
+            The CommandParser class is responsible for parsing and executing the commands provided by the user.
+            It contains methods to assign variables, check syntax, execute shape commands, handle loops and conditions, and more.
+            </td></tr><tr><td><a href="2ae8a36d-24cc-8699-a4c3-57739080ffff.htm">CustomCommandNotFoundException</a></td><td>
+            Custom exception class used to handle exceptional cases in the application
+            </td></tr><tr><td><a href="f1ec58e7-93c8-b8b5-6d35-8658f5082f21.htm">CustomConditionException</a></td><td>
+            Custom exception class used to handle exceptional cases in the application
+            </td></tr><tr><td><a href="bb871c77-dfd6-d4ab-6498-eb897ebfd2c2.htm">CustomParameterException</a></td><td>
+            Custom exception class used to handle exceptional cases in the application
+            </td></tr><tr><td><a href="af6e3d76-a3e2-c44f-7165-5e966a166b0e.htm">CustomValueException</a></td><td>
+            Custom exception class used to handle exceptional cases in the application
+            </td></tr><tr><td><a href="3e9c9dd5-47bd-4a9d-a936-db9989e8f6c4.htm">drawingProgram</a></td><td>
+            The drawingProgram class is the main class that is responsible for creating the UI, handling user inputs and running the code.
+            It contains all the event handlers and methods necessary to run the commands entered by the user,
+            display the output and handle saving, loading and clearing of the code.
+            It creates the objects of ArtWork and CommandParser classes and calls their respective functions accordingly.
+            </td></tr><tr><td><a href="d0fc113c-cc9c-1837-9a4e-e4590bd20cc9.htm">Line</a></td><td>
+            The Line class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a line on the Graphics object.
+            </td></tr><tr><td><a href="e2b57771-c84a-617c-d835-8f9c8c9cac3a.htm">Program</a></td><td> </td></tr><tr><td><a href="bfd35cb1-134f-00d1-b263-2a9a343f55b2.htm">Rectanglee</a></td><td>
+            The Rectanglee class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a Rectangle on the Graphics object.
+            </td></tr><tr><td><a href="f610ac40-0d2c-718c-2eff-c7cb8792e261.htm">ShapeFactory</a></td><td>
+            The ShapeFactory class is responsible for creating various shapes by taking a Graphics object and returning the corresponding shape object.
+            </td></tr><tr><td><a href="d7e04257-27ab-f693-bb5e-a4549d5554ec.htm">Square</a></td><td>
+            The Square class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a square on the Graphics object.
+            </td></tr><tr><td><a href="c1241dcd-9a79-a6fc-5c0e-781daab56014.htm">Star</a></td><td>
+            The Star class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a star on the Graphics object.
+            </td></tr><tr><td><a href="be534f85-e009-d2b3-fe0a-c20e47f8ca73.htm">Triangle</a></td><td>
+            The Triangle class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a triangle on the Graphics object.
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Interfaces</h2><div id="IDMCASection"><table id="interfaceList" class="table is-hoverable"><tr><td><a href="c8e94cc9-167a-5ad1-830e-82b6de1b0724.htm">Iterator</a></td><td>
+            An interface that defines a set of methods for iterating through a collection of objects.
+            </td></tr><tr><td><a href="60fdc80b-a707-2a1a-96e6-2e9fbf314499.htm">Shape</a></td><td>
+            Interface for all the shapes that can be drawn from the <a href="fed341ef-f990-6bd7-54e6-ae0283121b71.htm">ArtWork</a> class.
+            </td></tr><tr><td><a href="eb450eb6-fce8-af9f-7059-9b7fc714804c.htm">Shapes</a></td><td>
+            Declares the interface methods for creating different shapes
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Enumerations</h2><div id="IDFCASection"><table id="enumerationList" class="table is-hoverable"><tr><td><a href="4f81bb08-037c-9988-34cd-9ff6cfaa106f.htm">CommandParser<span id="LST4BD66E37_0" data-languageSpecificText="cs=.|vb=.|cpp=::|nu=.|fs=."></span>OtherCommands</a></td><td>
+            The `OtherCommands` enumeration defines a list of possible other commands that can be used in the application.
+            The enumeration contains the following values: reset, clear, moveto, pen, fill, and flash.
+            </td></tr><tr><td><a href="3b79ae6d-c3af-3020-468c-42e7b1f7cbab.htm">CommandParser<span id="LST4BD66E37_1" data-languageSpecificText="cs=.|vb=.|cpp=::|nu=.|fs=."></span>ShapeCommands</a></td><td>
+            The `ShapeCommands` enumeration defines a list of possible shape commands that can be used in the application.
+            The enumeration contains the following values: circle, drawto, square, rectangle, triangle and star.
+            </td></tr></table></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Classes</a></li><li><a class="quickLink">Remarks</a></li><li><a class="quickLink">Remarks</a></li><li><a class="quickLink">Interfaces</a></li><li><a class="quickLink">Enumerations</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div class="column"> 
+				</div><div class="column"> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+});</script></body></html>

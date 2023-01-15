@@ -1,0 +1,1131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Assignment</name>
+    </assembly>
+    <members>
+        <member name="T:Assignment.ArtWork">
+            <summary>
+            The ArtWork class is responsible for creating and drawing various shapes on the output screen, such as lines, squares, circles, rectangles, and triangles.
+            It also contains various properties and methods for managing the state of the drawn shapes, such as fill, pen, and position.
+            <remarks>
+            <para>
+            The class contains a ReaderWriterLockSlim object called '_rwLock' which is used to provide thread-safety while accessing the list of shapes.
+            </para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.pen">
+            <summary>
+            The pen used to draw the shapes
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.illustrate">
+            <summary>
+            The graphics object used to draw the shapes
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.drawFont">
+            <summary>
+            The font used for text
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.drawBrush">
+            <summary>
+            The brush used to fill in shapes
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.fill">
+            <summary>
+            Indicates if the shape should be filled or not
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.shape">
+            <summary>
+            The shape factory object used to create shapes
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork._rwLock">
+            <summary>
+            A lock used to ensure thread safety
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.xPosition">
+            <summary>
+            The current x and y positions
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.yPosition">
+            <summary>
+            The current x and y positions
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWork.shapes">
+            <summary>
+            A list of all the shapes drawn, along with their fill and pen properties
+            </summary>
+        </member>
+        <member name="M:Assignment.ArtWork.AddShape(Assignment.Shape)">
+            <summary>
+            Add a shape object to the list of shapes
+            </summary>
+            <param name="shape">The shape object to be added to the list</param>
+        </member>
+        <member name="M:Assignment.ArtWork.CreateIterator">
+            <summary>
+            Create and return an iterator for the list of shapes
+            </summary>
+            <returns>An iterator for the list of shapes</returns>
+        </member>
+        <member name="M:Assignment.ArtWork.#ctor">
+            <summary>
+            Default constructor for the ArtWork class
+            </summary>
+        </member>
+        <member name="M:Assignment.ArtWork.#ctor(System.Drawing.Graphics)">
+            <summary>
+            Constructor of ArtWork class which takes a Graphics object as the parameter
+            </summary>
+            <param name="g">A Graphics object used to draw shapes</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawLine(System.Int32,System.Int32)">
+            <summary>
+            Method responsible for creating a line and adding it to the list of shapes.
+            </summary>
+            <param name="xPos">The x-coordinate of the end point of the line.</param>
+            <param name="yPos">The y-coordinate of the end point of the line.</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawSquare(System.Int32)">
+            <summary>
+            This method is responsible for creating a square and adding it to the list of shapes.
+            </summary>
+            <param name="size">The size of the square</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawCircle(System.Int32)">
+            <summary>
+            This method is responsible for creating a circle and adding it to the list of shapes.
+            </summary>
+            <param name="radius">The radius of the circle</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawRectangle(System.Int32,System.Int32)">
+            <summary>
+            This method is responsible for creating a rectangle and adding it to the list of shapes.
+            </summary>
+            <param name="width">The width of the rectangle</param>
+            <param name="height">The height of the rectangle</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawTriangle(System.Drawing.Point[])">
+            <summary>
+            This method is responsible for creating a triangle and adding it to the list of shapes.
+            </summary>
+            <param name="Points">The points for the triangle</param>
+        </member>
+        <member name="M:Assignment.ArtWork.drawStar(System.Drawing.Point[])">
+            <summary>
+            This method is responsible for creating a Star and adding it to the list of shapes.
+            </summary>
+            <param name="Points">The points for the Star</param>
+        </member>
+        <member name="M:Assignment.ArtWork.DrawNow">
+            <summary>
+            Draws all the shapes in the shapes list.
+            </summary>
+            <remarks>
+            This method uses a <see cref="T:System.Threading.ReaderWriterLockSlim"/> to ensure thread safety while iterating through the shapes list and drawing them.
+            It also checks the fill status of each shape and calls the appropriate Draw method on the shape.
+            </remarks>
+        </member>
+        <member name="M:Assignment.ArtWork.moveTo(System.Int32,System.Int32)">
+            <summary>
+            This method is responsible for moving the position at which the shapes are to be drawn.
+            </summary>
+            <param name="positionX">The x-coordinate position</param>
+            <param name="positionY">The y-coordinate position</param>
+        </member>
+        <member name="M:Assignment.ArtWork.clear">
+            <summary>
+            This method is responsible clear the current output screen with white color.
+            </summary>
+        </member>
+        <member name="M:Assignment.ArtWork.reset">
+            <summary>
+            This method is responsible to reset the `xPosition` and `yPosition` back to 0,0.
+            </summary>
+        </member>
+        <member name="M:Assignment.ArtWork.changeColor(System.String)">
+            <summary>
+            Function to change the color of the pen and brush.
+            </summary>
+            <param name="colour">The name of the color to be used.</param>
+            <returns>Returns true if the color is valid, false otherwise.</returns>
+        </member>
+        <member name="M:Assignment.ArtWork.changeFill(System.String)">
+            <summary>
+            Changes the fill property of the shape being drawn.
+            </summary>
+            <param name="fill">A string value representing the fill property, "on" for filled shape, "off" for non-filled shape</param>
+        </member>
+        <member name="T:Assignment.ArtWorkIterator">
+            <summary>
+            This class represents an iterator for the ArtWork class.
+            It allows iteration through the shapes in the ArtWork's shape list.
+            <remarks>
+            The class implements the Iterator interface, and has two methods: HasNext() and Next().
+            HasNext() checks if there are more shapes in the list to iterate through and Next() returns the next shape in the list.
+            </remarks>
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWorkIterator.artwork">
+            <summary>
+            The ArtWork object being iterated over.
+            </summary>
+        </member>
+        <member name="F:Assignment.ArtWorkIterator.current">
+            <summary>
+            The current index of the iteration.
+            </summary>
+        </member>
+        <member name="M:Assignment.ArtWorkIterator.#ctor(Assignment.ArtWork)">
+            <summary>
+            Initializes a new instance of the ArtWorkIterator class.
+            </summary>
+            <param name="artwork">The ArtWork object to create the iterator for.</param>
+        </member>
+        <member name="M:Assignment.ArtWorkIterator.HasNext">
+            <summary>
+            Returns a value indicating whether there are more shapes in the list to iterate through.
+            </summary>
+            <returns>True if there are more shapes in the list, False otherwise.</returns>
+        </member>
+        <member name="M:Assignment.ArtWorkIterator.Next">
+            <summary>
+            Returns the next shape in the list.
+            </summary>
+            <returns>The next shape in the list, or null if there are no more shapes.</returns>
+        </member>
+        <member name="T:Assignment.BasicShape">
+            <summary>
+            The BasicShape class serves as a base class for different shape classes. It contains the basic variables and constructor needed to create a shape.
+            </summary>
+        </member>
+        <member name="F:Assignment.BasicShape.pen">
+            <summary>
+            The Pen object used to draw the shape
+            </summary>
+        </member>
+        <member name="F:Assignment.BasicShape.illustrate">
+            <summary>
+            The Graphics object used to draw the shape
+            </summary>
+        </member>
+        <member name="F:Assignment.BasicShape.xPosition">
+            <summary>
+            The x-coordinate and y-coordinate position of the shape
+            </summary>
+        </member>
+        <member name="F:Assignment.BasicShape.yPosition">
+            <summary>
+            The x-coordinate and y-coordinate position of the shape
+            </summary>
+        </member>
+        <member name="M:Assignment.BasicShape.#ctor(System.Drawing.Pen,System.Drawing.Graphics,System.Int32,System.Int32)">
+            <summary>
+            Constructor of BasicShape class which assigns the passed arguments to the class level variables
+            </summary>
+            <param name="pen">The Pen object used to draw the shape</param>
+            <param name="illustrate">The Graphics object used to draw the shape</param>
+            <param name="xPosition">The x-coordinate position of the shape</param>
+            <param name="yPosition">The y-coordinate position of the shape</param>
+        </member>
+        <member name="M:Assignment.BasicShape.Draw">
+            <summary>
+            Draws the shape
+            </summary>
+        </member>
+        <member name="M:Assignment.BasicShape.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the shape with a given brush
+            </summary>
+            <param name="brush">The brush used to fill the shape</param>
+        </member>
+        <member name="T:Assignment.Circle">
+            <summary>
+            The Circle class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a circle on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Circle.radius">
+            <summary>
+            Declaring variable for the radius of the circle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Circle.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor of the Circle class that takes Graphics object, Pen object, x and y position and radius of the circle as parameters.
+            </summary>
+            <param name="illustrate">The Graphics object on which the shape will be drawn.</param>
+            <param name="pen">The Pen object that will be used to draw the shape.</param>
+            <param name="xPosition">The x-coordinate of the center of the circle.</param>
+            <param name="yPosition">The y-coordinate of the center of the circle.</param>
+            <param name="radius">The radius of the circle.</param>
+        </member>
+        <member name="M:Assignment.Circle.Draw">
+            <summary>
+            Draws the circle on the Graphics object using the Pen object and the x, y position and radius of the circle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Circle.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the circle on the Graphics object using the Brush object and the x, y position and radius of the circle.
+            </summary>
+        </member>
+        <member name="T:Assignment.CommandParser">
+            <summary>
+            The CommandParser class is responsible for parsing and executing the commands provided by the user.
+            It contains methods to assign variables, check syntax, execute shape commands, handle loops and conditions, and more.
+            </summary>
+        </member>
+        <member name="T:Assignment.CommandParser.ShapeCommands">
+            <summary>
+            The `ShapeCommands` enumeration defines a list of possible shape commands that can be used in the application.
+            The enumeration contains the following values: circle, drawto, square, rectangle, triangle and star.
+            </summary>
+        </member>
+        <member name="T:Assignment.CommandParser.OtherCommands">
+            <summary>
+            The `OtherCommands` enumeration defines a list of possible other commands that can be used in the application.
+            The enumeration contains the following values: reset, clear, moveto, pen, fill, and flash.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.myArtWork">
+            <summary>
+            The `myArtWork` variable is an instance of the `ArtWork` class that holds the information and methods related to the artwork being drawn.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.commandSplit">
+            <summary>
+            The `commandSplit` variable is a string array that is used to store the results of splitting a command string into individual elements.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.parameter">
+            <summary>
+            The `parameter` variable holds the parameter of a command.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.errors">
+            <summary>
+            The `errors` list holds the errors that occur during the parsing of the commands.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.variable">
+            <summary>
+            The `variable` dictionary holds the user-defined variables and their values.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.validLoop">
+            <summary>
+            The `validLoop` variable indicates if the current loop statement is valid.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.inLoop">
+            <summary>
+            The `inLoop` variable indicates if the parser is currently inside a loop block.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.loopInterval">
+            <summary>
+            The `loopInterval` variable holds the interval at which the loop block should be executed.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.loopStatement">
+            <summary>
+            The `loopStatement` variable holds the loop statement.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.loopCommands">
+            <summary>
+            The `loopCommands` list holds the commands that should be executed in the loop block.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.loopCount">
+            <summary>
+            The `loopCount` variable holds the number of times the loop block has been executed.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.ifCount">
+            <summary>
+            The `ifCount` variable holds the number of if blocks encountered.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.inCondition">
+            <summary>
+            The `inCondition` variable indicates if the parser is currently inside an if block.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.validIf">
+            <summary>
+            The `validIf` variable indicates if the current if statement is valid.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.conditionCommands">
+             <summary>
+             The `conditionCommands` list holds the commands that should be executed in the if block.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.methodCount">
+            <summary>
+            The `methodCount` variable holds the number of method blocks encountered.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.inMethod">
+            <summary>
+            The `inMethod` variable indicates if the parser is currently inside a method block.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.calledMethod">
+            <summary>
+            The `calledMethod` variable holds the name of the method that is currently being called.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.methods">
+            <summary>
+            The `methods` dictionary holds the user-defined methods and their corresponding commands.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.methodCommands">
+            <summary>
+            The `methodCommands` dictionary holds the commands of the user-defined methods, keyed by method name.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.currentMethodname">
+            <summary>
+            The `currentMethodname` variable holds the name of the current method being parsed.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.shapeCommands">
+            <summary>
+            The `shapeCommands` list holds the shape commands that are encountered.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.shapeCommandsCopy">
+            <summary>
+            The `shapeCommandsCopy` list holds a copy of the shape commands that are encountered.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.colorIndex">
+            <summary>
+            The `colorIndex` variable holds the index of the current color in the flashing colors array.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.flashingColors">
+            <summary>
+            The `flashingColors` array holds the colors that the shapes should flash between.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.flashingInterval">
+            <summary>
+            The `flashingInterval` variable holds the interval, in milliseconds, at which the shapes should flash between colors.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.flashStatus">
+            <summary>
+            The `flashStatus` variable indicates the current flash status of the shapes.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.stopFlash">
+            <summary>
+            The `stopFlash` variable indicates if the flash thread should stop running.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.flashShapes">
+            <summary>
+            The `flashShapes` variable is a thread that is responsible for flashing the shapes.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.refreshMethod">
+            <summary>
+            The `refreshMethod` variable holds a reference to a method that is responsible for refreshing the artwork.
+            </summary>
+        </member>
+        <member name="F:Assignment.CommandParser.errorIndex">
+            <summary>
+            The `errorIndex` variable holds the index of the current error encountered.
+            </summary>
+        </member>
+        <member name="M:Assignment.CommandParser.#ctor(Assignment.ArtWork)">
+            <summary>
+            The constructor of the CommandParser class which initializes an instance of ArtWork.
+            </summary>
+            <param name="myArtWork">An instance of the ArtWork class.</param>
+        </member>
+        <member name="M:Assignment.CommandParser.checkParameter(System.String,System.String)">
+            <summary>
+            The `checkParameter` method is used to check the validity of a given parameter and convert it to the specified type.
+            </summary>
+            <param name="parameter">The parameter to be checked.</param>
+            <param name="type">The type of the parameter. Can be either "int" or "string".</param>
+            <returns>An array of the converted parameter or an exception if the parameter is invalid.</returns>
+        </member>
+        <member name="M:Assignment.CommandParser.runCommand(System.String)">
+            <summary>
+            Runs the command passed in the instruction parameter.
+            It splits the instruction by space and checks for the first word of the command.
+            It checks if the command is a valid shape command or other command and processes it accordingly.
+            It also checks if the command is being run inside a loop, condition or a method and processes it accordingly.
+            It also starts a new thread to flash the shapes that have been drawn.
+            </summary>
+            <param name="instruction">The instruction to be run as a command.</param>
+        </member>
+        <member name="M:Assignment.CommandParser.startFlashing(System.Collections.Generic.List{System.String})">
+            <summary>
+            This method starts flashing the shapes that have been drawn.
+            It takes a list of shape commands as an input and flashes them in the specified colors. 
+            The flashing can be stopped by setting the stopFlash variable to true. 
+            It uses the runCommand method to run the shape commands and the flashing interval can be adjusted by changing the value of the `flashingInterva` variable.
+            Any errors thrown will be added to the errors list for further handling.
+            </summary>
+            <param name="shapeCommandsCopy"></param>
+        </member>
+        <member name="M:Assignment.CommandParser.stopFlashing">
+            <summary>
+            This function is used to stop the flashing of the shapes on the screen. 
+            It sets the stopFlash flag to true, flashStatus flag to false, reset the fill and color, and waits for the flashShapes thread to complete.
+            </summary>
+        </member>
+        <member name="M:Assignment.CommandParser.refresh(System.Action)">
+            <summary>
+            This method assigns a method to be used as the refresh method for the current object.
+            </summary>
+            <param name="method">The method to be used as the refresh method.</param>
+        </member>
+        <member name="M:Assignment.CommandParser.checkSyntax(System.Collections.Generic.List{System.String})">
+            <summary>
+            This method checks the syntax of the given commands by verifying whether the command is an assignment statement.
+            If not, it checks whether the command is a valid shape command or other command. If the command is a shape command or other available command, it checks the
+            number of parameters passed to the command and whether they are valid parameters. If any errors are found, they are
+            added to the errors list. If errors had been found it does not forward the commands to `runCommand` function.
+            </summary>
+            <param name="commands">The list of commands to be checked for syntax errors</param>
+        </member>
+        <member name="M:Assignment.CommandParser.assignVariables(System.String)">
+            <summary>
+            Assigns a value to a variable or performs arithmetic operations on variables and assigns the result to a variable.
+            </summary>
+            <param name="command">The command to assign the value or perform arithmetic operation on</param>
+            <returns>Empty string if assignment is successful, otherwise returns an exception message</returns>
+        </member>
+        <member name="M:Assignment.CommandParser.checkVariables(System.String,System.Char)">
+            <summary>
+            This method checks the variables in the command string that is passed in and performs mathematical operations on them, such as addition, subtraction, multiplication, and division, based on the operator passed in.
+            The result of these operations is then assigned to a variable.
+            </summary>
+            <param name="values">A string that contains the variable names and values to be used in the mathematical operations.</param>
+            <param name="Operator">A char that represents the mathematical operation to be performed on the variables. Can be '+', '-', '*', or '/'.</param>
+            <returns>A dynamic type that returns a CustomValueException if an error occurs, or 'true' if the operations are successful.</returns>
+        </member>
+        <member name="M:Assignment.CommandParser.clearVariables">
+            <summary>
+            This method clears all the variables, loop commands, loop count, condition commands, if count, method count, methods, method commands, and current method name.
+            </summary>
+        </member>
+        <member name="M:Assignment.CommandParser.checkCommandLength(System.Int32,System.Int32)">
+            <summary>
+            This method checks if the length of the command given is equal to the expected length
+            </summary>
+            <param name="length">The length of the given command</param>
+            <param name="tobeLength">The expected length of the command</param>
+            <returns>returns true if the length of the command is equal to the expected length, otherwise false</returns>
+        </member>
+        <member name="M:Assignment.CommandParser.checkColor(System.String)">
+            <summary>
+            checkColor method is used to check whether the given color name is a known color or not.
+            </summary>
+            <param name="color">string color name to be checked</param>
+            <returns>returns true if the color name is known color and false if it is not a known color</returns>
+        </member>
+        <member name="M:Assignment.CommandParser.resetFill">
+            <summary>
+            This method is used to reset the fill of the shape.
+            </summary>
+        </member>
+        <member name="M:Assignment.CommandParser.resetColor">
+            <summary>
+            This method is used to reset the color of the shape to black.
+            </summary>
+        </member>
+        <member name="M:Assignment.CommandParser.showError">
+            <summary>
+            This method is used to return the list of errors.
+            </summary>
+            <returns>A list of errors that occurred during the execution of the commands</returns>
+        </member>
+        <member name="T:Assignment.CustomCommandNotFoundException">
+            <summary>
+            Custom exception class used to handle exceptional cases in the application
+            </summary>
+        </member>
+        <member name="M:Assignment.CustomCommandNotFoundException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Assignment.CustomCommandNotFoundException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="P:Assignment.CustomCommandNotFoundException.Message">
+            <summary>
+            Gets the message that describes the error.
+            </summary>
+        </member>
+        <member name="T:Assignment.CustomConditionException">
+            <summary>
+            Custom exception class used to handle exceptional cases in the application
+            </summary>
+        </member>
+        <member name="M:Assignment.CustomConditionException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Assignment.CustomConditionException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="P:Assignment.CustomConditionException.Message">
+            <summary>
+            Gets the message that describes the error.
+            </summary>
+        </member>
+        <member name="T:Assignment.CustomParameterException">
+            <summary>
+            Custom exception class used to handle exceptional cases in the application
+            </summary>
+        </member>
+        <member name="M:Assignment.CustomParameterException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Assignment.CustomParameterException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="P:Assignment.CustomParameterException.Message">
+            <summary>
+            Gets the message that describes the error.
+            </summary>
+        </member>
+        <member name="T:Assignment.CustomValueException">
+            <summary>
+            Custom exception class used to handle exceptional cases in the application
+            </summary>
+        </member>
+        <member name="M:Assignment.CustomValueException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Assignment.CustomValueException"/> class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="P:Assignment.CustomValueException.Message">
+            <summary>
+            Gets the message that describes the error.
+            </summary>
+        </member>
+        <member name="T:Assignment.drawingProgram">
+            <summary>
+            The drawingProgram class is the main class that is responsible for creating the UI, handling user inputs and running the code.
+            It contains all the event handlers and methods necessary to run the commands entered by the user,
+            display the output and handle saving, loading and clearing of the code.
+            It creates the objects of ArtWork and CommandParser classes and calls their respective functions accordingly.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.bitmapWidth">
+            <summary>
+            The width of the bitmap that is used to draw the shapes on the output screen.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.bitmapHeight">
+            <summary>
+            The height of the bitmap that is used to draw the shapes on the output screen.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.bitmapOutput">
+            <summary>
+            The bitmap object that is used to draw the shapes on the output screen.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.myArtWork">
+            <summary>
+            The object reference to the ArtWork class, which is responsible for drawing the shapes on the output screen.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.parser">
+            <summary>
+            The object reference to the CommandParser class, which is responsible for parsing the commands.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.multiCommands">
+            <summary>
+            A generic list of strings that is used to store the multiline commands entered by the user.
+            </summary>
+        </member>
+        <member name="M:Assignment.drawingProgram.#ctor">
+            <summary>
+            Constructor for drawingProgram class which calls the InitializeComponent method, sets size for the main screen
+            and created object references for both ArtWork and CommandParser class
+            </summary>
+        </member>
+        <member name="M:Assignment.drawingProgram.outputWindow_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            This method is used to draw an unscaled image using bitmapOutput on the current graphics of the pictureBox
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">Event arguments that contains the event data.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.runButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            This function is responsible to call the runCode function when the user presses the run button in the UI.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.singleCommand_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            Event handler for the singleCommandLine textbox when the enter key is pressed.
+            Trims and changes the case of the input code and checks if it is "run" or "stopflash".
+            If it is "run", calls the runCode() function. If it is "stopflash", calls the stopFlashing() function of the CommandParser class.
+            Otherwise, passes the code to the runCommand() function of the CommandParser class.
+            Also, clears the singleCommandLine textbox, updates the programLogWindow with the error messages and calls Refresh() to update the output screen.
+            </summary>
+            <param name="sender">Object that raised the event.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.clearCodeButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            This function is responsible for clearing the code from the program input window when user clicks the clear code button.
+            </summary>
+            <param name="sender">The object that raised the event</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.clearScreenButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            This function is responsible to clear the Output screen when user clicks Clear Screen Button.
+            It calls the runCommand function of the CommandParser class and passes "clear" as the argument.
+            Refresh function is also called to make the changes appear on the screen.
+            </summary>
+            <param name="sender">The object which raised the event.</param>
+            <param name="e">Event argument which contains the data related to the event.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.saveCodeButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handles the event when the user clicks the 'Save Code' button. 
+            It opens a SaveFileDialog for the user to select the location and name of the file and saves the contents of the programInputWindow in RichTextFormat.
+            </summary>
+            <param name="sender">The object that raised the event.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.forceRefresh">
+            <summary>
+            Method responsible for forcing the refresh of the output screen.
+            </summary>
+        </member>
+        <member name="M:Assignment.drawingProgram.loadCodeButton_Click(System.Object,System.EventArgs)">
+            <summary>
+             Handles the click event of the load code button. 
+             It allows the user to load a previously saved code file in RTF format
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.aboutButton_Click(System.Object,System.EventArgs)">
+            <summary>
+             This method handles the click event of the about button, it displays a message box containing information about the program
+            </summary>
+            <param name="sender">The object that raised the event</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.commandsToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+             This method is responsible to open a new MessageBox showing the available commands to the user.
+            </summary>
+            <param name="sender">The object that raised the event</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.resetPositionButton_Click(System.Object,System.EventArgs)">
+            <summary>
+             This method is responsible to reset the position of the cursor when the user presses reset position button.
+            </summary>
+            <param name="sender">The object that raised the event</param>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.runCode">
+            <summary>
+            This method is responsible for running the code entered by the user in the multi-line input window. 
+            It clears the output screen for every rerun of the code, trims the input code of any whitespaces and empty lines,
+            and sends each line of code to the CommandParser class for execution. It also calls the resetFill and resetColor method 
+            of the CommandParser class and clears all the variables stored by the program.
+            </summary>
+        </member>
+        <member name="F:Assignment.drawingProgram.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Assignment.drawingProgram.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Assignment.drawingProgram.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Assignment.Iterator">
+            <summary>
+            An interface that defines a set of methods for iterating through a collection of objects.
+            </summary>
+        </member>
+        <member name="M:Assignment.Iterator.HasNext">
+            <summary>
+            Determines if there are more items to iterate through.
+            </summary>
+            <returns>True if there are more items, false otherwise</returns>
+        </member>
+        <member name="M:Assignment.Iterator.Next">
+            <summary>
+            Returns the next item in the collection.
+            </summary>
+            <returns>The next item in the collection</returns>
+        </member>
+        <member name="T:Assignment.Line">
+            <summary>
+            The Line class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a line on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Line.toXPos">
+            <summary>
+            Declaring variable for the drawing position of the line.
+            </summary>
+        </member>
+        <member name="F:Assignment.Line.toYPos">
+            <summary>
+            Declaring variable for the drawing position of the line.
+            </summary>
+        </member>
+        <member name="M:Assignment.Line.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor of this class
+            </summary>
+            <param name="illustrate">The graphics object</param>
+            <param name="pen">The pen to be used for drawing</param>
+            <param name="xPosition">Starting x position of the line</param>
+            <param name="yPosition">Starting y position of the line</param>
+            <param name="toXPos">Ending x position of the line</param>
+            <param name="toYPos">Ending y position of the line</param>
+        </member>
+        <member name="M:Assignment.Line.Draw">
+            <summary>
+            Draws the Line shape on the graphics object
+            </summary>
+        </member>
+        <member name="M:Assignment.Line.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the Line shape on the graphics object with the given SolidBrush
+            </summary>
+        </member>
+        <member name="M:Assignment.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Assignment.Rectanglee">
+            <summary>
+            The Rectanglee class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a Rectangle on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Rectanglee.width">
+            <summary>
+            Declaring variable for the width and height of the rectangle.
+            </summary>
+        </member>
+        <member name="F:Assignment.Rectanglee.height">
+            <summary>
+            Declaring variable for the width and height of the rectangle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Rectanglee.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor of the Rectanglee class that takes Graphics object, Pen object, x and y position, width and height of the rectangle as parameters.
+            </summary>
+            <param name="illustrate">The Graphics object on which the shape will be drawn.</param>
+            <param name="pen">The Pen object that will be used to draw the shape.</param>
+            <param name="xPosition">The x-coordinate of the drawing point of the rectangle.</param>
+            <param name="yPosition">The y-coordinate of the drawing point of the rectagle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="M:Assignment.Rectanglee.Draw">
+            <summary>
+            Draws the rectangle on the Graphics object using the Pen object and the x, y position, width and height of the rectangle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Rectanglee.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the rectangle on the Graphics object using the Brush object and the x, y position, width and height of the rectangle.
+            </summary>
+        </member>
+        <member name="T:Assignment.Shape">
+            <summary>
+            Interface for all the shapes that can be drawn from the <see cref="T:Assignment.ArtWork"/> class.
+            </summary>
+        </member>
+        <member name="M:Assignment.Shape.Draw">
+            <summary>
+            Draws the shape without fill.
+            </summary>
+        </member>
+        <member name="M:Assignment.Shape.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the shape with fill using the provided brush.
+            </summary>
+            <param name="Brush">The brush to use for fill.</param>
+        </member>
+        <member name="T:Assignment.ShapeFactory">
+            <summary>
+            The ShapeFactory class is responsible for creating various shapes by taking a Graphics object and returning the corresponding shape object.
+            </summary>
+        </member>
+        <member name="F:Assignment.ShapeFactory.illustrate">
+            <summary>
+            The 'illustrate' variable is used to hold a reference to the Graphics object that is used to draw shapes on the screen.
+            </summary>
+        </member>
+        <member name="M:Assignment.ShapeFactory.#ctor(System.Drawing.Graphics)">
+            <summary>
+            Constructor for ShapeFactory class
+            </summary>
+            <param name="illustrate">A Graphics object that is used to create the shapes</param>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawCircle(System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function responsible to return the Circle object.
+            </summary>
+            <param name="pen">Pen object used to draw the shape</param>
+            <param name="x">x-coordinate of the center of the circle</param>
+            <param name="y">y-coordinate of the center of the circle</param>
+            <param name="radius">radius of the circle</param>
+            <returns>A Circle object</returns>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawRectangle(System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function responsible to return the Rectanglee object
+            </summary>
+            <param name="pen">Pen object used to draw the shape</param>
+            <param name="x">x-coordinate of the top-left corner of the rectangle</param>
+            <param name="y">y-coordinate of the top-left corner of the rectangle</param>
+            <param name="width">width of the rectangle</param>
+            <param name="height">height of the rectangle</param>
+            <returns>A Rectanglee object</returns>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawTriangle(System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Function responsible to return the Triangle Object
+            </summary>
+            <param name="pen">Pen object used to draw the shape</param>
+            <param name="points">An array of 3 Point objects that define the vertices of the triangle</param>
+            <returns>A Triangle object</returns>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawSquare(System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function responsible to return the Square Object
+            </summary>
+            <param name="pen">Pen object used to draw the shape</param>
+            <param name="xPosition">x-coordinate of the top-left corner of the square</param>
+            <param name="yPosition">y-coordinate of the top-left corner of the square</param>
+            <param name="size">length of the sides of the square</param>
+            <returns>A Square object</returns>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawLine(System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function responsible to return the Line Object
+            </summary>
+            <param name="pen">Pen object used to draw the line</param>
+            <param name="xPosition">x-coordinate position of the line</param>
+            <param name="yPosition">y-coordinate position of the line</param>
+            <returns>A Line object</returns>
+        </member>
+        <member name="M:Assignment.ShapeFactory.drawStar(System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Method for creating a Star shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Star</param>
+            <param name="points">An array of Point objects representing the vertices of the Star</param>
+            <returns>Returns a Star object</returns>
+        </member>
+        <member name="T:Assignment.Shapes">
+            <summary>
+            Declares the interface methods for creating different shapes
+            </summary>
+        </member>
+        <member name="M:Assignment.Shapes.drawCircle(System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method for creating a Circle shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Circle</param>
+            <param name="xPosition">The x-coordinate of the center of the Circle</param>
+            <param name="yPosition">The y-coordinate of the center of the Circle</param>
+            <param name="radius">The radius of the Circle</param>
+            <returns>Returns a Circle object</returns>
+        </member>
+        <member name="M:Assignment.Shapes.drawRectangle(System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method for creating a Rectangle shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Rectangle</param>
+            <param name="xPosition">The x-coordinate of the top-left corner of the Rectangle</param>
+            <param name="yPosition">The y-coordinate of the top-left corner of the Rectangle</param>
+            <param name="width">The width of the Rectangle</param>
+            <param name="height">The height of the Rectangle</param>
+            <returns>Returns a Rectanglee object</returns>
+        </member>
+        <member name="M:Assignment.Shapes.drawTriangle(System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Method for creating a Triangle shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Triangle</param>
+            <param name="points">An array of Point objects representing the vertices of the Triangle</param>
+            <returns>Returns a Triangle object</returns>
+        </member>
+        <member name="M:Assignment.Shapes.drawSquare(System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method for creating a Square shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Square</param>
+            <param name="xPosition">The x-coordinate of the top-left corner of the Square</param>
+            <param name="yPosition">The y-coordinate of the top-left corner of the Square</param>
+            <param name="size">The size of the Square</param>
+            <returns>Returns a Square object</returns>
+        </member>
+        <member name="M:Assignment.Shapes.drawLine(System.Drawing.Pen,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Method for creating a Line shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Line</param>
+            <param name="xPosition">The x-coordinate of the starting point of the Line</param>
+            <param name="yPosition">The y-coordinate of the starting point of the Line</param>
+            <param name="toXPosition">The x-coordinate of the ending point of the Line</param>
+            <param name="toYPosition">The y-coordinate of the ending point of the Line</param>
+            <returns>Returns a Line object</returns>
+        </member>
+        <member name="M:Assignment.Shapes.drawStar(System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Method for creating a Star shape
+            </summary>
+            <param name="pen">The Pen object to be used for drawing the Star</param>
+            <param name="points">An array of Point objects representing the vertices of the Star</param>
+            <returns>Returns a Star object</returns>
+        </member>
+        <member name="T:Assignment.Square">
+            <summary>
+            The Square class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a square on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Square.size">
+            <summary>
+            Declaring variable for the size of the square.
+            </summary>
+        </member>
+        <member name="M:Assignment.Square.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor of the Square class that takes Graphics object, Pen object, x and y position and size of the square as parameters.
+            </summary>
+            <param name="illustrate">The Graphics object on which the shape will be drawn.</param>
+            <param name="pen">The Pen object that will be used to draw the shape.</param>
+            <param name="xPosition">The x-coordinate of the drawing point of the square.</param>
+            <param name="yPosition">The y-coordinate of the drawing point of the square.</param>
+            <param name="size">The size of the square.</param>
+        </member>
+        <member name="M:Assignment.Square.Draw">
+            <summary>
+            Draws the square on the Graphics object using the Pen object and the x, y position and size of the square.
+            </summary>
+        </member>
+        <member name="M:Assignment.Square.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the square on the Graphics object using the Brush object and the x, y position and size of the square.
+            </summary>
+        </member>
+        <member name="T:Assignment.Star">
+            <summary>
+            The Star class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a star on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Star.points">
+            <summary>
+            Declaring variable for the points of the star.
+            </summary>
+        </member>
+        <member name="M:Assignment.Star.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Constructor of the Star class that takes Graphics object, Pen object and points of the star as parameters.
+            </summary>
+            <param name="illustrate">The Graphics object on which the shape will be drawn.</param>
+            <param name="pen">The Pen object that will be used to draw the shape.</param>
+            <param name="points">The points of the star.</param>
+        </member>
+        <member name="M:Assignment.Star.Draw">
+            <summary>
+            Draws the star on the Graphics object using the Pen object and points of the star.
+            </summary>
+        </member>
+        <member name="M:Assignment.Star.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the star on the Graphics object using the Brush object and points of the star.
+            </summary>
+        </member>
+        <member name="T:Assignment.Triangle">
+            <summary>
+            The Triangle class inherits the BasicShape class and implements the Draw() and Draw(SolidBrush brush) methods
+            to draw a triangle on the Graphics object.
+            </summary>
+        </member>
+        <member name="F:Assignment.Triangle.points">
+            <summary>
+            Declaring variable for the points of the triangle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Triangle.#ctor(System.Drawing.Graphics,System.Drawing.Pen,System.Drawing.Point[])">
+            <summary>
+            Constructor of the Triangle class that takes Graphics object, Pen object and points of the triangle as parameters.
+            </summary>
+            <param name="illustrate">The Graphics object on which the shape will be drawn.</param>
+            <param name="pen">The Pen object that will be used to draw the shape.</param>
+            <param name="points">The points of the triangle.</param>
+        </member>
+        <member name="M:Assignment.Triangle.Draw">
+            <summary>
+            Draws the triangle on the Graphics object using the Pen object and points of the triangle.
+            </summary>
+        </member>
+        <member name="M:Assignment.Triangle.Draw(System.Drawing.SolidBrush)">
+            <summary>
+            Draws the triangle on the Graphics object using the Brush object and points of the triangle.
+            </summary>
+        </member>
+        <member name="T:Assignment.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Assignment.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Assignment.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

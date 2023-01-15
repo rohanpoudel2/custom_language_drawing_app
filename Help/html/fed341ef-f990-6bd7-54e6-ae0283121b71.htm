@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html ><html lang="en-US"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="shortcut icon" href="../icons/favicon.ico" /><link rel="stylesheet" href="../css/bulma.css" /><link rel="stylesheet" href="../css/font-awesome.min.css" /><link rel="stylesheet" href="../css/presentationStyle.css" /><link rel="stylesheet" href="../css/vs.min.css" /><script src="../scripts/jquery-3.5.1.min.js"></script><script src="../scripts/clipboard.min.js"></script><script src="../scripts/highlight.min.js"></script><script src="../scripts/presentationStyle.js"></script><title>ArtWork Class</title><meta name="Title" content="ArtWork" /><meta name="Help.Id" content="T:Assignment.ArtWork" /><meta name="Help.ContentType" content="Reference" /><meta name="container" content="Assignment" /><meta name="guid" content="fed341ef-f990-6bd7-54e6-ae0283121b71" /><meta name="Description" content="The ArtWork class is responsible for creating and drawing various shapes on the output screen, such as lines, squares, circles, rectangles, and triangles." /><meta name="tocFile" content="../toc/IDA.xml" /></head><body><div class="fixedLayout"><div id="Header" class="fixedHeader"><div class="pageHeader level mb-0 py-2 px-4"><div id="TitleContainer" class="level-left"><div id="DocumentationTitle" class="level-item">A Sandcastle Documented Class Library</div></div><div id="LangFilterSearchContainer" class="level-right"><div class="level-item"><div class="dropdown is-hoverable"><div class="dropdown-trigger"><button class="button" aria-haspopup="true" aria-controls="dropdown-menu"><span id="CurrentLanguage"></span><span class="icon is-small"><i class="fa fa-angle-down" aria-hidden="true"></i></span></button></div><div class="dropdown-menu" role="menu"><div id="LanguageSelections" class="dropdown-content"><a class="dropdown-item languageFilterItem" data-languageId="cs">C#</a></div></div></div></div><div class="level-item"><form id="SearchForm" action="#" onsubmit="TransferToSearchPage(); return false;"><div class="field"><div class="control has-icons-left"><input id="SearchTerms" class="input" type="text" maxlength="200" placeholder="Search" /><span class="icon is-small is-left"><i class="fa fa-search"></i></span><button id="SearchButton" type="submit" class="is-hidden"></button></div></div></form></div></div></div></div><div class="fixedContent"><nav class="breadcrumb my-1 px-2 border-bottom" role="navigation"><ul id="TopicBreadcrumbs" /></nav><div class="columns pl-5 pr-5 fixedContent"><div id="ShowHideTOCColumn" class="column is-hidden-tablet"><a id="ShowHideTOC">Show/Hide TOC</a></div><div id="TOCColumn" class="column is-hidden-mobile"><nav class="toc"><ul id="TableOfContents" class="toc-menu" /></nav></div><div id="TopicContent" class="column content is-7"><h1>Art<wbr />Work Class</h1><div class="summary">
+            The ArtWork class is responsible for creating and drawing various shapes on the output screen, such as lines, squares, circles, rectangles, and triangles.
+            It also contains various properties and methods for managing the state of the drawn shapes, such as fill, pen, and position.
+            <h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Remarks</h2><div id="IDBACSection"><p>
+            The class contains a ReaderWriterLockSlim object called '_rwLock' which is used to provide thread-safety while accessing the list of shapes.
+            </p></div></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Definition</h2><div id="IDBSection"><strong>Namespace:</strong> <a href="d176f64a-4b5e-bb08-4361-19ddbd821a2b.htm">Assignment</a><br /><strong>Assembly:</strong> Assignment (in Assignment.exe) Version: 1.0.0.0 (1.0.0.0)<div class="codeSnippet"><div class="codeHeader"><span class="codeHeaderTitle">C#</span><span class="buttons"><button class="button is-small is-light copyCode" title="Copy"><span class="icon is-small"><i class="fa fa-copy"></i></span><span>Copy</span></button></span></div><div class="codePanel hljs"><pre xml:space="preserve"><code class="language-cs"><span class="keyword">public</span> <span class="keyword">class</span> <span class="identifier">ArtWork</span></code></pre></div></div><dl class="inheritanceHierarchy"><dt>Inheritance</dt><dd><a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>  <span class="icon is-small"><i class="fa fa-arrow-right"></i></span>  <span class="selflink">ArtWork</span></dd></dl></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Constructors</h2><div id="IDAKEASection"><table id="ConstructorList" class="table is-hoverable"><tr><td><a href="7e6d3fa9-5fc0-d9f0-88e7-4d42d38f5eaf.htm">ArtWork<span id="LST8F5F8CC3_0" data-languageSpecificText="cs=()|vb=|cpp=()|nu=()|fs=()"></span></a></td><td>
+            Default constructor for the ArtWork class
+            </td></tr><tr><td><a href="9c23c666-974e-4bd0-09ec-44c34e7c02ea.htm">ArtWork(Graphics)</a></td><td>
+            Constructor of ArtWork class which takes a Graphics object as the parameter
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Methods</h2><div id="IDLEASection"><table id="MethodList" class="table is-hoverable"><tr><td><a href="32071c28-26a7-8229-6f0b-d6ebe5e7e755.htm">AddShape</a></td><td>
+            Add a shape object to the list of shapes
+            </td></tr><tr><td><a href="b560f3d7-fb83-4c64-1e3a-368d525a44bb.htm">changeColor</a></td><td>
+            Function to change the color of the pen and brush.
+            </td></tr><tr><td><a href="f86c12c6-e0d6-77f3-b7ac-59c3144b3275.htm">changeFill</a></td><td>
+            Changes the fill property of the shape being drawn.
+            </td></tr><tr><td><a href="294d067f-905c-5130-e579-50e994ce815b.htm">clear</a></td><td>
+            This method is responsible clear the current output screen with white color.
+            </td></tr><tr><td><a href="289b664a-9ef7-b440-d3ba-6a0268afb7f9.htm">CreateIterator</a></td><td>
+            Create and return an iterator for the list of shapes
+            </td></tr><tr><td><a href="13eb249f-45ee-ec4b-f3b6-565dd2bc5d91.htm">drawCircle</a></td><td>
+            This method is responsible for creating a circle and adding it to the list of shapes.
+            </td></tr><tr><td><a href="34d461b2-74ba-1fcf-2158-5b617198aeb5.htm">drawLine</a></td><td>
+            Method responsible for creating a line and adding it to the list of shapes.
+            </td></tr><tr><td><a href="7875f341-f969-af15-f872-614fbdf82837.htm">DrawNow</a></td><td>
+            Draws all the shapes in the shapes list.
+            </td></tr><tr><td><a href="740f6c40-bf2a-9ec5-6bd7-dd1c3c261333.htm">drawRectangle</a></td><td>
+            This method is responsible for creating a rectangle and adding it to the list of shapes.
+            </td></tr><tr><td><a href="a1e34f96-4798-9f93-b734-c5a4fb22aa83.htm">drawSquare</a></td><td>
+            This method is responsible for creating a square and adding it to the list of shapes.
+            </td></tr><tr><td><a href="aea256a9-dbd1-4be8-6544-a86ac2ab135a.htm">drawStar</a></td><td>
+            This method is responsible for creating a Star and adding it to the list of shapes.
+            </td></tr><tr><td><a href="c8fdb9f6-bf9a-09ea-fbc5-3b041ae476ef.htm">drawTriangle</a></td><td>
+            This method is responsible for creating a triangle and adding it to the list of shapes.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)" target="_blank" rel="noopener noreferrer">Equals</a></td><td>Determines whether the specified object is equal to the current object.<br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.finalize#system-object-finalize" target="_blank" rel="noopener noreferrer">Finalize</a></td><td>Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.<br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode" target="_blank" rel="noopener noreferrer">GetHashCode</a></td><td>Serves as the default hash function. <br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype" target="_blank" rel="noopener noreferrer">GetType</a></td><td>Gets the <a href="https://learn.microsoft.com/dotnet/api/system.type" target="_blank" rel="noopener noreferrer">Type</a> of the current instance.<br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone" target="_blank" rel="noopener noreferrer">MemberwiseClone</a></td><td>Creates a shallow copy of the current <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>.<br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr><tr><td><a href="2e06708c-dcad-cb0e-bd1d-0215ca2ebae4.htm">moveTo</a></td><td>
+            This method is responsible for moving the position at which the shapes are to be drawn.
+            </td></tr><tr><td><a href="0e2315ae-919e-577f-7ac1-d753012c956c.htm">reset</a></td><td>
+            This method is responsible to reset the `xPosition` and `yPosition` back to 0,0.
+            </td></tr><tr><td><a href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring" target="_blank" rel="noopener noreferrer">ToString</a></td><td>Returns a string that represents the current object.<br />(Inherited from <a href="https://learn.microsoft.com/dotnet/api/system.object" target="_blank" rel="noopener noreferrer">Object</a>)</td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>Fields</h2><div id="IDAEASection"><table id="FieldList" class="table is-hoverable"><tr><td><a href="a7707e24-6d4e-e63f-65ab-1187a171c16d.htm">_rwLock</a></td><td>
+            A lock used to ensure thread safety
+            </td></tr><tr><td><a href="12d97c18-4431-191d-c855-cdc957c0d415.htm">drawBrush</a></td><td>
+            The brush used to fill in shapes
+            </td></tr><tr><td><a href="41deb949-6ea1-cb6f-190b-0e6f656db089.htm">drawFont</a></td><td>
+            The font used for text
+            </td></tr><tr><td><a href="44ed6024-398f-4adb-f2d4-b198026f2d15.htm">fill</a></td><td>
+            Indicates if the shape should be filled or not
+            </td></tr><tr><td><a href="c732bfb3-ecca-909b-30af-dd18d71a864e.htm">illustrate</a></td><td>
+            The graphics object used to draw the shapes
+            </td></tr><tr><td><a href="f12c7252-a9d6-93e6-6399-f395530ec06c.htm">pen</a></td><td>
+            The pen used to draw the shapes
+            </td></tr><tr><td><a href="97d67ce1-2cbc-7565-ebef-29291ef7f4a7.htm">shape</a></td><td>
+            The shape factory object used to create shapes
+            </td></tr><tr><td><a href="a1271cf6-c78d-925d-676d-4a50d5199554.htm">shapes</a></td><td>
+            A list of all the shapes drawn, along with their fill and pen properties
+            </td></tr><tr><td><a href="1132c42c-b312-c112-7b5b-e27159e1a752.htm">xPosition</a></td><td>
+            The current x and y positions
+            </td></tr><tr><td><a href="577c9774-0c62-5aaa-f739-dfd29aeb5042.htm">yPosition</a></td><td>
+            The current x and y positions
+            </td></tr></table></div><h2 class="quickLinkHeader"><span class="icon toggleSection" tabindex="0"><i class="fa fa-angle-down"></i></span>See Also</h2><div id="seeAlsoSection"><h4>Reference</h4><div><a href="d176f64a-4b5e-bb08-4361-19ddbd821a2b.htm">Assignment Namespace</a></div></div></div><div id="InThisArticleColumn" class="column is-hidden-mobile"><nav class="menu sticky is-hidden"><p class="menu-label"><strong>In This Article</strong></p><ul id="InThisArticleMenu" class="menu-list"><li><a class="quickLink">Remarks</a></li><li><a class="quickLink">Definition</a></li><li><a class="quickLink">Constructors</a></li><li><a class="quickLink">Methods</a></li><li><a class="quickLink">Fields</a></li><li><a class="quickLink">See Also</a></li></ul></nav></div></div></div><footer id="PageFooter" class="footer border-top py-3 fixedFooter"><div class="columns"><div class="column"> 
+				</div><div class="column"> 
+				</div></div></footer></div><script>$(function(){
+SetDefaultLanguage("cs");
+LoadTocFile(null, null);
+InitializeQuickLinks();
+
+$(".toggleSection" ).click(function () {
+    SectionExpandCollapse(this);
+});
+
+$(".toggleSection").keypress(function () {
+    SectionExpandCollapseCheckKey(this, event)
+});
+hljs.highlightAll();
+});</script></body></html>

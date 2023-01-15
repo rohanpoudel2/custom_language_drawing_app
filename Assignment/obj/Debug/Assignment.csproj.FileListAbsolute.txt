@@ -20,3 +20,15 @@ C:\Users\rohan\source\AssignmentWorking\assignment\Assignment\bin\Debug\Assignme
 C:\Users\rohan\source\AssignmentWorking\assignment\Assignment\bin\Debug\Assignment.exe
 C:\Users\rohan\source\AssignmentWorking\assignment\Assignment\bin\Debug\Assignment.pdb
 C:\Users\rohan\source\AssignmentWorking\assignment\Assignment\obj\Debug\Assignment.exe
+C:\Users\nsrap\source\assignment\Assignment\bin\Debug\Assignment.exe.config
+C:\Users\nsrap\source\assignment\Assignment\bin\Debug\Assignment.exe
+C:\Users\nsrap\source\assignment\Assignment\bin\Debug\Assignment.pdb
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.csproj.AssemblyReference.cache
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.csproj.SuggestedBindingRedirects.cache
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.drawingProgram.resources
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.Properties.Resources.resources
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.csproj.GenerateResource.cache
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.csproj.CoreCompileInputs.cache
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.exe
+C:\Users\nsrap\source\assignment\Assignment\obj\Debug\Assignment.pdb
+C:\Users\nsrap\source\assignment\Assignment\bin\Debug\Assignment.xml
