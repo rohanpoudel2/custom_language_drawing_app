@@ -27,7 +27,8 @@ namespace Assignment
             drawto,
             square,
             rectangle,
-            triangle
+            triangle,
+            star
         }
 
         /// <summary>
@@ -907,6 +908,37 @@ namespace Assignment
 
                         }
 
+                        if (command.Equals("star") == true)
+                        {
+                            if (!flashStatus)
+                            {
+                                shapeCommands.Add(command + " " + parameter[0]);
+                            }
+                      
+                            int outerRadius = parameter[0];
+                            int innerRadius = outerRadius / 2;
+                            Point center = new Point(myArtWork.xPosition, myArtWork.yPosition);
+
+                            List<Point> points = new List<Point>();
+                            for (int i = 0; i < 5; i++)
+                            {
+                                double angle = 4.0 * Math.PI * i / 5.0;
+                                int x = (int)(center.X + outerRadius * Math.Cos(angle));
+                                int y = (int)(center.Y + outerRadius * Math.Sin(angle));
+                                points.Add(new Point(x, y));
+
+                                angle += Math.PI / 5;
+                                x = (int)(center.X + innerRadius * Math.Cos(angle));
+                                y = (int)(center.Y + innerRadius * Math.Sin(angle));
+                                points.Add(new Point(x, y));
+                            }
+
+                            Point[] points1 = points.ToArray();
+
+                            myArtWork.drawStar(points1);
+                            
+                        }
+
                     }
                     // Runs if any non shape related commands has been given
                     else if (availableOtherCommands.Contains(commandSplit[0], StringComparer.OrdinalIgnoreCase))
@@ -1166,6 +1198,12 @@ namespace Assignment
                                 if (!checkCommandLength(parameter.Length, 4))
                                 {
                                     throw new CustomParameterException("Invalid Number of parameter is given for the triangle command. Please try with four parameters only.");
+                                }
+                                break;
+                            case "star":
+                                if (!checkCommandLength(parameter.Length, 1))
+                                {
+                                    throw new CustomParameterException("Invalid Number of parameter is given for the star command. Please try with one parameter only.");
                                 }
                                 break;
                             case "drawto":

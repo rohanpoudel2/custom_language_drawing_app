@@ -70,6 +70,7 @@
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="Shapes.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="Star.cs" />
     <Compile Include="Triangle.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -90,5 +90,16 @@ namespace Assignment
         {
             return new Line(illustrate, pen, xPosition, yPosition, xPos, yPos);
         }
+
+        /// <summary>
+        /// Method for creating a Star shape
+        /// </summary>
+        /// <param name="pen">The Pen object to be used for drawing the Star</param>
+        /// <param name="points">An array of Point objects representing the vertices of the Star</param>
+        /// <returns>Returns a Star object</returns>
+        public Star drawStar(Pen pen, Point[] points) 
+        {
+            return new Star(illustrate,pen,points);
+        }
     }
 }

@@ -161,6 +161,15 @@ namespace Assignment
         }
 
         /// <summary>
+        /// This method is responsible for creating a Star and adding it to the list of shapes.
+        /// </summary>
+        /// <param name="Points">The points for the Star</param>
+        public void drawStar(Point[] Points)
+        {
+            AddShape(shape.drawStar(pen, Points));
+        }
+
+        /// <summary>
         /// Draws all the shapes in the shapes list.
         /// </summary>
         /// <remarks>

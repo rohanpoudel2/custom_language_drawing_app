@@ -61,5 +61,13 @@ namespace Assignment
         /// <param name="toYPosition">The y-coordinate of the ending point of the Line</param>
         /// <returns>Returns a Line object</returns>
         Line drawLine(Pen pen, int xPosition, int yPosition, int toXPosition, int toYPosition);
+
+        /// <summary>
+        /// Method for creating a Star shape
+        /// </summary>
+        /// <param name="pen">The Pen object to be used for drawing the Star</param>
+        /// <param name="points">An array of Point objects representing the vertices of the Star</param>
+        /// <returns>Returns a Star object</returns>
+        Star drawStar(Pen pen, Point[] points);
     }
 }
